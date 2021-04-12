@@ -1,9 +1,15 @@
-import './App.css';
+// Material UI
+import { Typography } from "@material-ui/core";
 
-function App() {
+// Styles
+import "./App.css";
+
+const App = () => {
   return (
-    <h1>Hello World</h1>
+    <Typography variant="h1" gutterBottom>
+      Hello World
+    </Typography>
   );
-}
+};
 
 export default App;
