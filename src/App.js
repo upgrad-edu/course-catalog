@@ -1,6 +1,8 @@
 // imports for Material UI components
-import { Typography } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+
+// imports for custom components
+import { OnboardPage } from "./pages/onboard";
 
 // overriding default Material UI theme
 const theme = createMuiTheme({
@@ -18,9 +20,7 @@ const theme = createMuiTheme({
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Typography variant="h1" color="primary" gutterBottom>
-        Hello World
-      </Typography>
+      <OnboardPage />
     </ThemeProvider>
   );
 };
