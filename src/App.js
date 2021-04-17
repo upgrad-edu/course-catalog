@@ -1,6 +1,9 @@
 // imports for Material UI components
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
+// imports for 3rd party libraries
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 // imports for custom components
 import { OnboardPage } from "./pages/onboard";
 
@@ -20,7 +23,11 @@ const theme = createMuiTheme({
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <OnboardPage />
+      <Router>
+        <Switch>
+          <Route exact path={["/login", "/"]} component={OnboardPage}></Route>
+        </Switch>
+      </Router>
     </ThemeProvider>
   );
 };
