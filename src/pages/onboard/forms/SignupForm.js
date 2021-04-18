@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// import for utils
+import * as utils from "../../../utils";
+
 // imports for MUI components
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -49,6 +52,39 @@ const SignupForm = () => {
 
   const handleShowPasswordMouseDown = (event) => {
     event.preventDefault();
+  };
+
+  const doSignup = async () => {
+    if (email && password) {
+      const userData = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      };
+
+      const successCallback = (response) => {
+        console.log("Signed up successfully!", response);
+      };
+
+      const failureCallback = (_, errorMessage) => {
+        console.error(errorMessage);
+      };
+
+      try {
+        await utils.sendApiRequest(
+          "POST",
+          "/sign-up",
+          null,
+          userData,
+          null,
+          successCallback,
+          failureCallback
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 
   return (
@@ -141,6 +177,7 @@ const SignupForm = () => {
         fullWidth={true}
         size="large"
         className={classes.formButton}
+        onClick={doSignup}
       >
         register me
       </Button>
