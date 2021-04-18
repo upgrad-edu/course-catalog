@@ -13,38 +13,41 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from "@material-ui/core/Button";
 
+// imports for custom hook
+import useForm from "./useForm";
+import validateSignupForm from "./validateSignupForm";
+
 // imports for styles
 import { useStyles } from "./styles.js";
 
 const SignupForm = () => {
-  const classes = useStyles();
+  const initialFormValues = {
+    // the keys are similar to `name` attribute provided to form controls
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [apiErrorMessage, setApiErrorMessage] = useState("");
+
+  const submitCallback = () => {
+    // reset all API errors when the Submit button is clicked
+    setApiErrorMessage("");
+  };
+
+  const { values, errors, handleChange, handleSubmit } = useForm(
+    initialFormValues,
+    validateSignupForm,
+    submitCallback,
+    doSignup
+  );
+  const { firstName, lastName, email, password, confirmPassword } = values;
+
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
-  };
+  const classes = useStyles();
 
   const handleShowPasswordChange = () => {
     setShowPassword(!showPassword);
@@ -54,7 +57,7 @@ const SignupForm = () => {
     event.preventDefault();
   };
 
-  const doSignup = async () => {
+  async function doSignup() {
     if (email && password) {
       const userData = {
         firstName: firstName,
@@ -68,7 +71,7 @@ const SignupForm = () => {
       };
 
       const failureCallback = (_, errorMessage) => {
-        console.error(errorMessage);
+        setApiErrorMessage(errorMessage);
       };
 
       try {
@@ -82,10 +85,10 @@ const SignupForm = () => {
           failureCallback
         );
       } catch (error) {
-        console.error(error);
+        setApiErrorMessage("Some error occurred. Please retry.");
       }
     }
-  };
+  }
 
   return (
     <form
@@ -101,11 +104,15 @@ const SignupForm = () => {
           </InputLabel>
           <FilledInput
             id="signupFirstName"
+            name="firstName"
             value={firstName}
-            onChange={handleFirstNameChange}
+            onChange={handleChange}
             autoComplete="on"
             color="secondary"
           />
+          {errors.firstName && (
+            <div className={classes.error}>{errors.firstName}</div>
+          )}
         </FormControl>
         <FormControl variant="filled">
           <InputLabel htmlFor="signupLastName" color="secondary">
@@ -113,11 +120,15 @@ const SignupForm = () => {
           </InputLabel>
           <FilledInput
             id="signupLastName"
+            name="lastName"
             value={lastName}
-            onChange={handleLastNameChange}
+            onChange={handleChange}
             autoComplete="on"
             color="secondary"
           />
+          {errors.lastName && (
+            <div className={classes.error}>{errors.lastName}</div>
+          )}
         </FormControl>
         <FormControl variant="filled">
           <InputLabel htmlFor="signupEmail" color="secondary">
@@ -125,12 +136,14 @@ const SignupForm = () => {
           </InputLabel>
           <FilledInput
             id="signupEmail"
+            name="email"
             type="email"
             value={email}
-            onChange={handleEmailChange}
+            onChange={handleChange}
             autoComplete="on"
             color="secondary"
           />
+          {errors.email && <div className={classes.error}>{errors.email}</div>}
         </FormControl>
         <FormControl variant="filled">
           <InputLabel htmlFor="signupPassword" color="secondary">
@@ -138,9 +151,10 @@ const SignupForm = () => {
           </InputLabel>
           <FilledInput
             id="signupPassword"
+            name="password"
             type={showPassword ? "text" : "password"}
             value={password}
-            onChange={handlePasswordChange}
+            onChange={handleChange}
             autoComplete="on"
             color="secondary"
             endAdornment={
@@ -156,6 +170,9 @@ const SignupForm = () => {
               </InputAdornment>
             }
           />
+          {errors.password && (
+            <div className={classes.error}>{errors.password}</div>
+          )}
         </FormControl>
         <FormControl variant="filled">
           <InputLabel htmlFor="signupConfirmPassword" color="secondary">
@@ -163,13 +180,20 @@ const SignupForm = () => {
           </InputLabel>
           <FilledInput
             id="signupConfirmPassword"
+            name="confirmPassword"
             type={"password"}
             value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
+            onChange={handleChange}
             autoComplete="on"
             color="secondary"
           />
+          {errors.confirmPassword && (
+            <div className={classes.error}>{errors.confirmPassword}</div>
+          )}
         </FormControl>
+        {apiErrorMessage && (
+          <div className={classes.error}>{apiErrorMessage}</div>
+        )}
       </div>
       <Button
         variant="contained"
@@ -177,7 +201,7 @@ const SignupForm = () => {
         fullWidth={true}
         size="large"
         className={classes.formButton}
-        onClick={doSignup}
+        onClick={handleSubmit}
       >
         register me
       </Button>

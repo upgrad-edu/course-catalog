@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #ccc",
     borderRadius: "var(--radius)",
     boxShadow: "var(--dark-shadow)",
+    width: "20rem",
   },
   tab: {
     cursor: "pointer",

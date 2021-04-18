@@ -5,9 +5,24 @@ import axios from "../axiosConfig";
  * @param {*} value - value to be checked
  * @returns {Boolean} - true if the given value is reference type; false otherwise
  */
-const isReferenceType = (value) => {
+const checkReferenceType = (value) => {
   if (value) {
     return typeof value === "object" || typeof value === "function";
+  }
+  return false;
+};
+
+/**
+ * Function to check if given email is valid
+ * @param {String} email - email to be checked
+ * @returns {Boolean} - true if email is valid; false otherwise
+ */
+export const checkValidEmail = (email) => {
+  if (email) {
+    // Credits - https://stackoverflow.com/a/46181/7452548
+    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return regex.test(email.toString().toLowerCase());
   }
   return false;
 };
@@ -89,8 +104,8 @@ export const sendApiRequest = async (
  * @param {*} value - value corresponding to the key
  */
 export const setLocalStorage = (key, value) => {
-  if (!isReferenceType(key) && value) {
-    if (isReferenceType(value)) {
+  if (!checkReferenceType(key) && value) {
+    if (checkReferenceType(value)) {
       localStorage.setItem(key.toString(), JSON.stringify(value));
     } else {
       localStorage.setItem(key.toString(), value.toString());

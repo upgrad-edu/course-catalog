@@ -10,6 +10,15 @@ const useStyles = makeStyles((theme) => ({
     rowGap: "1.5rem",
     padding: theme.spacing(2, 4),
   },
+  error: {
+    color: "red",
+    fontSize: "0.875rem",
+    fontWeight: 300,
+    marginTop: "0.5rem",
+  },
+  centerAlignedText: {
+    textAlign: "center",
+  },
   formButton: {
     marginTop: theme.spacing(3),
     borderTopLeftRadius: "0",
