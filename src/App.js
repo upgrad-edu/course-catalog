@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // imports for custom components
 import { OnboardPage } from "./pages/onboard";
+import { HomePage } from "./pages/user/home";
 
 // overriding default Material UI theme
 const theme = createMuiTheme({
@@ -25,7 +26,10 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          <Route exact path={["/login", "/"]} component={OnboardPage}></Route>
+          <Route exact path="/login" component={OnboardPage}></Route>
+        </Switch>
+        <Switch>
+          <Route exact path={["/home", "/"]} component={HomePage}></Route>
         </Switch>
       </Router>
     </ThemeProvider>

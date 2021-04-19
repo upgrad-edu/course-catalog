@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// imports for 3rd party libraries
+import { useHistory } from "react-router-dom";
+
 // imports for utils
 import * as utils from "../../utils";
 
@@ -20,6 +23,7 @@ import { useStyles } from "./styles.js";
 
 const OnboardPage = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const [tabValue, setCurrentTabIndex] = useState(0);
   const [apiErrorMessage, setApiErrorMessage] = useState("");
@@ -39,12 +43,13 @@ const OnboardPage = () => {
       values,
       // success callback
       (response) => {
-        console.log("Logged in successfully!");
         setIsLoginSuccessful(true);
+        // set logged-in user's details in local storage
         utils.setLocalStorage(
           utils.constants.USER_KEY_LOCAL_STORAGE,
           response.data
         );
+        history.push("/home"); // redirect to home page on successful login
       },
       // failure callback
       (_, errorMessage) => {
