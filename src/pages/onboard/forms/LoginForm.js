@@ -17,7 +17,12 @@ import validateLoginForm from "./validateLoginForm";
 // imports for styles
 import { useStyles } from "./styles.js";
 
-const LoginForm = ({ success, apiErrorMessage, submitCallback }) => {
+const LoginForm = ({
+  success,
+  apiErrorMessage,
+  isLoginSuccessful,
+  submitCallback,
+}) => {
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
     email: "",
@@ -26,6 +31,7 @@ const LoginForm = ({ success, apiErrorMessage, submitCallback }) => {
 
   const { values, errors, handleChange, handleSubmit } = useForm(
     initialFormValues,
+    isLoginSuccessful, // determining if values of form control should be cleared
     validateLoginForm,
     submitCallback,
     success

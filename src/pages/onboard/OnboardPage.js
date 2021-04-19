@@ -22,6 +22,8 @@ const OnboardPage = () => {
   const classes = useStyles();
 
   const [apiErrorMessage, setApiErrorMessage] = useState("");
+  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
+  const [isSignupSucccessful, setIsSignupSuccessful] = useState(false);
 
   const { doLogin, doSignup } = onboardApi;
 
@@ -32,6 +34,7 @@ const OnboardPage = () => {
       // success callback
       (response) => {
         console.log("Logged in successfully!");
+        setIsLoginSuccessful(true);
         utils.setLocalStorage(
           utils.constants.USER_KEY_LOCAL_STORAGE,
           response.data
@@ -51,6 +54,7 @@ const OnboardPage = () => {
       // success callback
       (response) => {
         console.log("Signed up successfully!", response);
+        setIsSignupSuccessful(true);
       },
       // failure callback
       (_, errorMessage) => {
@@ -74,6 +78,7 @@ const OnboardPage = () => {
         <LoginForm
           success={(values) => handleLogin(values)}
           apiErrorMessage={apiErrorMessage}
+          isLoginSuccessful={isLoginSuccessful}
           submitCallback={submitCallback}
         />
       ),
@@ -85,6 +90,7 @@ const OnboardPage = () => {
         <SignupForm
           success={(values) => handleSignup(values)}
           apiErrorMessage={apiErrorMessage}
+          isSignupSucccessful={isSignupSucccessful}
           submitCallback={submitCallback}
         />
       ),

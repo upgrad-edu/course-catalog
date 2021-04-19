@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
 const useForm = (
-  valuesInitialState,
-  validate,
-  submitCallback,
-  successCallback
+  valuesInitialState, // initial state of form values
+  shouldSetValuesToInitialState, // whether form values should be set to initial state
+  validate, // function to validate form values
+  submitCallback, // callback to be executed after Submit button on form is clicked
+  successCallback // callback to be executed when all values of form control are valid (a.k.a. validation is successful)
 ) => {
   // form values entered on UI
   const [values, setValues] = useState(valuesInitialState);
@@ -30,6 +31,11 @@ const useForm = (
     setErrors(validate(values));
     setIsSubmitting(true);
   };
+
+  // clears form values
+  useEffect(() => {
+    shouldSetValuesToInitialState && setValues(valuesInitialState);
+  }, [shouldSetValuesToInitialState]);
 
   useEffect(() => {
     // if the submit button is clicked atleast once and there's no error, invoke success callback
