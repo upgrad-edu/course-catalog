@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
@@ -14,6 +14,7 @@ import { MuiTabs } from "../../components/MUI/MuiTabs";
 
 // imports for custom components
 import { LoginForm, SignupForm } from "./forms";
+import { Loader } from "../../components/UI/Loader";
 
 // imports for assets
 import logo from "../../assets/logo.png";
@@ -29,6 +30,7 @@ const OnboardPage = () => {
   const [apiErrorMessage, setApiErrorMessage] = useState("");
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   const [isSignupSucccessful, setIsSignupSuccessful] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Event handler triggered when a tab is changed
   const handleTabChange = (_, newTabValue) => {
@@ -39,6 +41,7 @@ const OnboardPage = () => {
 
   // Function to call login API and pass success and failure callbacks to it
   const handleLogin = (values) => {
+    setIsLoading(true);
     doLogin(
       values,
       // success callback
@@ -49,28 +52,33 @@ const OnboardPage = () => {
           utils.constants.USER_KEY_LOCAL_STORAGE,
           response.data
         );
+        setIsLoading(false);
         history.push("/home"); // redirect to home page on successful login
       },
       // failure callback
       (_, errorMessage) => {
         setApiErrorMessage(errorMessage);
+        setIsLoading(false);
       }
     );
   };
 
   // Function to call signup API and pass success and failure callbacks to it
   const handleSignup = (values) => {
+    setIsLoading(true);
     doSignup(
       values,
       // success callback
       (response) => {
         console.log("Signed up successfully!", response);
         setCurrentTabIndex(0); // redirect to login tab when signup is successful
+        setIsLoading(false);
         setIsSignupSuccessful(true);
       },
       // failure callback
       (_, errorMessage) => {
         setApiErrorMessage(errorMessage);
+        setIsLoading(false);
       }
     );
   };
@@ -111,16 +119,22 @@ const OnboardPage = () => {
 
   return (
     <div className={classes.loginPage}>
-      <div className={classes.logoContainer}>
-        <img src={logo} alt="upGrad Logo" className={classes.logo} />
-      </div>
-      <div className={classes.loginPageTabs}>
-        <MuiTabs
-          tabValue={tabValue}
-          handleTabChange={handleTabChange}
-          tabsDetails={tabsDetails}
-        ></MuiTabs>
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <div className={classes.logoContainer}>
+            <img src={logo} alt="upGrad Logo" className={classes.logo} />
+          </div>
+          <div className={classes.loginPageTabs}>
+            <MuiTabs
+              tabValue={tabValue}
+              handleTabChange={handleTabChange}
+              tabsDetails={tabsDetails}
+            ></MuiTabs>
+          </div>
+        </Fragment>
+      )}
     </div>
   );
 };
