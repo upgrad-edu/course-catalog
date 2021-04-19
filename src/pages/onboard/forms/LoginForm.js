@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 
-// import for utils
-import * as utils from "../../../utils";
-
 // imports for MUI components
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -20,24 +17,18 @@ import validateLoginForm from "./validateLoginForm";
 // imports for styles
 import { useStyles } from "./styles.js";
 
-const LoginForm = () => {
+const LoginForm = ({ success, apiErrorMessage, submitCallback }) => {
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
     email: "",
     password: "",
-  };
-  const [apiErrorMessage, setApiErrorMessage] = useState("");
-
-  const submitCallback = () => {
-    // reset all API errors when the Submit button is clicked
-    setApiErrorMessage("");
   };
 
   const { values, errors, handleChange, handleSubmit } = useForm(
     initialFormValues,
     validateLoginForm,
     submitCallback,
-    doLogin
+    success
   );
   const { email, password } = values;
 
@@ -52,41 +43,6 @@ const LoginForm = () => {
   const handleShowPasswordMouseDown = (event) => {
     event.preventDefault();
   };
-
-  async function doLogin() {
-    if (email && password) {
-      const userData = {
-        email: email,
-        password: password,
-      };
-
-      const successCallback = (response) => {
-        console.log("Logged in successfully!");
-        utils.setLocalStorage(
-          utils.CONSTANTS.USER_KEY_LOCAL_STORAGE,
-          response.data
-        );
-      };
-
-      const failureCallback = (_, errorMessage) => {
-        setApiErrorMessage(errorMessage);
-      };
-
-      try {
-        await utils.sendApiRequest(
-          "POST",
-          "/login",
-          null,
-          userData,
-          null,
-          successCallback,
-          failureCallback
-        );
-      } catch (error) {
-        setApiErrorMessage("Some error occurred. Please retry.");
-      }
-    }
-  }
 
   return (
     <form id="loginForm" noValidate autoComplete="off" className={classes.form}>

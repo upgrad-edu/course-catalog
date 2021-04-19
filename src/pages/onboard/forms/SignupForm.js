@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 
-// import for utils
-import * as utils from "../../../utils";
-
 // imports for MUI components
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -20,7 +17,7 @@ import validateSignupForm from "./validateSignupForm";
 // imports for styles
 import { useStyles } from "./styles.js";
 
-const SignupForm = () => {
+const SignupForm = ({ success, apiErrorMessage, submitCallback }) => {
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
     firstName: "",
@@ -30,18 +27,11 @@ const SignupForm = () => {
     confirmPassword: "",
   };
 
-  const [apiErrorMessage, setApiErrorMessage] = useState("");
-
-  const submitCallback = () => {
-    // reset all API errors when the Submit button is clicked
-    setApiErrorMessage("");
-  };
-
   const { values, errors, handleChange, handleSubmit } = useForm(
     initialFormValues,
     validateSignupForm,
     submitCallback,
-    doSignup
+    success
   );
   const { firstName, lastName, email, password, confirmPassword } = values;
 
@@ -56,39 +46,6 @@ const SignupForm = () => {
   const handleShowPasswordMouseDown = (event) => {
     event.preventDefault();
   };
-
-  async function doSignup() {
-    if (email && password) {
-      const userData = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      };
-
-      const successCallback = (response) => {
-        console.log("Signed up successfully!", response);
-      };
-
-      const failureCallback = (_, errorMessage) => {
-        setApiErrorMessage(errorMessage);
-      };
-
-      try {
-        await utils.sendApiRequest(
-          "POST",
-          "/sign-up",
-          null,
-          userData,
-          null,
-          successCallback,
-          failureCallback
-        );
-      } catch (error) {
-        setApiErrorMessage("Some error occurred. Please retry.");
-      }
-    }
-  }
 
   return (
     <form

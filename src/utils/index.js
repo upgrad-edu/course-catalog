@@ -1,2 +1,2 @@
 export * from "./utils";
-export * as CONSTANTS from "./constants";
+export * as constants from "./constants";
