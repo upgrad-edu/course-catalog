@@ -19,13 +19,8 @@ const a11yProps = (id, index) => {
   };
 };
 
-const MuiTabs = ({ tabsDetails }) => {
+const MuiTabs = ({ tabValue, handleTabChange, tabsDetails }) => {
   const classes = useStyles();
-  const [tabValue, setTabValue] = React.useState(0);
-
-  const handleTabChange = (_, newTabValue) => {
-    setTabValue(newTabValue);
-  };
 
   return (
     <div className={classes.tabsContainer}>
@@ -58,6 +53,8 @@ const MuiTabs = ({ tabsDetails }) => {
 };
 
 MuiTabs.propTypes = {
+  tabValue: PropTypes.number.isRequired,
+  handleTabChange: PropTypes.func.isRequired,
   tabsDetails: PropTypes.array.isRequired,
 };
 

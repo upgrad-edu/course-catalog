@@ -21,9 +21,15 @@ import { useStyles } from "./styles.js";
 const OnboardPage = () => {
   const classes = useStyles();
 
+  const [tabValue, setCurrentTabIndex] = useState(0);
   const [apiErrorMessage, setApiErrorMessage] = useState("");
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   const [isSignupSucccessful, setIsSignupSuccessful] = useState(false);
+
+  // Event handler triggered when a tab is changed
+  const handleTabChange = (_, newTabValue) => {
+    setCurrentTabIndex(newTabValue);
+  };
 
   const { doLogin, doSignup } = onboardApi;
 
@@ -54,6 +60,7 @@ const OnboardPage = () => {
       // success callback
       (response) => {
         console.log("Signed up successfully!", response);
+        setCurrentTabIndex(0); // redirect to login tab when signup is successful
         setIsSignupSuccessful(true);
       },
       // failure callback
@@ -103,7 +110,11 @@ const OnboardPage = () => {
         <img src={logo} alt="upGrad Logo" className={classes.logo} />
       </div>
       <div className={classes.loginPageTabs}>
-        <MuiTabs tabsDetails={tabsDetails}></MuiTabs>
+        <MuiTabs
+          tabValue={tabValue}
+          handleTabChange={handleTabChange}
+          tabsDetails={tabsDetails}
+        ></MuiTabs>
       </div>
     </div>
   );
