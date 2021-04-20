@@ -63,6 +63,9 @@ const HomePage = () => {
             handleCategorySearch={handleCategorySearch}
           />
         )}
+        <div className={classes.titleBar}>
+          <h4>New Courses</h4>
+        </div>
         <Footer />
       </div>
     </div>
