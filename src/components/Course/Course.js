@@ -10,11 +10,11 @@ import StarIcon from "@material-ui/icons/Star";
 // imports for styles
 import { useStyles } from "./styles.js";
 
-const Course = ({ data }) => {
+const Course = ({ data, handleClick }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.card} onClick={handleClick}>
       <CardMedia
         className={classes.media}
         image={data.imageURL}

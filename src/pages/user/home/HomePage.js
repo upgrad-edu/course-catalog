@@ -1,15 +1,20 @@
 import React, { useState, useEffect, Fragment } from "react";
 
+// imports for 3rd party libraries
+import { useHistory } from "react-router";
+
 // imports for utils
 import * as constants from "../../../utils/constants";
 
+// imports for components from Material UI library
+import { Typography } from "@material-ui/core";
+
 // imports for MUI components
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
-import { Typography } from "@material-ui/core";
+import { EnhancedSingleLineGridList } from "../../../components/MUI/MuiSingleLineGridList";
 
 // imports for custom components
 import { Loader } from "../../../components/UI/Loader";
-import { EnhancedSingleLineGridList } from "../../../components/MUI/MuiSingleLineGridList";
 import { Course } from "../../../components/Course";
 import { Footer } from "../../../components/UI/Footer";
 
@@ -20,6 +25,8 @@ import * as coursesApi from "../../../api/coursesApi";
 import classes from "./HomePage.module.css";
 
 const HomePage = () => {
+  const history = useHistory();
+
   const [isLoading, setIsLoading] = useState(false);
   const [newCoursesList, setNewCoursesList] = useState([]);
   const [coursesList, setCoursesList] = useState([]);
@@ -62,6 +69,10 @@ const HomePage = () => {
         setIsLoading(false);
       }
     );
+  };
+
+  const showCourseDetailsPage = (id) => {
+    history.push(`/courses/${id}`); // redirect to course details page on click of course card
   };
 
   // get all NEW courses
@@ -122,7 +133,11 @@ const HomePage = () => {
             {coursesList.length > 0 ? (
               <div className={classes.courseCardsContainer}>
                 {coursesList.map((course) => (
-                  <Course key={course._id} data={course} />
+                  <Course
+                    key={course._id}
+                    data={course}
+                    handleClick={() => showCourseDetailsPage(course._id)}
+                  />
                 ))}
               </div>
             ) : (
