@@ -5,6 +5,8 @@ import * as utilsApi from "./utils-api";
  * @param {Object}
  * 		email key
  * 		password key
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
  */
 export async function doLogin(
   { email, password },
@@ -29,7 +31,9 @@ export async function doLogin(
         failureCallback
       );
     } catch (error) {
-      failureCallback(error);
+      if (failureCallback) {
+        failureCallback(error);
+      }
     }
   }
 }
@@ -41,6 +45,8 @@ export async function doLogin(
  * 		lastName key
  * 		email key
  * 		password key
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
  */
 export async function doSignup(
   { firstName, lastName, email, password },
@@ -67,7 +73,9 @@ export async function doSignup(
         failureCallback
       );
     } catch (error) {
-      failureCallback(error);
+      if (failureCallback) {
+        failureCallback(error);
+      }
     }
   }
 }

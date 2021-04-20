@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import * as utils from "../../utils";
 
 // imports for API methods
-import * as onboardApi from "../../api/onboardApi";
+import * as userApi from "../../api/userApi";
 
 // imports for MUI components
 import { MuiTabs } from "../../components/MUI/MuiTabs";
@@ -37,7 +37,7 @@ const OnboardPage = () => {
     setCurrentTabIndex(newTabValue);
   };
 
-  const { doLogin, doSignup } = onboardApi;
+  const { doLogin, doSignup } = userApi;
 
   // Function to call login API and pass success and failure callbacks to it
   const handleLogin = (values) => {
