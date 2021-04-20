@@ -57,3 +57,27 @@ export async function getCoursesByCategory(
     }
   }
 }
+
+/**
+ * Function to get all published courses
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
+ */
+export async function getAllPublishedCourses(successCallback, failureCallback) {
+  try {
+    await utilsApi.sendApiRequest(
+      utilsApi.constants.HTTP_METHOD.GET,
+      "/tutorials",
+      ["published"],
+      null,
+      null,
+      null,
+      successCallback,
+      failureCallback
+    );
+  } catch (error) {
+    if (failureCallback) {
+      failureCallback(error);
+    }
+  }
+}
