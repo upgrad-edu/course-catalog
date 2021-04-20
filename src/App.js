@@ -1,5 +1,12 @@
 // imports for Material UI components
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import {
+  unstable_createMuiStrictModeTheme as createMuiTheme,
+  /* change suggested to overcome the error of Material UI in Menu component inside MuiPrimarySearchAppBar component
+  https://stackoverflow.com/a/64135466/7452548; 
+  TODO: REVERT TO STABLE WITH UPDATED VERSION OF MATERIAL UI where error is fixed
+   */
+  ThemeProvider,
+} from "@material-ui/core";
 
 // imports for 3rd party libraries
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
