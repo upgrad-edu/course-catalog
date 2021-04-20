@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // imports from Material UI library
 import AppBar from "@material-ui/core/AppBar";
@@ -9,6 +9,7 @@ import InputBase from "@material-ui/core/InputBase";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import SendIcon from "@material-ui/icons/Send";
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -16,10 +17,11 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 // imports for styles
 import { useStyles } from "./styles";
 
-const MuiPrimarySearchAppBar = () => {
+const MuiPrimarySearchAppBar = ({ handleSearch }) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [searchInputText, setSearchInputText] = useState("");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -38,6 +40,14 @@ const MuiPrimarySearchAppBar = () => {
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchInputText(event.target.value);
+  };
+
+  const handleSearchSubmitClick = () => {
+    handleSearch(searchInputText);
   };
 
   // visible as profile icon on large screen sizes (desktop)
@@ -107,7 +117,18 @@ const MuiPrimarySearchAppBar = () => {
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
+              onChange={handleSearchInputChange}
             />
+            <IconButton
+              className={classes.searchButton}
+              aria-label="search course"
+              aria-controls={menuId}
+              aria-haspopup="false"
+              color="inherit"
+              onClick={handleSearchSubmitClick}
+            >
+              <SendIcon />
+            </IconButton>
           </div>
 
           <div className={classes.grow} />

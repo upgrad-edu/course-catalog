@@ -1,5 +1,7 @@
-.app {
+.homePage {
   height: 100vh;
+}
+.app {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto 1fr auto;
