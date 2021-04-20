@@ -5,6 +5,7 @@ import * as constants from "../../../utils/constants";
 
 // imports for MUI components
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
+import { Typography } from "@material-ui/core";
 
 // imports for custom components
 import { Loader } from "../../../components/UI/Loader";
@@ -35,7 +36,7 @@ const HomePage = () => {
       title,
       // success callback
       (response) => {
-        console.log(response);
+        setCoursesList(response.data);
         setIsLoading(false);
       },
       // failure callback
@@ -52,7 +53,7 @@ const HomePage = () => {
       category,
       // success callback
       (response) => {
-        console.log(response);
+        setCoursesList(response.data);
         setIsLoading(false);
       },
       // failure callback
@@ -117,11 +118,18 @@ const HomePage = () => {
           // TODO: API pending; pass new courses instead of published courses
           <Fragment>
             <EnhancedSingleLineGridList newCourses={newCoursesList} />
-            <div className={classes.courseCardsContainer}>
-              {coursesList.map((course) => (
-                <Course key={course._id} data={course} />
-              ))}
-            </div>
+
+            {coursesList.length > 0 ? (
+              <div className={classes.courseCardsContainer}>
+                {coursesList.map((course) => (
+                  <Course key={course._id} data={course} />
+                ))}
+              </div>
+            ) : (
+              <Typography variant="subtitle1" gutterBottom>
+                No course found
+              </Typography>
+            )}
           </Fragment>
         )}
         <Footer />

@@ -70,6 +70,7 @@ const MuiPrimarySearchAppBar = ({
     }
     const category = event.target.innerText;
     handleCategorySearch(category);
+    handleCategoriesMenuClose();
   };
 
   // visible as categories menu
