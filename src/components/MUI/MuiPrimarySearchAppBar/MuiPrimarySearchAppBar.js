@@ -17,29 +17,43 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 // imports for styles
 import { useStyles } from "./styles";
 
-const MuiPrimarySearchAppBar = ({ handleSearch }) => {
+const MuiPrimarySearchAppBar = ({
+  handleTitleSearch,
+  handleCategorySearch,
+}) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [categoriesAnchorEl, setCategoriesAnchorEl] = useState(null);
+  const [profileAnchorEl, setProfileAnchorEl] = useState(null);
+  const [profileMobileAnchorEl, setProfileForMobileAnchorEl] = useState(null);
+
   const [searchInputText, setSearchInputText] = useState("");
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isCategoriesMenuOpen = Boolean(categoriesAnchorEl);
+  const isProfileMenuOpen = Boolean(profileAnchorEl);
+  const isProfileMobileMenuOpen = Boolean(profileMobileAnchorEl);
+
+  const handleCategoriesMenuOpen = (event) => {
+    setCategoriesAnchorEl(event.currentTarget);
+  };
+
+  const handleCategoriesMenuClose = () => {
+    setCategoriesAnchorEl(null);
+  };
 
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    setProfileAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleProfileMenuClose = () => {
+    setProfileAnchorEl(null);
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const handleProfileMobileMenuOpen = (event) => {
+    setProfileForMobileAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+  const handleProfileMobileMenuClose = () => {
+    setProfileForMobileAnchorEl(null);
   };
 
   const handleSearchInputChange = (event) => {
@@ -47,43 +61,71 @@ const MuiPrimarySearchAppBar = ({ handleSearch }) => {
   };
 
   const handleSearchSubmitClick = () => {
-    handleSearch(searchInputText);
+    handleTitleSearch(searchInputText);
   };
 
-  // visible as profile icon on large screen sizes (desktop)
-  const menuId = "profile-menu";
-  const renderMenu = (
+  const handleCategoryClick = (event) => {
+    {
+      /* TODO: API pending; replace innerText with data fetched from server */
+    }
+    const category = event.target.innerText;
+    handleCategorySearch(category);
+  };
+
+  // visible as categories menu
+  const categoriesMenuId = "categories-menu";
+  const renderCategoriesMenu = (
     <Menu
-      anchorEl={anchorEl}
+      anchorEl={categoriesAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
+      id={categoriesMenuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
+      open={isCategoriesMenuOpen}
+      onClose={handleCategoriesMenuClose}
       className={classes.root}
     >
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      {/* TODO: API pending; fetch categories data from server */}
+      <MenuItem onClick={handleCategoryClick}>Frontend Development</MenuItem>
+      <MenuItem onClick={handleCategoryClick}>Backend Development</MenuItem>
+      <MenuItem onClick={handleCategoryClick}>DevOps</MenuItem>
     </Menu>
   );
 
-  // visible as more icon on small screen sizes (mobile)
-  const mobileMenuId = "profile-menu-mobile";
-  const renderMobileMenu = (
+  // visible as profile menu on large screen sizes (desktop)
+  const profileMenuId = "profile-menu";
+  const renderProfileMenu = (
     <Menu
-      anchorEl={mobileMoreAnchorEl}
+      anchorEl={profileAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
+      id={profileMenuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
+      open={isProfileMenuOpen}
+      onClose={handleProfileMenuClose}
+      className={classes.root}
+    >
+      <MenuItem onClick={handleProfileMenuClose}>Logout</MenuItem>
+    </Menu>
+  );
+
+  // visible as more icon's menu on small screen sizes (mobile)
+  const profileMobileMenuId = "profile-menu-mobile";
+  const renderProfileMobileMenu = (
+    <Menu
+      anchorEl={profileMobileAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={profileMobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isProfileMobileMenuOpen}
+      onClose={handleProfileMobileMenuClose}
       className={classes.root}
     >
       <MenuItem>
         <IconButton
           aria-label="profile of current user"
-          aria-controls={menuId}
+          aria-controls={profileMenuId}
           aria-haspopup="true"
           color="inherit"
         >
@@ -122,7 +164,7 @@ const MuiPrimarySearchAppBar = ({ handleSearch }) => {
             <IconButton
               className={classes.searchButton}
               aria-label="search course"
-              aria-controls={menuId}
+              aria-controls={profileMenuId}
               aria-haspopup="false"
               color="inherit"
               onClick={handleSearchSubmitClick}
@@ -137,14 +179,17 @@ const MuiPrimarySearchAppBar = ({ handleSearch }) => {
           <div className={classes.categories}>
             <IconButton
               aria-label="course categories"
-              aria-controls={menuId}
+              aria-controls={profileMenuId}
               aria-haspopup="true"
               color="inherit"
+              onClick={handleCategoriesMenuOpen}
             >
               <AppsOutlinedIcon />
             </IconButton>
             <p className={classes.categoriesLabel}>Categories</p>
           </div>
+
+          {renderCategoriesMenu}
 
           <div className={classes.grow} />
 
@@ -153,7 +198,7 @@ const MuiPrimarySearchAppBar = ({ handleSearch }) => {
             <IconButton
               edge="end"
               aria-label="profile of current user"
-              aria-controls={menuId}
+              aria-controls={profileMenuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
@@ -166,9 +211,9 @@ const MuiPrimarySearchAppBar = ({ handleSearch }) => {
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
-              aria-controls={mobileMenuId}
+              aria-controls={profileMobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              onClick={handleProfileMobileMenuOpen}
               color="inherit"
             >
               <MoreIcon />
@@ -176,8 +221,8 @@ const MuiPrimarySearchAppBar = ({ handleSearch }) => {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      {renderProfileMobileMenu}
+      {renderProfileMenu}
     </div>
   );
 };

@@ -15,12 +15,29 @@ import classes from "./HomePage.module.css";
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { searchCourseByTitle } = coursesApi;
+  const { searchCourseByTitle, getCoursesByCategory } = coursesApi;
 
-  const handleSearchCourse = (title) => {
+  const handleTitleSearch = (title) => {
     setIsLoading(true);
     searchCourseByTitle(
       title,
+      // success callback
+      (response) => {
+        console.log(response);
+        setIsLoading(false);
+      },
+      // failure callback
+      (_, errorMessage) => {
+        console.error(errorMessage);
+        setIsLoading(false);
+      }
+    );
+  };
+
+  const handleCategorySearch = (category) => {
+    setIsLoading(true);
+    getCoursesByCategory(
+      category,
       // success callback
       (response) => {
         console.log(response);
@@ -40,7 +57,10 @@ const HomePage = () => {
         <Loader />
       ) : (
         <div className={classes.app}>
-          <MuiPrimarySearchAppBar handleSearch={handleSearchCourse} />
+          <MuiPrimarySearchAppBar
+            handleTitleSearch={handleTitleSearch}
+            handleCategorySearch={handleCategorySearch}
+          />
         </div>
       )}
     </div>
