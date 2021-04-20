@@ -5,6 +5,7 @@ import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearch
 
 // imports for custom components
 import { Loader } from "../../../components/UI/Loader";
+import { Footer } from "../../../components/UI/Footer";
 
 // imports for APIs
 import * as coursesApi from "../../../api/coursesApi";
@@ -53,16 +54,17 @@ const HomePage = () => {
 
   return (
     <div className={classes.homePage}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className={classes.app}>
+      <div className={classes.app}>
+        {isLoading ? (
+          <Loader />
+        ) : (
           <MuiPrimarySearchAppBar
             handleTitleSearch={handleTitleSearch}
             handleCategorySearch={handleCategorySearch}
           />
-        </div>
-      )}
+        )}
+        <Footer />
+      </div>
     </div>
   );
 };
