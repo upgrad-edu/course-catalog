@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 
 // imports for utils
 import * as constants from "../../../utils/constants";
@@ -9,6 +9,7 @@ import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearch
 // imports for custom components
 import { Loader } from "../../../components/UI/Loader";
 import { EnhancedSingleLineGridList } from "../../../components/MUI/MuiSingleLineGridList";
+import { Course } from "../../../components/Course";
 import { Footer } from "../../../components/UI/Footer";
 
 // imports for APIs
@@ -20,6 +21,7 @@ import classes from "./HomePage.module.css";
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [newCoursesList, setNewCoursesList] = useState([]);
+  const [coursesList, setCoursesList] = useState([]);
 
   const {
     searchCourseByTitle,
@@ -61,6 +63,7 @@ const HomePage = () => {
     );
   };
 
+  // get all NEW courses
   useEffect(() => {
     setIsLoading(true);
     getAllPublishedCourses(
@@ -71,6 +74,23 @@ const HomePage = () => {
           constants.SHOW_NEW_COURSES_LIMIT
         );
         setNewCoursesList(nNewCourses);
+        setIsLoading(false);
+      },
+      // failure callback
+      (_, errorMessage) => {
+        console.error(errorMessage);
+        setIsLoading(false);
+      }
+    );
+  }, []);
+
+  // get all courses
+  useEffect(() => {
+    setIsLoading(true);
+    getAllPublishedCourses(
+      // success callback
+      (response) => {
+        setCoursesList(response.data);
         setIsLoading(false);
       },
       // failure callback
@@ -95,7 +115,14 @@ const HomePage = () => {
           <Loader />
         ) : (
           // TODO: API pending; pass new courses instead of published courses
-          <EnhancedSingleLineGridList newCourses={newCoursesList} />
+          <Fragment>
+            <EnhancedSingleLineGridList newCourses={newCoursesList} />
+            <div className={classes.courseCardsContainer}>
+              {coursesList.map((course) => (
+                <Course key={course._id} data={course} />
+              ))}
+            </div>
+          </Fragment>
         )}
         <Footer />
       </div>

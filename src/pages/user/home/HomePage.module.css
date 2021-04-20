@@ -18,3 +18,11 @@
   margin-bottom: 0;
   line-height: 2.25rem;
 }
+.courseCardsContainer {
+  padding: 2rem;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  row-gap: 2rem;
+  column-gap: 2rem;
+}
