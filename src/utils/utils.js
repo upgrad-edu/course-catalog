@@ -43,6 +43,19 @@ export const checkValidEmail = (email) => {
 };
 
 /**
+ * Function to check if given value contains only numbers
+ * @param {String} value - value to be checked
+ * @returns {Boolean} - true if value is numerical; false otherwise
+ */
+export const checkIsNumerical = (value) => {
+  if (value) {
+    const regex = /^[0-9]*$/;
+    return regex.test(value.toString());
+  }
+  return false;
+};
+
+/**
  * Function to set local storage with given key-value pair
  * @param {*} key - unique identifier (datatype is not reference type)
  * @param {*} value - value corresponding to the key

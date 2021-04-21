@@ -1,0 +1,32 @@
+.checkoutPage {
+  height: 100vh;
+}
+.checkoutPageHeading {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+.addressFormContainer {
+  height: calc(
+    100vh - 7.5rem
+  ); /* height of PrimarySearchAppBar = 3rem, height of Footer = 3.5rem*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.addressForm {
+  width: 18rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  box-shadow: var(--dark-shadow);
+}
+@media screen and (min-width: 576px) {
+  .addressFormContainer {
+    height: calc(
+      100vh - 8.5rem
+    ); /* height of PrimarySearchAppBar = 4rem, height of Footer = 3.5rem*/
+  }
+  .addressForm {
+    width: 25rem;
+  }
+}
