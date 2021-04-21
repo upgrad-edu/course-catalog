@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { OnboardPage } from "./pages/onboard";
 import { HomePage } from "./pages/user/home";
 import { DetailsPage } from "./pages/user/details";
+import { CheckoutPage } from "./pages/user/checkout";
 
 // overriding default Material UI theme
 const theme = createMuiTheme({
@@ -41,6 +42,9 @@ const App = () => {
         </Switch>
         <Switch>
           <Route exact path="/courses/:id" component={DetailsPage}></Route>
+        </Switch>
+        <Switch>
+          <Route exact path="/checkout" component={CheckoutPage}></Route>
         </Switch>
       </Router>
     </ThemeProvider>

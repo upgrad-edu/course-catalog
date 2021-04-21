@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 // imports for utils
 import * as utils from "../../../utils";
 
+// imports for 3rd party libraries
+import { useHistory } from "react-router-dom";
+
 // imports for custom components
 import { Loader } from "../../../components/UI/Loader";
 import { Footer } from "../../../components/UI/Footer";
@@ -27,6 +30,8 @@ const DetailsPage = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [courseDetails, setCourseDetails] = useState({});
 
+  const history = useHistory();
+
   const { getCourseById } = coursesApi;
 
   // get all data of course with given id
@@ -47,6 +52,10 @@ const DetailsPage = (props) => {
       }
     );
   }, []);
+
+  const navigateToCheckoutPage = () => {
+    history.push("/checkout");
+  };
 
   const renderSkills =
     courseDetails && courseDetails.skills
@@ -155,7 +164,11 @@ const DetailsPage = (props) => {
             <div
               className={`${classes.btnContainer} ${classes.enrolMeBtnContainer}`}
             >
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={navigateToCheckoutPage}
+              >
                 Enrol Me
               </Button>
             </div>
