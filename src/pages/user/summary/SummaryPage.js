@@ -1,5 +1,8 @@
 import React from "react";
 
+// imports for 3rd party libraries
+import { useHistory } from "react-router-dom";
+
 // imports for components from MUI library
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -16,8 +19,12 @@ import { Footer } from "../../../components/UI/Footer";
 import classes from "./SummaryPage.module.css";
 
 const SummaryPage = () => {
+  const history = useHistory();
+  const { courseDetails, addressDetails } = history.location;
+
   const placeOrder = () => {
     alert("Your order has been placed successfully!");
+    history.push("/");
   };
 
   return (
@@ -47,13 +54,16 @@ const SummaryPage = () => {
               Course:
             </Typography>
             <Typography variant="inherit" component="p" gutterBottom>
-              <span>Title:</span>
+              <span className={classes.bold}>Title: </span>
+              {courseDetails.title}
             </Typography>
             <Typography variant="inherit" component="p" gutterBottom>
-              <span>Author:</span>
+              <span className={classes.bold}>Author: </span>
+              {courseDetails.author}
             </Typography>
             <Typography variant="inherit" component="p" gutterBottom>
-              <span>Price:</span>
+              <span className={classes.bold}>Price: </span>
+              {courseDetails.priceAfterDiscount}
             </Typography>
           </div>
 
@@ -67,16 +77,12 @@ const SummaryPage = () => {
             >
               Address:
             </Typography>
-            <Typography
-              variant="inherit"
-              component="p"
-              gutterBottom
-            ></Typography>
-            <Typography
-              variant="inherit"
-              component="p"
-              gutterBottom
-            ></Typography>
+            <Typography variant="inherit" component="p" gutterBottom>
+              {`${addressDetails.flatOrBuilding}, ${addressDetails.street}`}
+            </Typography>
+            <Typography variant="inherit" component="p" gutterBottom>
+              {`${addressDetails.city}, ${addressDetails.state}, ${addressDetails.country}`}
+            </Typography>
             <Typography
               variant="inherit"
               component="p"
@@ -89,6 +95,7 @@ const SummaryPage = () => {
               gutterBottom
             >
               <RoomIcon fontSize="small" />
+              {addressDetails.pin}
             </Typography>
             <Typography
               variant="inherit"
@@ -97,6 +104,7 @@ const SummaryPage = () => {
               gutterBottom
             >
               <PhoneIcon fontSize="small" />
+              {addressDetails.phone}
             </Typography>
           </div>
         </article>

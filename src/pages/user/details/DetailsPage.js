@@ -54,7 +54,10 @@ const DetailsPage = (props) => {
   }, []);
 
   const navigateToCheckoutPage = () => {
-    history.push("/checkout");
+    history.push({
+      pathname: "/checkout",
+      courseDetails: courseDetails, // pass course details to checkout page
+    });
   };
 
   const renderSkills =

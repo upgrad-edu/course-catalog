@@ -42,7 +42,11 @@ const CheckoutPage = () => {
   };
 
   const navigateToSummaryPage = () => {
-    history.push("/summary");
+    history.push({
+      pathname: "/summary",
+      courseDetails: history.location.courseDetails, // pass course details received from details page to summary page
+      addressDetails: values, // pass address details to summary page
+    });
   };
 
   const { values, errors, handleChange, handleSubmit } = useForm(
