@@ -1,0 +1,52 @@
+.summaryPage {
+  height: 100vh;
+}
+.summaryContainer {
+  height: calc(
+    100vh - 7.5rem
+  ); /* height of PrimarySearchAppBar = 3rem, height of Footer = 3.5rem*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.summaryPageHeading {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+.summary {
+  width: 20rem;
+  border: 1px solid var(--clr-grey-light);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: 2rem;
+}
+.pin,
+.phone {
+  display: flex;
+  justify-content: center;
+}
+.placeOrderBtn {
+  margin-top: 2rem;
+}
+@media screen and (min-width: 576px) {
+  .summaryContainer {
+    height: calc(
+      100vh - 8.5rem
+    ); /* height of PrimarySearchAppBar = 4rem, height of Footer = 3.5rem*/
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .summary {
+    width: 25rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .summary {
+    width: 30rem;
+  }
+}

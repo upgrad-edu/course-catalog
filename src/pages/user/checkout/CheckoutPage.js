@@ -10,6 +10,7 @@ import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearch
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import FilledInput from "@material-ui/core/FilledInput";
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 // imports for custom components
@@ -59,7 +60,14 @@ const CheckoutPage = () => {
       {/* TODO: Show header */}
       <MuiPrimarySearchAppBar />
       <section className={cssClasses.addressFormContainer}>
-        <h3 className={classes.checkoutPageHeading}>Address Form</h3>
+        <Typography
+          variant="inherit"
+          component="h3"
+          color="secondary"
+          className={classes.checkoutPageHeading}
+        >
+          Address Form
+        </Typography>
         <form
           id="addressForm"
           noValidate
