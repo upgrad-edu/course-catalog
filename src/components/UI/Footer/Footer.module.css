@@ -5,6 +5,8 @@
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   padding: 0 1.5rem;
+  bottom: 0;
+  width: 100%;
 }
 .footer p {
   margin-bottom: 0;

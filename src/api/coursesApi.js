@@ -81,3 +81,32 @@ export async function getAllPublishedCourses(successCallback, failureCallback) {
     }
   }
 }
+
+/**
+ * Function to get course with given id
+ * @param {*} courseId - id of the course to be fetched
+ * @param {*} successCallback - callback method to be called when API succeeds
+ * @param {*} failureCallback - callback method to be called when API fails
+ */
+export async function getCourseById(
+  courseId,
+  successCallback,
+  failureCallback
+) {
+  try {
+    await utilsApi.sendApiRequest(
+      utilsApi.constants.HTTP_METHOD.GET,
+      "/tutorials",
+      [courseId],
+      null,
+      null,
+      null,
+      successCallback,
+      failureCallback
+    );
+  } catch (error) {
+    if (failureCallback) {
+      failureCallback(error);
+    }
+  }
+}

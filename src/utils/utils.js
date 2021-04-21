@@ -11,6 +11,23 @@ const checkReferenceType = (value) => {
 };
 
 /**
+ * Function to get formatted date as: April 20, 2021 from an ISO date string
+ * @param {String} isoDate - ISO date string to be formatted
+ * @returns {String} - formatted date string
+ */
+export const getFormattedDate = (isoDate) => {
+  if (isoDate) {
+    const options = {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
+    return new Date(isoDate).toLocaleDateString("en-US", options);
+  }
+  return "";
+};
+
+/**
  * Function to check if given email is valid
  * @param {String} email - email to be checked
  * @returns {Boolean} - true if email is valid; false otherwise

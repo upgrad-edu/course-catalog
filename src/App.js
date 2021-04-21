@@ -40,11 +40,7 @@ const App = () => {
           <Route exact path={["/home", "/"]} component={HomePage}></Route>
         </Switch>
         <Switch>
-          <Route
-            exact
-            path="/courses/:courseId"
-            component={DetailsPage}
-          ></Route>
+          <Route exact path="/courses/:id" component={DetailsPage}></Route>
         </Switch>
       </Router>
     </ThemeProvider>

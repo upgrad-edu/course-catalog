@@ -1,8 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  card: {
     width: "23rem",
+    cursor: "pointer",
   },
   media: {
     height: 140,
