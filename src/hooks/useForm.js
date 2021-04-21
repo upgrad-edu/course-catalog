@@ -26,7 +26,9 @@ const useForm = (
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    submitCallback();
+    if (submitCallback) {
+      submitCallback();
+    }
 
     setErrors(validate(values));
     setIsSubmitting(true);
@@ -39,7 +41,7 @@ const useForm = (
 
   useEffect(() => {
     // if the submit button is clicked atleast once and there's no error, invoke success callback
-    if (isSubmitting && Object.keys(errors).length === 0) {
+    if (isSubmitting && Object.keys(errors).length === 0 && successCallback) {
       successCallback(values);
     }
   }, [errors]);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// imports for MUI components
+// imports for components from MUI library
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import FilledInput from "@material-ui/core/FilledInput";
@@ -11,11 +11,11 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from "@material-ui/core/Button";
 
 // imports for custom hook
-import useForm from "./useForm";
+import { useForm } from "../../../hooks";
 import validateSignupForm from "./validateSignupForm";
 
 // imports for styles
-import { useStyles } from "./styles.js";
+import { useStyles } from "../../../styles/formStyles.js";
 
 const SignupForm = ({
   success,
