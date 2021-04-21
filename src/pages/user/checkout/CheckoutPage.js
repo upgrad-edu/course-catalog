@@ -1,5 +1,8 @@
 import React from "react";
 
+// imports for 3rd party libraries
+import { useHistory } from "react-router-dom";
+
 // imports for MUI components
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
 
@@ -24,6 +27,8 @@ const CheckoutPage = () => {
   // merging all styles imported
   const cssClasses = { ...classes, ...useStyles() };
 
+  const history = useHistory();
+
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
     flatOrBuilding: "",
@@ -36,7 +41,7 @@ const CheckoutPage = () => {
   };
 
   const navigateToSummaryPage = () => {
-    console.log("Navigating to Summary Page!");
+    history.push("/summary");
   };
 
   const { values, errors, handleChange, handleSubmit } = useForm(

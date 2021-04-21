@@ -16,6 +16,7 @@ import { OnboardPage } from "./pages/onboard";
 import { HomePage } from "./pages/user/home";
 import { DetailsPage } from "./pages/user/details";
 import { CheckoutPage } from "./pages/user/checkout";
+import { SummaryPage } from "./pages/user/summary";
 
 // overriding default Material UI theme
 const theme = createMuiTheme({
@@ -45,6 +46,9 @@ const App = () => {
         </Switch>
         <Switch>
           <Route exact path="/checkout" component={CheckoutPage}></Route>
+        </Switch>
+        <Switch>
+          <Route exact path="/summary" component={SummaryPage}></Route>
         </Switch>
       </Router>
     </ThemeProvider>
