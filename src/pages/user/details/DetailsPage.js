@@ -126,10 +126,27 @@ const DetailsPage = (props) => {
                   </Typography>
                 </div>
               </div>
-              <Typography variant="inherit" component="p" color="textSecondary">
+              <Typography
+                variant="inherit"
+                component="p"
+                color="textSecondary"
+                gutterBottom
+              >
                 Category:{" "}
                 <span className={classes.subtitleContent}>
                   {courseDetails.category}
+                </span>
+              </Typography>
+              <Typography variant="inherit" component="p" color="textSecondary">
+                Price:{" "}
+                <span className={classes.originalPrice}>
+                  {courseDetails.priceInRupees}
+                </span>
+                &nbsp;
+                <span
+                  className={`${classes.discountedPrice} ${classes.subtitleContent}`}
+                >
+                  {courseDetails.priceAfterDiscount}
                 </span>
               </Typography>
 
