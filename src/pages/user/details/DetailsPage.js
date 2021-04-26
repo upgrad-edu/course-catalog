@@ -87,7 +87,7 @@ const DetailsPage = (props) => {
   return (
     <div className={classes.detailsPage}>
       {/* TODO: Show header */}
-      <MuiPrimarySearchAppBar />
+      <MuiPrimarySearchAppBar isLogoClickable={true} />
       {isLoading ? (
         <Loader />
       ) : (

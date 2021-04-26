@@ -117,6 +117,8 @@ const HomePage = () => {
     <div className={classes.homePage}>
       {/* Header */}
       <MuiPrimarySearchAppBar
+        isSearchVisible={true}
+        isCategoriesVisible={true}
         handleTitleSearch={handleTitleSearch}
         handleCategorySearch={handleCategorySearch}
       />

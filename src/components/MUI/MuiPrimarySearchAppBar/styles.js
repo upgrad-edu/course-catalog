@@ -16,10 +16,14 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     fontSize: "1.25rem",
     fontWeight: 500,
+    color: "var(--clr-white)",
     [theme.breakpoints.up("sm")]: {
       display: "block",
       cursor: "default",
     },
+  },
+  cursorPointer: {
+    cursor: "pointer",
   },
   search: {
     display: "flex",

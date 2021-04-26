@@ -1,5 +1,8 @@
 import React, { useState, Fragment } from "react";
 
+// imports from 3rd party libraries
+import { Link } from "react-router-dom";
+
 // imports from Material UI library
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,6 +21,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { useStyles } from "./styles";
 
 const MuiPrimarySearchAppBar = ({
+  isLogoClickable,
+  isSearchVisible,
+  isCategoriesVisible,
   handleTitleSearch,
   handleCategorySearch,
 }) => {
@@ -31,6 +37,11 @@ const MuiPrimarySearchAppBar = ({
   const isCategoriesMenuOpen = Boolean(categoriesAnchorEl);
   const isProfileMenuOpen = Boolean(profileAnchorEl);
   const isProfileMobileMenuOpen = Boolean(profileMobileAnchorEl);
+
+  // setting defaults if the props are not received
+  isLogoClickable = isLogoClickable || false;
+  isSearchVisible = isSearchVisible || false;
+  isCategoriesVisible = isCategoriesVisible || false;
 
   const handleCategoriesMenuOpen = (event) => {
     setCategoriesAnchorEl(event.currentTarget);
@@ -137,59 +148,74 @@ const MuiPrimarySearchAppBar = ({
     </Menu>
   );
 
+  const renderLogo = (
+    // add cursorPointer class when the logo is clickable
+    <Typography
+      className={`${classes.logo} ${
+        isLogoClickable ? classes.cursorPointer : null
+      }`}
+      variant="inherit"
+      component="h1"
+    >
+      upGrad
+    </Typography>
+  );
+
   return (
     <Fragment>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           {/* upGrad Logo */}
-          <Typography className={classes.logo} variant="inherit" component="h1">
-            upGrad
-          </Typography>
+          {isLogoClickable ? <Link to="/">{renderLogo}</Link> : renderLogo}
 
           {/* Search Bar */}
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+          {isSearchVisible ? (
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+                onChange={handleSearchInputChange}
+              />
+              <IconButton
+                className={`${classes.searchButton} ${classes.btn}`}
+                aria-label="search course"
+                aria-controls={profileMenuId}
+                aria-haspopup="false"
+                color="inherit"
+                onClick={handleSearchSubmitClick}
+              >
+                <SendIcon />
+              </IconButton>
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-              onChange={handleSearchInputChange}
-            />
-            <IconButton
-              className={`${classes.searchButton} ${classes.btn}`}
-              aria-label="search course"
-              aria-controls={profileMenuId}
-              aria-haspopup="false"
-              color="inherit"
-              onClick={handleSearchSubmitClick}
-            >
-              <SendIcon />
-            </IconButton>
-          </div>
+          ) : null}
 
           {/* Categories */}
-          <div
-            className={classes.categories}
-            onClick={handleCategoriesMenuOpen}
-          >
-            <IconButton
-              className={classes.btn}
-              aria-label="course categories"
-              aria-controls={profileMenuId}
-              aria-haspopup="true"
-              color="inherit"
+          {isCategoriesVisible ? (
+            <div
+              className={classes.categories}
+              onClick={handleCategoriesMenuOpen}
             >
-              <AppsOutlinedIcon />
-            </IconButton>
-            <Typography variant="inherit" className={classes.categoriesLabel}>
-              Categories
-            </Typography>
-          </div>
+              <IconButton
+                className={classes.btn}
+                aria-label="course categories"
+                aria-controls={profileMenuId}
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <AppsOutlinedIcon />
+              </IconButton>
+              <Typography variant="inherit" className={classes.categoriesLabel}>
+                Categories
+              </Typography>
+            </div>
+          ) : null}
 
           {renderCategoriesMenu}
 
