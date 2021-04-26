@@ -10,7 +10,7 @@ import StarIcon from "@material-ui/icons/Star";
 // imports for styles
 import { useStyles } from "./styles.js";
 
-const Course = ({ data, handleClick }) => {
+const MuiCard = ({ data, handleClick }) => {
   const classes = useStyles();
 
   return (
@@ -50,4 +50,4 @@ const Course = ({ data, handleClick }) => {
   );
 };
 
-export default Course;
+export default MuiCard;

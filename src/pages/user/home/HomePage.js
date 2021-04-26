@@ -12,10 +12,10 @@ import Typography from "@material-ui/core/Typography";
 // imports for MUI components
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
 import { EnhancedSingleLineGridList } from "../../../components/MUI/MuiSingleLineGridList";
+import { MuiCard } from "../../../components/MUI/MuiCard";
 
 // imports for custom components
 import { Loader } from "../../../components/UI/Loader";
-import { Course } from "../../../components/Course";
 import { Footer } from "../../../components/UI/Footer";
 
 // imports for APIs
@@ -139,7 +139,7 @@ const HomePage = () => {
             {coursesList.length > 0 ? (
               <section className={classes.courseCardsContainer}>
                 {coursesList.map((course) => (
-                  <Course
+                  <MuiCard
                     key={course._id}
                     data={course}
                     handleClick={() => showCourseDetailsPage(course._id)}
