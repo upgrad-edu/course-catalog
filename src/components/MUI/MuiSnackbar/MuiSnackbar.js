@@ -1,5 +1,8 @@
 import React from "react";
 
+// imports for 3rd party libraries
+import PropTypes from "prop-types";
+
 // imports for components from MUI library
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -30,6 +33,12 @@ const MuiSnackbar = ({ isOpen, message, handleClose }) => {
       }
     />
   );
+};
+
+MuiSnackbar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  message: PropTypes.string.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default MuiSnackbar;

@@ -1,5 +1,8 @@
 import React from "react";
 
+// imports for 3rd party libraries
+import PropTypes from "prop-types";
+
 // imports for utils
 import * as utils from "../../../utils";
 
@@ -51,6 +54,11 @@ const MuiCard = ({ data, handleClick }) => {
       </CardContent>
     </Card>
   );
+};
+
+MuiCard.propTypes = {
+  data: PropTypes.object.isRequired,
+  handleClick: PropTypes.func,
 };
 
 export default MuiCard;

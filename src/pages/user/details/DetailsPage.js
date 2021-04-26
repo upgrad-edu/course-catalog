@@ -5,6 +5,7 @@ import * as utils from "../../../utils";
 
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // imports for custom components
 import { Loader } from "../../../components/UI/Loader";
@@ -212,6 +213,10 @@ const DetailsPage = (props) => {
       <Footer />
     </div>
   );
+};
+
+DetailsPage.propTypes = {
+  props: PropTypes.object,
 };
 
 export default DetailsPage;

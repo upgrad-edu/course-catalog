@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from "react";
 
-// imports from 3rd party libraries
+// imports for 3rd party libraries
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // imports from Material UI library
 import AppBar from "@material-ui/core/AppBar";
@@ -252,6 +253,14 @@ const MuiPrimarySearchAppBar = ({
       {renderProfileMenu}
     </Fragment>
   );
+};
+
+MuiPrimarySearchAppBar.propTypes = {
+  isLogoClickable: PropTypes.bool,
+  isSearchVisible: PropTypes.bool,
+  isCategoriesVisible: PropTypes.bool,
+  handleTitleSearch: PropTypes.func,
+  handleCategorySearch: PropTypes.func,
 };
 
 export default MuiPrimarySearchAppBar;

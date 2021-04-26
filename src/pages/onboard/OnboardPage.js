@@ -103,7 +103,7 @@ const OnboardPage = () => {
       label: "login",
       children: (
         <LoginForm
-          success={(values) => handleLogin(values)}
+          successHandler={(values) => handleLogin(values)}
           apiErrorMessage={apiErrorMessage}
           isLoginSuccessful={isLoginSuccessful}
           submitCallback={submitCallback}
@@ -115,7 +115,7 @@ const OnboardPage = () => {
       label: "signup",
       children: (
         <SignupForm
-          success={(values) => handleSignup(values)}
+          successHandler={(values) => handleSignup(values)}
           apiErrorMessage={apiErrorMessage}
           isSignupSucccessful={isSignupSucccessful}
           submitCallback={submitCallback}

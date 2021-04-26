@@ -1,5 +1,8 @@
 import React from "react";
 
+// imports for 3rd party libraries
+import PropTypes from "prop-types";
+
 // imports for components from Material UI library
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -17,7 +20,7 @@ const SingleLineGridList = ({ width, data }) => {
       return 3;
     }
 
-    if (isWidthUp("sm", width)) {
+    if (isWidthUp("md", width)) {
       return 2;
     }
 
@@ -42,6 +45,11 @@ const SingleLineGridList = ({ width, data }) => {
       </GridList>
     </section>
   );
+};
+
+SingleLineGridList.propTypes = {
+  width: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export const EnhancedSingleLineGridList = withWidth()(SingleLineGridList);

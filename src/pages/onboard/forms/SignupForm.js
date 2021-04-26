@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// imports for 3rd party libraries
+import PropTypes from "prop-types";
+
 // imports for components from MUI library
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -18,7 +21,7 @@ import validateSignupForm from "./validateSignupForm";
 import { useStyles } from "../../../styles/formStyles.js";
 
 const SignupForm = ({
-  success,
+  successHandler,
   apiErrorMessage,
   isSignupSucccessful,
   submitCallback,
@@ -37,7 +40,7 @@ const SignupForm = ({
     isSignupSucccessful, // determining if values of form control should be cleared
     validateSignupForm,
     submitCallback,
-    success
+    successHandler
   );
   const { firstName, lastName, email, password, confirmPassword } = values;
 
@@ -170,6 +173,13 @@ const SignupForm = ({
       </Button>
     </form>
   );
+};
+
+SignupForm.propTypes = {
+  successHandler: PropTypes.func.isRequired,
+  apiErrorMessage: PropTypes.string,
+  isSignupSucccessful: PropTypes.bool.isRequired,
+  submitCallback: PropTypes.func,
 };
 
 export default SignupForm;

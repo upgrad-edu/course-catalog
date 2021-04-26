@@ -26,8 +26,8 @@ const MuiTabPanel = (props) => {
 
 MuiTabPanel.propTypes = {
   children: PropTypes.node,
-  index: PropTypes.number.isRequired,
   tabValue: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
 };
 
