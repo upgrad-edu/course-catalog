@@ -89,9 +89,6 @@ const SignupForm = ({
             autoComplete="on"
             color="secondary"
           />
-          {errors.lastName && (
-            <div className={classes.error}>{errors.lastName}</div>
-          )}
         </FormControl>
         <FormControl variant="filled">
           <InputLabel htmlFor="signupEmail" color="secondary">

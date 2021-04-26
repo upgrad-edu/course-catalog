@@ -11,15 +11,8 @@ const validateSignupForm = (values) => {
   }
 
   /*
-   Rule 2: lastName is required
-   */
-  if (!values.lastName.trim()) {
-    errors.lastName = "Required";
-  }
-
-  /*
-   Rule 3: email is required
-   Rule 4: email should be valid
+   Rule 2: email is required
+   Rule 3: email should be valid
    */
   if (!values.email.trim()) {
     errors.email = "Required";
@@ -28,8 +21,8 @@ const validateSignupForm = (values) => {
   }
 
   /*
-   Rule 5: password is required
-   Rule 6: password should be atleast 6 characters long
+   Rule 4: password is required
+   Rule 5: password should be atleast 6 characters long
    */
   if (!values.password) {
     errors.password = "Required";
@@ -38,8 +31,8 @@ const validateSignupForm = (values) => {
   }
 
   /*
-   Rule 7: confirm password is required
-   Rule 8: confirm password should be equal to password
+   Rule 6: confirm password is required
+   Rule 7: confirm password should be equal to password
    */
   if (!values.confirmPassword) {
     errors.confirmPassword = "Required";
