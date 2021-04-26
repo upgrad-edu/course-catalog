@@ -114,7 +114,9 @@ const DetailsPage = (props) => {
                 <div className={classes.durationContainer}>
                   <ScheduleIcon color="primary" className={classes.icon} />
                   <Typography variant="inherit" component="p">
-                    {courseDetails.duration} hours
+                    {utils.getFormattedTimeInHoursAndMinutes(
+                      courseDetails.duration
+                    )}
                   </Typography>
                 </div>
                 <div className={classes.dateContainer}>

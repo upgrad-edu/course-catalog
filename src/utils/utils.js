@@ -69,3 +69,25 @@ export const setLocalStorage = (key, value) => {
     }
   }
 };
+
+/**
+ * Function to get formatted time represented in hours and minutes
+ * @param {number} minutes - unique identifier (datatype is not reference type)
+ * @returns {String} formatted time if minutes exist; "NA" otherwise
+ *    Example: 2h 30m
+ */
+export const getFormattedTimeInHoursAndMinutes = (minutes) => {
+  if (minutes) {
+    minutes = +minutes; // convert string to number (type safe for further calculations)
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    if (hours === 0) {
+      return `${mins}m`;
+    }
+    if (mins === 0) {
+      return `${hours}h`;
+    }
+    return `${hours}h ${mins}m`;
+  }
+  return "NA";
+};

@@ -1,5 +1,8 @@
 import React from "react";
 
+// imports for utils
+import * as utils from "../../../utils";
+
 // imports for components from Material UI
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -34,7 +37,7 @@ const MuiCard = ({ data, handleClick }) => {
         </div>
         <div className={classes.footerInfo}>
           <Typography variant="inherit" component="h5">
-            {data.duration} hours
+            {utils.getFormattedTimeInHoursAndMinutes(data.duration)}
           </Typography>
           <Typography variant="inherit" component="h5">
             INR{" "}
