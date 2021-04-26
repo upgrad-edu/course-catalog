@@ -11,6 +11,7 @@ import * as userApi from "../../api/userApi";
 
 // imports for MUI components
 import { MuiTabs } from "../../components/MUI/MuiTabs";
+import { MuiSnackbar } from "../../components/MUI/MuiSnackbar";
 
 // imports for custom components
 import { LoginForm, SignupForm } from "./forms";
@@ -31,6 +32,8 @@ const OnboardPage = () => {
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   const [isSignupSucccessful, setIsSignupSuccessful] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   // Event handler triggered when a tab is changed
   const handleTabChange = (_, newTabValue) => {
@@ -70,9 +73,13 @@ const OnboardPage = () => {
       values,
       // success callback
       (response) => {
-        console.log("Signed up successfully!", response);
         setCurrentTabIndex(0); // redirect to login tab when signup is successful
         setIsLoading(false);
+
+        // show the success message inside Snackbar component
+        setSnackbarMessage("Signed up successfully!");
+        setIsSnackbarOpen(true);
+
         setIsSignupSuccessful(true);
       },
       // failure callback
@@ -117,6 +124,14 @@ const OnboardPage = () => {
     },
   ];
 
+  // event handler to close Snackbar
+  const closeSnackbar = (_, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setIsSnackbarOpen(false);
+  };
+
   return (
     <Fragment>
       <header className={classes.onboardPageHeader}>
@@ -134,6 +149,11 @@ const OnboardPage = () => {
             ></MuiTabs>
           </div>
         )}
+        <MuiSnackbar
+          isOpen={isSnackbarOpen}
+          message={snackbarMessage}
+          handleClose={closeSnackbar}
+        />
       </main>
     </Fragment>
   );
