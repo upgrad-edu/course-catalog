@@ -17,6 +17,7 @@ import { HomePage } from "./pages/user/home";
 import { DetailsPage } from "./pages/user/details";
 import { CheckoutPage } from "./pages/user/checkout";
 import { SummaryPage } from "./pages/user/summary";
+import { NotFoundPage } from "./pages/notfound";
 
 // overriding default Material UI theme
 const theme = createMuiTheme({
@@ -37,18 +38,11 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/login" component={OnboardPage}></Route>
-        </Switch>
-        <Switch>
           <Route exact path={["/home", "/"]} component={HomePage}></Route>
-        </Switch>
-        <Switch>
           <Route exact path="/courses/:id" component={DetailsPage}></Route>
-        </Switch>
-        <Switch>
           <Route exact path="/checkout" component={CheckoutPage}></Route>
-        </Switch>
-        <Switch>
           <Route exact path="/summary" component={SummaryPage}></Route>
+          <Route path="*" component={NotFoundPage}></Route>
         </Switch>
       </Router>
     </ThemeProvider>
