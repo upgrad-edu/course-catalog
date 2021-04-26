@@ -5,9 +5,9 @@ import { useHistory } from "react-router-dom";
 
 // imports for components from MUI library
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import RoomIcon from "@material-ui/icons/Room";
 import PhoneIcon from "@material-ui/icons/Phone";
+import Button from "@material-ui/core/Button";
 
 // imports for MUI components
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
@@ -31,7 +31,7 @@ const SummaryPage = () => {
     <div className={classes.summaryPage}>
       {/* TODO: Show header */}
       <MuiPrimarySearchAppBar />
-      <section className={classes.summaryContainer}>
+      <main className={classes.summaryPageContent}>
         {/* Summary Heading */}
         <Typography
           variant="inherit"
@@ -44,7 +44,7 @@ const SummaryPage = () => {
         {/* Summary Content */}
         <article className={classes.summary}>
           {/* Course Summary */}
-          <div className={classes.courseSummary}>
+          <div>
             <Typography
               variant="inherit"
               component="h4"
@@ -68,7 +68,7 @@ const SummaryPage = () => {
           </div>
 
           {/* Address Summary */}
-          <div className={classes.addressSummary}>
+          <div>
             <Typography
               variant="inherit"
               component="h4"
@@ -95,6 +95,7 @@ const SummaryPage = () => {
               gutterBottom
             >
               <RoomIcon fontSize="small" />
+              &nbsp;
               {addressDetails.pin}
             </Typography>
             <Typography
@@ -104,6 +105,7 @@ const SummaryPage = () => {
               gutterBottom
             >
               <PhoneIcon fontSize="small" />
+              &nbsp;
               {addressDetails.phone}
             </Typography>
           </div>
@@ -113,7 +115,7 @@ const SummaryPage = () => {
             place order
           </Button>
         </div>
-      </section>
+      </main>
       <Footer />
     </div>
   );

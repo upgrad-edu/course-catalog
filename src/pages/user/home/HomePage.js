@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 import * as constants from "../../../utils/constants";
 
 // imports for components from Material UI library
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 // imports for MUI components
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
@@ -115,23 +115,29 @@ const HomePage = () => {
 
   return (
     <div className={classes.homePage}>
-      <div className={classes.app}>
-        <MuiPrimarySearchAppBar
-          handleTitleSearch={handleTitleSearch}
-          handleCategorySearch={handleCategorySearch}
-        />
-        <div className={classes.titleBar}>
-          <h4>New Courses</h4>
-        </div>
+      {/* Header */}
+      <MuiPrimarySearchAppBar
+        handleTitleSearch={handleTitleSearch}
+        handleCategorySearch={handleCategorySearch}
+      />
+      {/* Main Content */}
+      <main className={classes.homePageContent}>
         {isLoading ? (
           <Loader />
         ) : (
           // TODO: API pending; pass new courses instead of published courses
           <Fragment>
-            <EnhancedSingleLineGridList newCourses={newCoursesList} />
+            {/* New Courses */}
+            <section>
+              <div className={classes.titleBar}>
+                <h4>New Courses</h4>
+              </div>
+              <EnhancedSingleLineGridList data={newCoursesList} />
+            </section>
 
+            {/* Course Cards */}
             {coursesList.length > 0 ? (
-              <div className={classes.courseCardsContainer}>
+              <section className={classes.courseCardsContainer}>
                 {coursesList.map((course) => (
                   <Course
                     key={course._id}
@@ -139,18 +145,22 @@ const HomePage = () => {
                     handleClick={() => showCourseDetailsPage(course._id)}
                   />
                 ))}
-              </div>
+              </section>
             ) : (
-              <Typography variant="subtitle1" gutterBottom>
+              <Typography
+                variant="inherit"
+                component="h4"
+                className={classes.noCourseFoundText}
+              >
                 No course found
               </Typography>
             )}
           </Fragment>
         )}
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 };
 
-export { HomePage };
+export default HomePage;

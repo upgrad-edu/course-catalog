@@ -7,28 +7,28 @@ import PropTypes from "prop-types";
 import { useStyles } from "./styles.js";
 
 const MuiTabPanel = (props) => {
-  const { children, value, index, id, ...other } = props;
+  const { children, tabValue, index, id, ...other } = props;
 
   const classes = useStyles();
 
   return (
-    <div
+    <article
       role="tabpanel"
-      hidden={value !== index}
+      hidden={tabValue !== index}
       id={`${id}-tabpanel-${index}`}
       aria-labelledby={`${id}-tab-${index}`}
       {...other}
     >
-      {value === index && <div className={classes.tabPanel}>{children}</div>}
-    </div>
+      {tabValue === index && <div className={classes.tabPanel}>{children}</div>}
+    </article>
   );
 };
 
 MuiTabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+  tabValue: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
 };
 
-export { MuiTabPanel };
+export default MuiTabPanel;

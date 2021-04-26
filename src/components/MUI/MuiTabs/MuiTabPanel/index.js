@@ -1,1 +1,1 @@
-export * from "./MuiTabPanel";
+export { default as MuiTabPanel } from "./MuiTabPanel";

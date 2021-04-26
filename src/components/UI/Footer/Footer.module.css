@@ -1,36 +1,50 @@
 .footer {
-  height: 3.5rem;
   box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  padding: 0.75rem 1rem;
+  font-size: 0.65rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 0 1.5rem;
-  bottom: 0;
-  width: 100%;
 }
-.footer p {
+.copyright,
+.creator {
   margin-bottom: 0;
-}
-.copyright {
-  text-transform: capitalize;
 }
 .company,
 .creator a {
   color: var(--clr-black);
-  text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
 }
 .socialLinks {
-  text-align: center;
+  padding: 0.75rem 0;
 }
 .socialLink {
-  display: inline-block;
   color: var(--clr-black);
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 .socialLink:not(:last-child) {
-  margin-right: 2.5rem;
+  margin-right: 1.5rem;
 }
 .creator {
   text-transform: capitalize;
-  justify-self: flex-end;
+}
+@media screen and (min-width: 576px) {
+  .footer {
+    font-size: 0.75rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .company,
+  .creator a {
+    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+  }
+}
+@media screen and (min-width: 912px) {
+  .footer {
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+  }
+  .socialLink:not(:last-child) {
+    margin-right: 2.5rem;
+  }
 }

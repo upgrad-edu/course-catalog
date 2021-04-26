@@ -1,16 +1,18 @@
 .detailsPage {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-.detailsContainer {
+.detailsPageContent {
   padding: 1.5rem 2.5rem;
+  margin-top: 4rem;
+  flex: 1;
 }
 .subtitleContent {
   font-weight: 700;
 }
 .durationAndDateContainer {
   display: grid;
-  align-items: center;
-  justify-content: space-between;
   padding: 1rem 0;
 }
 .durationContainer,
@@ -21,7 +23,7 @@
   align-items: center;
 }
 .durationContainer {
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 .icon {
   margin-right: 0.35rem;
@@ -30,18 +32,18 @@
   margin: 1.5rem 0;
 }
 .previewButton {
-  background: var(--clr-black);
-  color: var(--clr-white);
+  background: var(--clr-black) !important;
+  color: var(--clr-white) !important;
 }
 .skillsContainer {
-  border: 1px solid var(--clr-grey-light);
-  padding: 0.75rem 1rem;
+  box-shadow: var(--light-shadow);
+  padding: 1.25rem 1rem;
   border-radius: var(--radius);
 }
 .skills {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  margin-top: 1rem;
 }
 .skill {
   background: var(--clr-secondary);
@@ -55,7 +57,6 @@
 .chaptersContainer {
   max-height: 25rem;
   overflow-y: auto;
-  width: 100%;
 }
 .chaptersHeading {
   background: var(--clr-grey-dark);
@@ -79,12 +80,11 @@
     grid-template-columns: 1fr 1fr;
   }
   .durationContainer {
-    margin-bottom: 0;
+    padding-bottom: 0;
   }
 }
 @media screen and (min-width: 1024px) {
-  .detailsContainer {
-    height: calc(100vh - 7.5rem);
+  .detailsPageContent {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -95,11 +95,7 @@
   .previewBtnContainer {
     margin-top: 1rem;
   }
-  .leftColumn,
-  .rightColumn {
-    display: grid;
-  }
   .enrolMeBtnContainer {
-    justify-self: center;
+    text-align: center;
   }
 }

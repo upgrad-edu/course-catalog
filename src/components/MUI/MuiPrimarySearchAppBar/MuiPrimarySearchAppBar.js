@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 // imports from Material UI library
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
 import SendIcon from "@material-ui/icons/Send";
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 // imports for styles
 import { useStyles } from "./styles";
@@ -138,15 +138,13 @@ const MuiPrimarySearchAppBar = ({
   );
 
   return (
-    <div className={`${classes.root} ${classes.grow}`}>
-      <AppBar position="static">
-        <Toolbar>
+    <Fragment>
+      <AppBar position="fixed">
+        <Toolbar className={classes.toolbar}>
           {/* upGrad Logo */}
-          <Typography className={classes.logo} variant="h6">
+          <Typography className={classes.logo} variant="inherit" component="h1">
             upGrad
           </Typography>
-
-          <div className={classes.grow} />
 
           {/* Search Bar */}
           <div className={classes.search}>
@@ -163,7 +161,7 @@ const MuiPrimarySearchAppBar = ({
               onChange={handleSearchInputChange}
             />
             <IconButton
-              className={classes.searchButton}
+              className={`${classes.searchButton} ${classes.btn}`}
               aria-label="search course"
               aria-controls={profileMenuId}
               aria-haspopup="false"
@@ -174,25 +172,26 @@ const MuiPrimarySearchAppBar = ({
             </IconButton>
           </div>
 
-          <div className={classes.grow} />
-
           {/* Categories */}
-          <div className={classes.categories}>
+          <div
+            className={classes.categories}
+            onClick={handleCategoriesMenuOpen}
+          >
             <IconButton
+              className={classes.btn}
               aria-label="course categories"
               aria-controls={profileMenuId}
               aria-haspopup="true"
               color="inherit"
-              onClick={handleCategoriesMenuOpen}
             >
               <AppsOutlinedIcon />
             </IconButton>
-            <p className={classes.categoriesLabel}>Categories</p>
+            <Typography variant="inherit" className={classes.categoriesLabel}>
+              Categories
+            </Typography>
           </div>
 
           {renderCategoriesMenu}
-
-          <div className={classes.grow} />
 
           {/* Profile Menu - large screens (desktop) */}
           <div className={classes.sectionDesktop}>
@@ -211,6 +210,7 @@ const MuiPrimarySearchAppBar = ({
           {/* More Button - small screens (mobile) */}
           <div className={classes.sectionMobile}>
             <IconButton
+              className={classes.btn}
               aria-label="show more"
               aria-controls={profileMobileMenuId}
               aria-haspopup="true"
@@ -224,7 +224,7 @@ const MuiPrimarySearchAppBar = ({
       </AppBar>
       {renderProfileMobileMenu}
       {renderProfileMenu}
-    </div>
+    </Fragment>
   );
 };
 

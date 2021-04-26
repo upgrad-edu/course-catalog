@@ -118,25 +118,25 @@ const OnboardPage = () => {
   ];
 
   return (
-    <div className={classes.loginPage}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Fragment>
-          <div className={classes.logoContainer}>
-            <img src={logo} alt="upGrad Logo" className={classes.logo} />
-          </div>
-          <div className={classes.loginPageTabs}>
+    <Fragment>
+      <header className={classes.onboardPageHeader}>
+        <img src={logo} alt="upGrad Logo" className={classes.logo} />
+      </header>
+      <main className={classes.onboardPageContent}>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className={classes.onboardPageTabsContainer}>
             <MuiTabs
               tabValue={tabValue}
               handleTabChange={handleTabChange}
-              tabsDetails={tabsDetails}
+              data={tabsDetails}
             ></MuiTabs>
           </div>
-        </Fragment>
-      )}
-    </div>
+        )}
+      </main>
+    </Fragment>
   );
 };
 
-export { OnboardPage };
+export default OnboardPage;

@@ -12,9 +12,9 @@ import { Footer } from "../../../components/UI/Footer";
 
 // imports for components from MUI library
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import TodayIcon from "@material-ui/icons/Today";
+import Button from "@material-ui/core/Button";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 
 // imports for MUI components
@@ -91,9 +91,9 @@ const DetailsPage = (props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className={classes.detailsContainer}>
+        <div className={classes.detailsPageContent}>
           {/* Left Column (on large screens only) */}
-          <section className={classes.leftColumn}>
+          <section>
             {/* Course Textual Details */}
             <article>
               <Typography variant="inherit" component="h3" gutterBottom>
@@ -162,7 +162,7 @@ const DetailsPage = (props) => {
           </section>
 
           {/* Right Column (on large screens only) */}
-          <section className={classes.rightColumn}>
+          <section>
             {/* Button for Enrolment */}
             <div
               className={`${classes.btnContainer} ${classes.enrolMeBtnContainer}`}

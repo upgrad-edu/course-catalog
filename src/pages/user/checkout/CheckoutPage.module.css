@@ -1,32 +1,33 @@
 .checkoutPage {
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .checkoutPageHeading {
   text-align: center;
   padding-bottom: 1rem;
 }
-.addressFormContainer {
-  height: calc(
-    100vh - 7.5rem
-  ); /* height of PrimarySearchAppBar = 3rem, height of Footer = 3.5rem*/
+.checkoutPageContent {
+  margin-top: 4rem;
+  padding: 1.5rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex: 1;
 }
 .addressForm {
-  width: 18rem;
+  width: 90%;
+  max-width: 18rem;
   border: 1px solid #ccc;
   border-radius: var(--radius);
   box-shadow: var(--dark-shadow);
 }
+.addressFormControlsContainer {
+  margin-top: 1rem;
+}
 @media screen and (min-width: 576px) {
-  .addressFormContainer {
-    height: calc(
-      100vh - 8.5rem
-    ); /* height of PrimarySearchAppBar = 4rem, height of Footer = 3.5rem*/
-  }
   .addressForm {
-    width: 25rem;
+    max-width: 25rem;
   }
 }

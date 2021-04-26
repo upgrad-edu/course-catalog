@@ -3,9 +3,11 @@ import React from "react";
 // imports for 3rd party libraries
 import PropTypes from "prop-types";
 
-// imports for Material UI components
+// imports for components from Material UI library
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+
+// imports for MUI components
 import { MuiTabPanel } from "./MuiTabPanel";
 
 // imports for styles
@@ -19,17 +21,17 @@ const a11yProps = (id, index) => {
   };
 };
 
-const MuiTabs = ({ tabValue, handleTabChange, tabsDetails }) => {
+const MuiTabs = ({ tabValue, handleTabChange, data }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.tabsContainer}>
+    <section className={classes.tabsContainer}>
       <Tabs
         value={tabValue}
         onChange={handleTabChange}
         aria-label="login & signup tabs"
       >
-        {tabsDetails.map((tab, index) => {
+        {data.map((tab, index) => {
           return (
             <Tab
               key={tab.id}
@@ -41,21 +43,26 @@ const MuiTabs = ({ tabValue, handleTabChange, tabsDetails }) => {
         })}
       </Tabs>
 
-      {tabsDetails.map((tab, index) => {
+      {data.map((tab, index) => {
         return (
-          <MuiTabPanel key={tab.id} value={tabValue} index={index} id={tab.id}>
+          <MuiTabPanel
+            key={tab.id}
+            tabValue={tabValue}
+            index={index}
+            id={tab.id}
+          >
             {tab.children}
           </MuiTabPanel>
         );
       })}
-    </div>
+    </section>
   );
 };
 
 MuiTabs.propTypes = {
   tabValue: PropTypes.number.isRequired,
   handleTabChange: PropTypes.func.isRequired,
-  tabsDetails: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
-export { MuiTabs };
+export default MuiTabs;

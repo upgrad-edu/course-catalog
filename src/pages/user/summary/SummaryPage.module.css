@@ -1,27 +1,27 @@
 .summaryPage {
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-.summaryContainer {
-  height: calc(
-    100vh - 7.5rem
-  ); /* height of PrimarySearchAppBar = 3rem, height of Footer = 3.5rem*/
+.summaryPageContent {
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex: 1;
 }
 .summaryPageHeading {
-  text-align: center;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
 }
 .summary {
-  width: 20rem;
-  border: 1px solid var(--clr-grey-light);
+  width: 90%;
+  max-width: 25rem;
+  box-shadow: var(--light-shadow);
   border-radius: var(--radius);
   padding: 1rem;
   text-align: center;
   display: grid;
-  grid-template-rows: auto auto;
   row-gap: 2rem;
 }
 .bold {
@@ -35,21 +35,13 @@
 .placeOrderBtn {
   margin-top: 2rem;
 }
-@media screen and (min-width: 576px) {
-  .summaryContainer {
-    height: calc(
-      100vh - 8.5rem
-    ); /* height of PrimarySearchAppBar = 4rem, height of Footer = 3.5rem*/
-  }
-}
-
 @media screen and (min-width: 768px) {
   .summary {
-    width: 25rem;
+    max-width: 27rem;
   }
 }
 @media screen and (min-width: 1200px) {
   .summary {
-    width: 30rem;
+    max-width: 30rem;
   }
 }

@@ -7,10 +7,10 @@ import { useHistory } from "react-router-dom";
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
 
 // imports for components from MUI library
+import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import FilledInput from "@material-ui/core/FilledInput";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 // imports for custom components
@@ -63,7 +63,7 @@ const CheckoutPage = () => {
     <div className={cssClasses.checkoutPage}>
       {/* TODO: Show header */}
       <MuiPrimarySearchAppBar />
-      <section className={cssClasses.addressFormContainer}>
+      <main className={cssClasses.checkoutPageContent}>
         <Typography
           variant="inherit"
           component="h3"
@@ -78,7 +78,9 @@ const CheckoutPage = () => {
           autoComplete="off"
           className={`${cssClasses.form} ${cssClasses.addressForm}`}
         >
-          <div className={cssClasses.formControlsContainer}>
+          <div
+            className={`${cssClasses.formControlsContainer} ${cssClasses.addressFormControlsContainer}`}
+          >
             <FormControl variant="filled">
               <InputLabel htmlFor="flatOrBuilding" color="secondary">
                 Flat / Building No.
@@ -211,7 +213,7 @@ const CheckoutPage = () => {
             show summary
           </Button>
         </form>
-      </section>
+      </main>
       <Footer />
     </div>
   );

@@ -1,28 +1,29 @@
 .homePage {
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-.app {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto 1fr auto;
+.homePageContent {
+  margin-top: 4rem;
+  flex: 1;
 }
 .titleBar {
-  max-height: 2.25rem;
   text-align: center;
 }
 .titleBar h4 {
-  color: var(--clr-black);
   background: var(--clr-grey-light);
   font-size: 1rem;
   font-weight: 400;
   margin-bottom: 0;
-  line-height: 2.25rem;
+  padding: 0.5rem 0;
 }
 .courseCardsContainer {
   padding: 2rem;
   display: grid;
   justify-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
-  row-gap: 2rem;
-  column-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(80%, 23rem), 1fr));
+  gap: 2rem;
+}
+.noCourseFoundText {
+  padding: 2rem;
 }

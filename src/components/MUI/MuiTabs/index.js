@@ -1,1 +1,1 @@
-export * from "./MuiTabs";
+export { default as MuiTabs } from "./MuiTabs";

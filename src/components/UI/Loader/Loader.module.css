@@ -1,8 +1,9 @@
-/* Credits - https://projects.lukehaas.me/css-loaders/ */
+/* CREDITS - https://projects.lukehaas.me/css-loaders/ */
 .loaderContainer {
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .loader {
   font-size: 10px;

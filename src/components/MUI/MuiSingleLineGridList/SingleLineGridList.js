@@ -9,7 +9,7 @@ import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 // imports for styles
 import { useStyles } from "./styles.js";
 
-const SingleLineGridList = ({ width, newCourses }) => {
+const SingleLineGridList = ({ width, data }) => {
   const classes = useStyles();
 
   const getGridListCols = () => {
@@ -25,15 +25,11 @@ const SingleLineGridList = ({ width, newCourses }) => {
   };
 
   return (
-    <div className={classes.gridListContainer}>
+    <section className={classes.gridListContainer}>
       <GridList className={classes.gridList} cols={getGridListCols()}>
-        {newCourses.map((tile) => (
+        {data.map((tile) => (
           <GridListTile key={tile._id} className={classes.gridListItem}>
-            <img
-              src={tile.imageURL}
-              alt={tile.title}
-              className={classes.gridImage}
-            />
+            <img src={tile.imageURL} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
               classes={{
@@ -44,7 +40,7 @@ const SingleLineGridList = ({ width, newCourses }) => {
           </GridListTile>
         ))}
       </GridList>
-    </div>
+    </section>
   );
 };
 

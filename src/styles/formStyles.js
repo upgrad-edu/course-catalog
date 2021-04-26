@@ -12,9 +12,9 @@ const useStyles = makeStyles((theme) => ({
   },
   error: {
     color: "red",
-    fontSize: "0.875rem",
+    fontSize: "0.75rem",
     fontWeight: 300,
-    marginTop: "0.5rem",
+    paddingTop: "0.5rem",
   },
   centerAlignedText: {
     textAlign: "center",

@@ -155,9 +155,12 @@ const SignupForm = ({
           )}
         </FormControl>
         {apiErrorMessage && (
-          <div className={classes.error}>{apiErrorMessage}</div>
+          <div className={`${classes.error} ${classes.centerAlignedText}`}>
+            {apiErrorMessage}
+          </div>
         )}
       </div>
+
       <Button
         variant="contained"
         color="secondary"
@@ -172,4 +175,4 @@ const SignupForm = ({
   );
 };
 
-export { SignupForm };
+export default SignupForm;

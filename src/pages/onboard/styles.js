@@ -1,10 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  loginPage: {
-    height: "100vh",
-  },
-  logoContainer: {
+  onboardPageHeader: {
     boxShadow: "var(--light-shadow)",
     height: "3rem",
     [theme.breakpoints.up("sm")]: {
@@ -16,14 +13,17 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     margin: "0 auto",
   },
-  loginPageTabs: {
+  onboardPageContent: {
     height: "calc(100vh - 3rem)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     [theme.breakpoints.up("sm")]: {
       height: "calc(100vh - 4rem)",
     },
+  },
+  onboardPageTabsContainer: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 

@@ -8,20 +8,19 @@ const Footer = () => {
     <footer className={classes.footer}>
       {/* copyright text */}
       <p className={classes.copyright}>
-        copyright &copy;&nbsp;
+        Copyright &copy;&nbsp;
         <a
           href="https://www.upgrad.com/"
           target="_blank"
           rel="noreferrer"
           className={classes.company}
-          style={{ textTransform: "none" }}
         >
           upGrad Education
         </a>
       </p>
 
       {/* social media links */}
-      <div className={classes.socialLinks}>
+      <article className={classes.socialLinks}>
         <a
           href="https://www.facebook.com/upGradGlobal"
           target="_blank"
@@ -46,7 +45,7 @@ const Footer = () => {
         >
           <i className="fab fa-linkedin"></i>
         </a>
-      </div>
+      </article>
 
       {/* creator details */}
       <p className={classes.creator}>
