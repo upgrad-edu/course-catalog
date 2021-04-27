@@ -15,8 +15,10 @@ import { EnhancedSingleLineGridList } from "../../../components/MUI/MuiSingleLin
 import { MuiCard } from "../../../components/MUI/MuiCard";
 
 // imports for custom components
-import { Loader } from "../../../components/UI/Loader";
 import { Footer } from "../../../components/UI/Footer";
+
+// imports for custom hooks
+import useLoader from "../../../hooks/useLoader";
 
 // imports for APIs
 import * as coursesApi from "../../../api/coursesApi";
@@ -26,8 +28,8 @@ import classes from "./HomePage.module.css";
 
 const HomePage = () => {
   const history = useHistory();
+  const { loader, isLoading, showLoader, hideLoader } = useLoader();
 
-  const [isLoading, setIsLoading] = useState(false);
   const [newCoursesList, setNewCoursesList] = useState([]);
   const [coursesList, setCoursesList] = useState([]);
 
@@ -38,35 +40,35 @@ const HomePage = () => {
   } = coursesApi;
 
   const handleTitleSearch = (title) => {
-    setIsLoading(true);
+    showLoader();
     searchCourseByTitle(
       title,
       // success callback
       (response) => {
         setCoursesList(response.data);
-        setIsLoading(false);
+        hideLoader();
       },
       // failure callback
       (_, errorMessage) => {
         console.error(errorMessage);
-        setIsLoading(false);
+        hideLoader();
       }
     );
   };
 
   const handleCategorySearch = (category) => {
-    setIsLoading(true);
+    showLoader();
     getCoursesByCategory(
       category,
       // success callback
       (response) => {
         setCoursesList(response.data);
-        setIsLoading(false);
+        hideLoader();
       },
       // failure callback
       (_, errorMessage) => {
         console.error(errorMessage);
-        setIsLoading(false);
+        hideLoader();
       }
     );
   };
@@ -77,7 +79,7 @@ const HomePage = () => {
 
   // get all NEW courses
   useEffect(() => {
-    setIsLoading(true);
+    showLoader();
     getAllPublishedCourses(
       // success callback
       (response) => {
@@ -86,29 +88,29 @@ const HomePage = () => {
           constants.SHOW_NEW_COURSES_LIMIT
         );
         setNewCoursesList(nNewCourses);
-        setIsLoading(false);
+        hideLoader();
       },
       // failure callback
       (_, errorMessage) => {
         console.error(errorMessage);
-        setIsLoading(false);
+        hideLoader();
       }
     );
   }, []);
 
   // get all courses
   useEffect(() => {
-    setIsLoading(true);
+    showLoader();
     getAllPublishedCourses(
       // success callback
       (response) => {
         setCoursesList(response.data);
-        setIsLoading(false);
+        hideLoader();
       },
       // failure callback
       (_, errorMessage) => {
         console.error(errorMessage);
-        setIsLoading(false);
+        hideLoader();
       }
     );
   }, []);
@@ -125,7 +127,7 @@ const HomePage = () => {
       {/* Main Content */}
       <main className={classes.homePageContent}>
         {isLoading ? (
-          <Loader />
+          loader
         ) : (
           // TODO: API pending; pass new courses instead of published courses
           <Fragment>

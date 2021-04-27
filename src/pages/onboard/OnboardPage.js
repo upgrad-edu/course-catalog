@@ -15,7 +15,9 @@ import { MuiSnackbar } from "../../components/MUI/MuiSnackbar";
 
 // imports for custom components
 import { LoginForm, SignupForm } from "./forms";
-import { Loader } from "../../components/UI/Loader";
+
+// imports for custom hooks
+import useLoader from "../../hooks/useLoader";
 
 // imports for assets
 import logo from "../../assets/logo.png";
@@ -26,12 +28,12 @@ import { useStyles } from "./styles.js";
 const OnboardPage = () => {
   const classes = useStyles();
   const history = useHistory();
+  const { loader, isLoading, showLoader, hideLoader } = useLoader();
 
   const [tabValue, setCurrentTabIndex] = useState(0);
   const [apiErrorMessage, setApiErrorMessage] = useState("");
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   const [isSignupSucccessful, setIsSignupSuccessful] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
@@ -44,7 +46,7 @@ const OnboardPage = () => {
 
   // Function to call login API and pass success and failure callbacks to it
   const handleLogin = (values) => {
-    setIsLoading(true);
+    showLoader();
     doLogin(
       values,
       // success callback
@@ -55,26 +57,26 @@ const OnboardPage = () => {
           utils.constants.USER_KEY_LOCAL_STORAGE,
           response.data
         );
-        setIsLoading(false);
+        hideLoader();
         history.push("/home"); // redirect to home page on successful login
       },
       // failure callback
       (_, errorMessage) => {
         setApiErrorMessage(errorMessage);
-        setIsLoading(false);
+        hideLoader();
       }
     );
   };
 
   // Function to call signup API and pass success and failure callbacks to it
   const handleSignup = (values) => {
-    setIsLoading(true);
+    showLoader();
     doSignup(
       values,
       // success callback
       (response) => {
         setCurrentTabIndex(0); // redirect to login tab when signup is successful
-        setIsLoading(false);
+        hideLoader();
 
         // show the success message inside Snackbar component
         setSnackbarMessage("Signed up successfully!");
@@ -85,7 +87,7 @@ const OnboardPage = () => {
       // failure callback
       (_, errorMessage) => {
         setApiErrorMessage(errorMessage);
-        setIsLoading(false);
+        hideLoader();
       }
     );
   };
@@ -139,7 +141,7 @@ const OnboardPage = () => {
       </header>
       <main className={classes.onboardPageContent}>
         {isLoading ? (
-          <Loader />
+          loader
         ) : (
           <div className={classes.onboardPageTabsContainer}>
             <MuiTabs
