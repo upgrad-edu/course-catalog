@@ -22,6 +22,7 @@ import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearch
 
 // imports for custom hooks
 import useLoader from "../../../hooks/useLoader";
+import useNotification from "../../../hooks/useNotification";
 
 // imports for APIs
 import * as coursesApi from "../../../api/coursesApi";
@@ -32,6 +33,7 @@ import classes from "./DetailsPage.module.css";
 const DetailsPage = (props) => {
   const history = useHistory();
   const { loader, isLoading, showLoader, hideLoader } = useLoader();
+  const { notification, showNotification } = useNotification();
 
   const [courseDetails, setCourseDetails] = useState({});
 
@@ -49,8 +51,13 @@ const DetailsPage = (props) => {
         hideLoader();
       },
       // failure callback
-      (_, errorMessage) => {
-        console.error(errorMessage);
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
         hideLoader();
       }
     );
@@ -217,6 +224,7 @@ const DetailsPage = (props) => {
             </section>
           </Fragment>
         )}
+        {notification}
       </div>
       <Footer />
     </div>

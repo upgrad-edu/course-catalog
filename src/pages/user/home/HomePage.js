@@ -19,6 +19,7 @@ import { Footer } from "../../../components/UI/Footer";
 
 // imports for custom hooks
 import useLoader from "../../../hooks/useLoader";
+import useNotification from "../../../hooks/useNotification";
 
 // imports for APIs
 import * as coursesApi from "../../../api/coursesApi";
@@ -29,6 +30,7 @@ import classes from "./HomePage.module.css";
 const HomePage = () => {
   const history = useHistory();
   const { loader, isLoading, showLoader, hideLoader } = useLoader();
+  const { notification, showNotification } = useNotification();
 
   const [newCoursesList, setNewCoursesList] = useState([]);
   const [coursesList, setCoursesList] = useState([]);
@@ -49,8 +51,13 @@ const HomePage = () => {
         hideLoader();
       },
       // failure callback
-      (_, errorMessage) => {
-        console.error(errorMessage);
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
         hideLoader();
       }
     );
@@ -66,8 +73,13 @@ const HomePage = () => {
         hideLoader();
       },
       // failure callback
-      (_, errorMessage) => {
-        console.error(errorMessage);
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
         hideLoader();
       }
     );
@@ -91,8 +103,13 @@ const HomePage = () => {
         hideLoader();
       },
       // failure callback
-      (_, errorMessage) => {
-        console.error(errorMessage);
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
         hideLoader();
       }
     );
@@ -108,8 +125,13 @@ const HomePage = () => {
         hideLoader();
       },
       // failure callback
-      (_, errorMessage) => {
-        console.error(errorMessage);
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
         hideLoader();
       }
     );
@@ -136,7 +158,17 @@ const HomePage = () => {
               <div className={classes.titleBar}>
                 <h4>New Courses</h4>
               </div>
-              <EnhancedSingleLineGridList data={newCoursesList} />
+              {newCoursesList.length > 0 ? (
+                <EnhancedSingleLineGridList data={newCoursesList} />
+              ) : (
+                <Typography
+                  variant="inherit"
+                  component="h4"
+                  className={classes.noCourseFoundText}
+                >
+                  No new course
+                </Typography>
+              )}
             </section>
 
             {/* Course Cards */}
@@ -161,6 +193,7 @@ const HomePage = () => {
             )}
           </Fragment>
         )}
+        {notification}
       </main>
       <Footer />
     </div>

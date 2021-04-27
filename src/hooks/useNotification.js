@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // imports for custom components
 import { MuiSnackbar } from "../components/MUI/MuiSnackbar";
 
-const useNotification = ({ hideNotificationSuccessCallback }) => {
+const useNotification = (props) => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -18,8 +18,8 @@ const useNotification = ({ hideNotificationSuccessCallback }) => {
     }
     setIsNotificationOpen(false);
     setMessage("");
-    if (hideNotificationSuccessCallback) {
-      hideNotificationSuccessCallback();
+    if (props && props.hideNotificationSuccessCallback) {
+      props.hideNotificationSuccessCallback();
     }
   };
 

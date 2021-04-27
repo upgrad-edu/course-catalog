@@ -60,8 +60,13 @@ const OnboardPage = () => {
         history.push("/home"); // redirect to home page on successful login
       },
       // failure callback
-      (_, errorMessage) => {
-        setApiErrorMessage(errorMessage);
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
         hideLoader();
       }
     );
@@ -83,8 +88,13 @@ const OnboardPage = () => {
         setIsSignupSuccessful(true);
       },
       // failure callback
-      (_, errorMessage) => {
-        setApiErrorMessage(errorMessage);
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
         hideLoader();
       }
     );
