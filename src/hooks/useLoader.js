@@ -6,7 +6,7 @@ import { Loader } from "../components/UI/Loader";
 const useLoader = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const loader = isLoading ? <Loader /> : null;
+  const loader = isLoading && <Loader />;
 
   const showLoader = () => {
     setIsLoading(true);

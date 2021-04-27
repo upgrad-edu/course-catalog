@@ -77,9 +77,7 @@ const MuiPrimarySearchAppBar = ({
   };
 
   const handleCategoryClick = (event) => {
-    {
-      /* TODO: API pending; replace innerText with data fetched from server */
-    }
+    /* TODO: API pending; replace innerText with data fetched from server */
     const category = event.target.innerText;
     handleCategorySearch(category);
     handleCategoriesMenuClose();
@@ -158,9 +156,7 @@ const MuiPrimarySearchAppBar = ({
   const renderLogo = (
     // add cursorPointer class when the logo is clickable
     <Typography
-      className={`${classes.logo} ${
-        isLogoClickable ? classes.cursorPointer : null
-      }`}
+      className={`${classes.logo} ${isLogoClickable && classes.cursorPointer}`}
       variant="inherit"
       component="h1"
     >
@@ -176,7 +172,7 @@ const MuiPrimarySearchAppBar = ({
           {isLogoClickable ? <Link to="/">{renderLogo}</Link> : renderLogo}
 
           {/* Search Bar */}
-          {isSearchVisible ? (
+          {isSearchVisible && (
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -201,10 +197,10 @@ const MuiPrimarySearchAppBar = ({
                 <SendIcon />
               </IconButton>
             </div>
-          ) : null}
+          )}
 
           {/* Categories */}
-          {isCategoriesVisible ? (
+          {isCategoriesVisible && (
             <div
               className={classes.categories}
               onClick={handleCategoriesMenuOpen}
@@ -222,9 +218,9 @@ const MuiPrimarySearchAppBar = ({
                 Categories
               </Typography>
             </div>
-          ) : null}
+          )}
 
-          {isCategoriesVisible ? renderCategoriesMenu : null}
+          {isCategoriesVisible && renderCategoriesMenu}
 
           {/* Profile Menu - large screens (desktop) */}
           <div className={classes.sectionDesktop}>

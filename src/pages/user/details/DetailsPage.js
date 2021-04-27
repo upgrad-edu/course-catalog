@@ -71,28 +71,28 @@ const DetailsPage = (props) => {
   };
 
   const renderSkills =
-    courseDetails && courseDetails.skills
-      ? JSON.parse(courseDetails.skills).map((skill, index) => {
-          return (
-            <div key={index} className={classes.skill}>
-              <Typography variant="inherit">{skill}</Typography>
-            </div>
-          );
-        })
-      : null;
+    courseDetails &&
+    courseDetails.skills &&
+    JSON.parse(courseDetails.skills).map((skill, index) => {
+      return (
+        <div key={index} className={classes.skill}>
+          <Typography variant="inherit">{skill}</Typography>
+        </div>
+      );
+    });
 
   const renderChapters =
-    courseDetails && courseDetails.chapters
-      ? JSON.parse(courseDetails.chapters).map((chapter, index) => {
-          return (
-            <div key={index} className={classes.chapter}>
-              <Typography variant="inherit">{`${
-                index + 1
-              }. ${chapter}`}</Typography>
-            </div>
-          );
-        })
-      : null;
+    courseDetails &&
+    courseDetails.chapters &&
+    JSON.parse(courseDetails.chapters).map((chapter, index) => {
+      return (
+        <div key={index} className={classes.chapter}>
+          <Typography variant="inherit">{`${
+            index + 1
+          }. ${chapter}`}</Typography>
+        </div>
+      );
+    });
 
   return (
     <div className={classes.detailsPage}>
