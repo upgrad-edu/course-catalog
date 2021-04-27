@@ -102,6 +102,10 @@
   .previewBtnContainer {
     margin-top: 1rem;
   }
+  .rightColumn {
+    width: 30%;
+    max-width: 25rem;
+  }
   .enrolMeBtnContainer {
     text-align: center;
   }

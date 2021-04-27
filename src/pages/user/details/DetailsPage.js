@@ -182,7 +182,7 @@ const DetailsPage = (props) => {
           </section>
 
           {/* Right Column (on large screens only) */}
-          <section>
+          <section className={classes.rightColumn}>
             {/* Button for Enrolment */}
             <div
               className={`${classes.btnContainer} ${classes.enrolMeBtnContainer}`}

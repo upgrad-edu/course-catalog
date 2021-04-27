@@ -99,9 +99,15 @@ const MuiPrimarySearchAppBar = ({
       className={classes.root}
     >
       {/* TODO: API pending; fetch categories data from server */}
-      <MenuItem onClick={handleCategoryClick}>Frontend Development</MenuItem>
-      <MenuItem onClick={handleCategoryClick}>Backend Development</MenuItem>
-      <MenuItem onClick={handleCategoryClick}>DevOps</MenuItem>
+      <MenuItem onClick={handleCategoryClick} className={classes.menuItem}>
+        Frontend Development
+      </MenuItem>
+      <MenuItem onClick={handleCategoryClick} className={classes.menuItem}>
+        Backend Development
+      </MenuItem>
+      <MenuItem onClick={handleCategoryClick} className={classes.menuItem}>
+        DevOps
+      </MenuItem>
     </Menu>
   );
 
@@ -218,7 +224,7 @@ const MuiPrimarySearchAppBar = ({
             </div>
           ) : null}
 
-          {renderCategoriesMenu}
+          {isCategoriesVisible ? renderCategoriesMenu : null}
 
           {/* Profile Menu - large screens (desktop) */}
           <div className={classes.sectionDesktop}>

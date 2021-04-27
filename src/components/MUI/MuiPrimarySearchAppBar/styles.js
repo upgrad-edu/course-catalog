@@ -85,6 +85,11 @@ const useStyles = makeStyles((theme) => ({
       color: "inherit",
     },
   },
+  menuItem: {
+    "&:not(:first-child)": {
+      borderTop: "1px solid var(--clr-grey-light)",
+    },
+  },
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
