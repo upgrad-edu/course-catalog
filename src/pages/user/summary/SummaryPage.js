@@ -11,34 +11,32 @@ import Button from "@material-ui/core/Button";
 
 // imports for MUI components
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
-import { MuiSnackbar } from "../../../components/MUI/MuiSnackbar";
 
 // imports for custom components
 import { Footer } from "../../../components/UI/Footer";
+
+// imports for custom hooks
+import useNotification from "../../../hooks/useNotification";
 
 // imports for styles
 import classes from "./SummaryPage.module.css";
 
 const SummaryPage = () => {
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
   const history = useHistory();
+
+  const hideNotificationSuccessCallback = () => {
+    history.push("/");
+  };
+
+  const { notification, showNotification } = useNotification({
+    hideNotificationSuccessCallback,
+  });
+
   const { courseDetails, addressDetails } = history.location;
 
   const placeOrder = () => {
     // show the success message inside Snackbar component
-    setSnackbarMessage("Your order has been successfully placed!");
-    setIsSnackbarOpen(true);
-  };
-
-  // event handler to close Snackbar
-  const closeSnackbar = (_, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setIsSnackbarOpen(false);
-    history.push("/");
+    showNotification("Your order has been successfully placed!");
   };
 
   return (
@@ -128,11 +126,7 @@ const SummaryPage = () => {
             place order
           </Button>
         </div>
-        <MuiSnackbar
-          isOpen={isSnackbarOpen}
-          message={snackbarMessage}
-          handleClose={closeSnackbar}
-        />
+        {notification}
       </main>
       <Footer />
     </div>

@@ -11,13 +11,13 @@ import * as userApi from "../../api/userApi";
 
 // imports for MUI components
 import { MuiTabs } from "../../components/MUI/MuiTabs";
-import { MuiSnackbar } from "../../components/MUI/MuiSnackbar";
 
 // imports for custom components
 import { LoginForm, SignupForm } from "./forms";
 
 // imports for custom hooks
 import useLoader from "../../hooks/useLoader";
+import useNotification from "../../hooks/useNotification";
 
 // imports for assets
 import logo from "../../assets/logo.png";
@@ -29,13 +29,12 @@ const OnboardPage = () => {
   const classes = useStyles();
   const history = useHistory();
   const { loader, isLoading, showLoader, hideLoader } = useLoader();
+  const { notification, showNotification } = useNotification();
 
   const [tabValue, setCurrentTabIndex] = useState(0);
   const [apiErrorMessage, setApiErrorMessage] = useState("");
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   const [isSignupSucccessful, setIsSignupSuccessful] = useState(false);
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   // Event handler triggered when a tab is changed
   const handleTabChange = (_, newTabValue) => {
@@ -78,9 +77,8 @@ const OnboardPage = () => {
         setCurrentTabIndex(0); // redirect to login tab when signup is successful
         hideLoader();
 
-        // show the success message inside Snackbar component
-        setSnackbarMessage("Signed up successfully!");
-        setIsSnackbarOpen(true);
+        // show the success message as notification to user
+        showNotification("Signed up successfully!");
 
         setIsSignupSuccessful(true);
       },
@@ -126,14 +124,6 @@ const OnboardPage = () => {
     },
   ];
 
-  // event handler to close Snackbar
-  const closeSnackbar = (_, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setIsSnackbarOpen(false);
-  };
-
   return (
     <Fragment>
       <header className={classes.onboardPageHeader}>
@@ -151,11 +141,7 @@ const OnboardPage = () => {
             ></MuiTabs>
           </div>
         )}
-        <MuiSnackbar
-          isOpen={isSnackbarOpen}
-          message={snackbarMessage}
-          handleClose={closeSnackbar}
-        />
+        {notification}
       </main>
     </Fragment>
   );
