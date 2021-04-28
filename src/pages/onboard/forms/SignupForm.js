@@ -20,7 +20,7 @@ import validateSignupForm from "./validateSignupForm";
 // imports for styles
 import { useStyles } from "../../../styles/formStyles.js";
 
-const SignupForm = ({ successHandler, isSignupSucccessful }) => {
+const SignupForm = ({ successHandler }) => {
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
     firstName: "",
@@ -32,7 +32,6 @@ const SignupForm = ({ successHandler, isSignupSucccessful }) => {
 
   const { values, errors, handleChange, handleSubmit } = useForm(
     initialFormValues,
-    isSignupSucccessful, // determining if values of form control should be cleared
     validateSignupForm,
     successHandler
   );
@@ -167,7 +166,6 @@ const SignupForm = ({ successHandler, isSignupSucccessful }) => {
 SignupForm.propTypes = {
   successHandler: PropTypes.func.isRequired,
   apiErrorMessage: PropTypes.string,
-  isSignupSucccessful: PropTypes.bool.isRequired,
   submitCallback: PropTypes.func,
 };
 

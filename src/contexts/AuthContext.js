@@ -12,6 +12,7 @@ import * as userApi from "../api/userApi";
 // imports for custom hooks
 import useLoader from "../hooks/useLoader";
 import useNotification from "../hooks/useNotification";
+import useTabs from "../hooks/useTabs";
 
 const AuthContext = createContext();
 
@@ -19,6 +20,7 @@ export const AuthProvider = ({ children }) => {
   const history = useHistory();
   const { showLoader, hideLoader } = useLoader();
   const { notification, showNotification } = useNotification();
+  const { tabValue, handleTabChange } = useTabs();
 
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -61,8 +63,7 @@ export const AuthProvider = ({ children }) => {
       values,
       // success callback
       (response) => {
-        // TODO: Implement tab change to login
-        // handleTabChange(0); // redirect to login tab when signup is successful
+        handleTabChange(null, 0); // redirect to login tab when signup is successful
         hideLoader();
 
         // show the success message inside Snackbar component
@@ -85,6 +86,8 @@ export const AuthProvider = ({ children }) => {
     currentUser,
     login,
     signup,
+    tabValue,
+    handleTabChange,
   };
 
   return (

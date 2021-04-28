@@ -16,7 +16,7 @@ const MuiSnackbar = ({ isOpen, message, handleClose }) => {
         horizontal: "left",
       }}
       open={isOpen}
-      autoHideDuration={6000}
+      autoHideDuration={3000}
       onClose={handleClose}
       message={message}
       action={

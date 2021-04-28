@@ -29,9 +29,9 @@ const LoginForm = ({ successHandler, isLoginSuccessful }) => {
 
   const { values, errors, handleChange, handleSubmit } = useForm(
     initialFormValues,
-    isLoginSuccessful, // determining if values of form control should be cleared
     validateLoginForm,
-    successHandler
+    successHandler,
+    isLoginSuccessful // determining if values of form control should be cleared
   );
   const { email, password } = values;
 

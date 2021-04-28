@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 
 const useForm = (
   valuesInitialState, // initial state of form values
-  shouldSetValuesToInitialState, // whether form values should be set to initial state
   validate, // function to validate form values
-  successCallback // callback to be executed when all values of form control are valid (a.k.a. validation is successful)
+  successCallback, // callback to be executed when all values of form control are valid (a.k.a. validation is successful)
+  shouldSetValuesToInitialState // whether form values should be set to initial state
 ) => {
   // form values entered on UI
   const [values, setValues] = useState(valuesInitialState);

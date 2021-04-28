@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 
 // imports for MUI components
 import { MuiTabs } from "../../components/MUI/MuiTabs";
@@ -21,16 +21,7 @@ const OnboardPage = () => {
   const classes = useStyles();
   const { loader, isLoading } = useLoader();
   const { notification } = useNotification();
-  const { currentUser, login, signup } = useAuth();
-
-  const [tabValue, setCurrentTabIndex] = useState(0);
-  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
-  const [isSignupSucccessful, setIsSignupSuccessful] = useState(false);
-
-  // Event handler triggered when a tab is changed
-  const handleTabChange = (_, newTabValue) => {
-    setCurrentTabIndex(newTabValue);
-  };
+  const { currentUser, login, signup, tabValue, handleTabChange } = useAuth();
 
   // array consisting of details of tabs to be displayed
   const tabsDetails = [
@@ -47,12 +38,7 @@ const OnboardPage = () => {
     {
       id: "signup",
       label: "signup",
-      children: (
-        <SignupForm
-          successHandler={(values) => signup(values)}
-          isSignupSucccessful={isSignupSucccessful}
-        />
-      ),
+      children: <SignupForm successHandler={(values) => signup(values)} />,
     },
   ];
 
