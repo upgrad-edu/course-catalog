@@ -4,7 +4,6 @@ const useForm = (
   valuesInitialState, // initial state of form values
   shouldSetValuesToInitialState, // whether form values should be set to initial state
   validate, // function to validate form values
-  submitCallback, // callback to be executed after Submit button on form is clicked
   successCallback // callback to be executed when all values of form control are valid (a.k.a. validation is successful)
 ) => {
   // form values entered on UI
@@ -25,10 +24,6 @@ const useForm = (
   // Event handler detecting click of Submit button inside form
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (submitCallback) {
-      submitCallback();
-    }
 
     setErrors(validate(values));
     setIsSubmitting(true);

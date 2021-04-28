@@ -19,6 +19,9 @@ import { CheckoutPage } from "./pages/user/checkout";
 import { SummaryPage } from "./pages/user/summary";
 import { NotFoundPage } from "./pages/notfound";
 
+// imports for contexts
+import { AuthProvider } from "./contexts/AuthContext";
+
 // overriding default Material UI theme
 const theme = createMuiTheme({
   palette: {
@@ -36,14 +39,16 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Switch>
-          <Route exact path="/login" component={OnboardPage}></Route>
-          <Route exact path={["/home", "/"]} component={HomePage}></Route>
-          <Route exact path="/courses/:id" component={DetailsPage}></Route>
-          <Route exact path="/checkout" component={CheckoutPage}></Route>
-          <Route exact path="/summary" component={SummaryPage}></Route>
-          <Route path="*" component={NotFoundPage}></Route>
-        </Switch>
+        <AuthProvider>
+          <Switch>
+            <Route exact path="/login" component={OnboardPage}></Route>
+            <Route exact path={["/home", "/"]} component={HomePage}></Route>
+            <Route exact path="/courses/:id" component={DetailsPage}></Route>
+            <Route exact path="/checkout" component={CheckoutPage}></Route>
+            <Route exact path="/summary" component={SummaryPage}></Route>
+            <Route path="*" component={NotFoundPage}></Route>
+          </Switch>
+        </AuthProvider>
       </Router>
     </ThemeProvider>
   );

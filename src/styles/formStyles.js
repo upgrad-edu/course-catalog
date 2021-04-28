@@ -16,9 +16,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     paddingTop: "0.5rem",
   },
-  centerAlignedText: {
-    textAlign: "center",
-  },
   formButton: {
     marginTop: theme.spacing(3),
     borderTopLeftRadius: "0",

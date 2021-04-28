@@ -20,12 +20,7 @@ import validateSignupForm from "./validateSignupForm";
 // imports for styles
 import { useStyles } from "../../../styles/formStyles.js";
 
-const SignupForm = ({
-  successHandler,
-  apiErrorMessage,
-  isSignupSucccessful,
-  submitCallback,
-}) => {
+const SignupForm = ({ successHandler, isSignupSucccessful }) => {
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
     firstName: "",
@@ -39,7 +34,6 @@ const SignupForm = ({
     initialFormValues,
     isSignupSucccessful, // determining if values of form control should be cleared
     validateSignupForm,
-    submitCallback,
     successHandler
   );
   const { firstName, lastName, email, password, confirmPassword } = values;
@@ -154,11 +148,6 @@ const SignupForm = ({
             <div className={classes.error}>{errors.confirmPassword}</div>
           )}
         </FormControl>
-        {apiErrorMessage && (
-          <div className={`${classes.error} ${classes.centerAlignedText}`}>
-            {apiErrorMessage}
-          </div>
-        )}
       </div>
 
       <Button

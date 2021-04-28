@@ -20,12 +20,7 @@ import validateLoginForm from "./validateLoginForm";
 // imports for styles
 import { useStyles } from "../../../styles/formStyles.js";
 
-const LoginForm = ({
-  successHandler,
-  apiErrorMessage,
-  isLoginSuccessful,
-  submitCallback,
-}) => {
+const LoginForm = ({ successHandler, isLoginSuccessful }) => {
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
     email: "",
@@ -36,7 +31,6 @@ const LoginForm = ({
     initialFormValues,
     isLoginSuccessful, // determining if values of form control should be cleared
     validateLoginForm,
-    submitCallback,
     successHandler
   );
   const { email, password } = values;
@@ -100,11 +94,6 @@ const LoginForm = ({
             <div className={classes.error}>{errors.password}</div>
           )}
         </FormControl>
-        {apiErrorMessage && (
-          <div className={`${classes.error} ${classes.centerAlignedText}`}>
-            {apiErrorMessage}
-          </div>
-        )}
       </div>
 
       <Button
