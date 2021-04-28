@@ -60,13 +60,23 @@ export const checkIsNumerical = (value) => {
  * @param {*} key - unique identifier (datatype is not reference type)
  * @param {*} value - value corresponding to the key
  */
-export const setLocalStorage = (key, value) => {
+export const setInLocalStorage = (key, value) => {
   if (!checkReferenceType(key) && value) {
     if (checkReferenceType(value)) {
       localStorage.setItem(key.toString(), JSON.stringify(value));
     } else {
       localStorage.setItem(key.toString(), value.toString());
     }
+  }
+};
+
+/**
+ * Function to remove given key from local storage
+ * @param {*} key - unique identifier
+ */
+export const removeFromLocalStorage = (key) => {
+  if (key) {
+    localStorage.removeItem(key);
   }
 };
 

@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState(null);
 
-  const { doLogin, doSignup } = userApi;
+  const { doLogin, doSignup, doLogout } = userApi;
 
   // Function to call login API and pass success and failure callbacks to it
   const login = ({ email, password }) => {
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
         setCurrentUser(response.data);
 
         // set logged-in user's details in local storage
-        utils.setLocalStorage(
+        utils.setInLocalStorage(
           utils.constants.USER_KEY_LOCAL_STORAGE,
           response.data
         );
@@ -82,10 +82,41 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
+  // Function to call logout API and pass success and failure callbacks to it
+  const logout = () => {
+    showLoader();
+    doLogout(
+      currentUser._id,
+      // success callback
+      (response) => {
+        setCurrentUser(null);
+
+        // clear logged-in user's details in local storage
+        utils.removeFromLocalStorage(utils.constants.USER_KEY_LOCAL_STORAGE);
+
+        hideLoader();
+        // show the success message inside Snackbar component
+        showNotification("Logged out successfully!");
+        history.push("/login"); // redirect to login page on successful logout
+      },
+      // failure callback
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
+        hideLoader();
+      }
+    );
+  };
+
   const authValues = {
     currentUser,
     login,
     signup,
+    logout,
     tabValue,
     handleTabChange,
   };

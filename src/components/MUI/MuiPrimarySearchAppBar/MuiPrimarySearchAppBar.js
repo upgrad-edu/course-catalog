@@ -18,6 +18,9 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
+// imports for custom hooks
+import { useAuth } from "../../../contexts/AuthContext";
+
 // imports for styles
 import { useStyles } from "./styles";
 
@@ -29,6 +32,8 @@ const MuiPrimarySearchAppBar = ({
   handleCategorySearch,
 }) => {
   const classes = useStyles();
+  const { logout } = useAuth();
+
   const [categoriesAnchorEl, setCategoriesAnchorEl] = useState(null);
   const [profileAnchorEl, setProfileAnchorEl] = useState(null);
   const [profileMobileAnchorEl, setProfileForMobileAnchorEl] = useState(null);
@@ -122,7 +127,7 @@ const MuiPrimarySearchAppBar = ({
       onClose={handleProfileMenuClose}
       className={classes.root}
     >
-      <MenuItem onClick={handleProfileMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -139,7 +144,7 @@ const MuiPrimarySearchAppBar = ({
       onClose={handleProfileMobileMenuClose}
       className={classes.root}
     >
-      <MenuItem>
+      <MenuItem onClick={logout}>
         <IconButton
           aria-label="profile of current user"
           aria-controls={profileMenuId}

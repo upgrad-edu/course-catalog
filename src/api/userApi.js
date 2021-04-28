@@ -79,3 +79,34 @@ export async function doSignup(
     }
   }
 }
+
+/**
+ * Function to log out of the application
+ * @param {String} userId - ID of the user currently logged in
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
+ */
+export async function doLogout(userId, successCallback, failureCallback) {
+  if (userId) {
+    const userData = {
+      id: userId,
+    };
+
+    try {
+      await utilsApi.sendApiRequest(
+        utilsApi.constants.HTTP_METHOD.POST,
+        "/logout",
+        null,
+        null,
+        userData,
+        null,
+        successCallback,
+        failureCallback
+      );
+    } catch (error) {
+      if (failureCallback) {
+        failureCallback(error);
+      }
+    }
+  }
+}
