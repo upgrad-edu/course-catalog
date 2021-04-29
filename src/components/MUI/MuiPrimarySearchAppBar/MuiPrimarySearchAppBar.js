@@ -32,6 +32,7 @@ const MuiPrimarySearchAppBar = ({
   isLogoClickable,
   isSearchVisible,
   isCategoriesVisible,
+  isProfileVisible,
   handleTitleSearch,
   handleCategorySearch,
 }) => {
@@ -53,6 +54,7 @@ const MuiPrimarySearchAppBar = ({
   isLogoClickable = isLogoClickable || false;
   isSearchVisible = isSearchVisible || false;
   isCategoriesVisible = isCategoriesVisible || false;
+  isProfileVisible = isProfileVisible || false;
 
   const handleCategoriesMenuOpen = (event) => {
     setCategoriesAnchorEl(event.currentTarget);
@@ -238,46 +240,46 @@ const MuiPrimarySearchAppBar = ({
           {isCategoriesVisible && renderCategoriesMenu}
 
           {/* Profile Menu - large screens (desktop) */}
-          {currentUser ? (
-            <div className={classes.sectionDesktop}>
-              <IconButton
-                edge="end"
-                aria-label="profile of current user"
-                aria-controls={profileMenuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </div>
-          ) : (
-            <Button
-              variant="contained"
-              color="textSecondary"
-              onClick={redirectToLoginPage}
-            >
-              Login
-            </Button>
-          )}
+          {isProfileVisible && (
+            <Fragment>
+              {currentUser ? (
+                <div className={classes.sectionDesktop}>
+                  <IconButton
+                    edge="end"
+                    aria-label="profile of current user"
+                    aria-controls={profileMenuId}
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </div>
+              ) : (
+                <Button variant="contained" onClick={redirectToLoginPage}>
+                  Login
+                </Button>
+              )}
 
-          {/* More Button - small screens (mobile) */}
-          <div className={classes.sectionMobile}>
-            <IconButton
-              className={classes.btn}
-              aria-label="show more"
-              aria-controls={profileMobileMenuId}
-              aria-haspopup="true"
-              onClick={handleProfileMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
+              {/* More Button - small screens (mobile) */}
+              <div className={classes.sectionMobile}>
+                <IconButton
+                  className={classes.btn}
+                  aria-label="show more"
+                  aria-controls={profileMobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
+                </IconButton>
+              </div>
+            </Fragment>
+          )}
         </Toolbar>
       </AppBar>
-      {renderProfileMobileMenu}
-      {renderProfileMenu}
+      {isProfileVisible && renderProfileMobileMenu}
+      {isProfileVisible && renderProfileMenu}
     </Fragment>
   );
 };
@@ -286,6 +288,7 @@ MuiPrimarySearchAppBar.propTypes = {
   isLogoClickable: PropTypes.bool,
   isSearchVisible: PropTypes.bool,
   isCategoriesVisible: PropTypes.bool,
+  isProfileVisible: PropTypes.bool,
   handleTitleSearch: PropTypes.func,
   handleCategorySearch: PropTypes.func,
 };

@@ -63,7 +63,7 @@ const CheckoutPage = () => {
 
   return (
     <div className={cssClasses.checkoutPage}>
-      <MuiPrimarySearchAppBar isLogoClickable={true} />
+      <MuiPrimarySearchAppBar isLogoClickable={true} isProfileVisible={true} />
       <main className={cssClasses.checkoutPageContent}>
         <Typography
           variant="inherit"

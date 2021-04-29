@@ -146,6 +146,7 @@ const HomePage = () => {
       <MuiPrimarySearchAppBar
         isSearchVisible={true}
         isCategoriesVisible={true}
+        isProfileVisible={true}
         handleTitleSearch={handleTitleSearch}
         handleCategorySearch={handleCategorySearch}
       />

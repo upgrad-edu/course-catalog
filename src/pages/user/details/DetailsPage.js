@@ -99,7 +99,7 @@ const DetailsPage = (props) => {
 
   return (
     <div className={classes.detailsPage}>
-      <MuiPrimarySearchAppBar isLogoClickable={true} />
+      <MuiPrimarySearchAppBar isLogoClickable={true} isProfileVisible={true} />
 
       <div className={classes.detailsPageContent}>
         {isLoading ? (

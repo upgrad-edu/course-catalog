@@ -44,7 +44,7 @@ const SummaryPage = () => {
 
   return (
     <div className={classes.summaryPage}>
-      <MuiPrimarySearchAppBar isLogoClickable={true} />
+      <MuiPrimarySearchAppBar isLogoClickable={true} isProfileVisible={true} />
       <main className={classes.summaryPageContent}>
         {/* Summary Heading */}
         <Typography
