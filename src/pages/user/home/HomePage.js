@@ -3,6 +3,9 @@ import React, { useState, useEffect, Fragment } from "react";
 // imports for 3rd party libraries
 import { useHistory } from "react-router";
 
+// imports for routes
+import { routeUtils } from "../../../routes";
+
 // imports for utils
 import * as constants from "../../../utils/constants";
 
@@ -86,7 +89,7 @@ const HomePage = () => {
   };
 
   const showCourseDetailsPage = (id) => {
-    history.push(`/courses/${id}`); // redirect to course details page on click of course card
+    history.push(routeUtils.getDetailsPageRouteUrl(id)); // redirect to course details page on click of course card
   };
 
   // get all NEW courses

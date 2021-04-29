@@ -7,6 +7,9 @@ import * as utils from "../../../utils";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
+// imports for routes
+import * as routeConstants from "../../../routes/routeConstants";
+
 // imports for custom components
 import { Footer } from "../../../components/UI/Footer";
 
@@ -65,7 +68,7 @@ const DetailsPage = (props) => {
 
   const navigateToCheckoutPage = () => {
     history.push({
-      pathname: "/checkout",
+      pathname: routeConstants.ROUTE_URL.CHECKOUT,
       courseDetails: courseDetails, // pass course details to checkout page
     });
   };

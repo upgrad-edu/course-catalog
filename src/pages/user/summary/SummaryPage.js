@@ -3,6 +3,9 @@ import React from "react";
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
 
+// imports for routes
+import * as routeConstants from "../../../routes/routeConstants";
+
 // imports for components from MUI library
 import Typography from "@material-ui/core/Typography";
 import RoomIcon from "@material-ui/icons/Room";
@@ -25,7 +28,7 @@ const SummaryPage = () => {
   const history = useHistory();
 
   const hideNotificationSuccessCallback = () => {
-    history.push("/");
+    history.push(routeConstants.ROUTE_URL.ROOT);
   };
 
   const { notification, showNotification } = useNotification({

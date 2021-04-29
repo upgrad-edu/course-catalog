@@ -3,6 +3,9 @@ import React, { createContext, useState, useContext } from "react";
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
 
+// imports for routes
+import * as routeConstants from "../routes/routeConstants";
+
 // imports for utils
 import * as utils from "../utils";
 
@@ -41,7 +44,7 @@ export const AuthProvider = ({ children }) => {
           response.data
         );
         hideLoader();
-        history.push("/home"); // redirect to home page on successful login
+        history.push(routeConstants.ROUTE_URL.HOME); // redirect to home page on successful login
       },
       // failure callback
       (error, errorMessage) => {
@@ -97,7 +100,7 @@ export const AuthProvider = ({ children }) => {
         hideLoader();
         // show the success message inside Snackbar component
         showNotification("Logged out successfully!");
-        history.push("/login"); // redirect to login page on successful logout
+        history.push(routeConstants.ROUTE_URL.ONBOARD); // redirect to onboard page on successful logout
       },
       // failure callback
       (error, errorMessage) => {

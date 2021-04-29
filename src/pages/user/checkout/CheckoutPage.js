@@ -3,6 +3,9 @@ import React from "react";
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
 
+// imports for routes
+import * as routeConstants from "../../../routes/routeConstants";
+
 // imports for MUI components
 import { MuiPrimarySearchAppBar } from "../../../components/MUI/MuiPrimarySearchAppBar";
 
@@ -43,7 +46,7 @@ const CheckoutPage = () => {
 
   const navigateToSummaryPage = () => {
     history.push({
-      pathname: "/summary",
+      pathname: routeConstants.ROUTE_URL.SUMMARY,
       courseDetails: history.location.courseDetails, // pass course details received from details page to summary page
       addressDetails: values, // pass address details to summary page
     });

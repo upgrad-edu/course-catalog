@@ -14,26 +14,45 @@ import { AuthProvider } from "../contexts/AuthContext";
 
 // imports for routes
 import ProtectedRoute from "./ProtectedRoute";
+import * as routeConstants from "./routeConstants";
 
 const Routes = () => {
   return (
     <Router>
       <AuthProvider>
         <Switch>
-          <Route exact path="/login" component={OnboardPage}></Route>
-          <Route exact path={["/home", "/"]} component={HomePage}></Route>
-          <Route exact path="/courses/:id" component={DetailsPage}></Route>
+          <Route
+            exact
+            path={routeConstants.ROUTE_URL.ONBOARD}
+            component={OnboardPage}
+          ></Route>
+          <Route
+            exact
+            path={[
+              routeConstants.ROUTE_URL.HOME,
+              routeConstants.ROUTE_URL.ROOT,
+            ]}
+            component={HomePage}
+          ></Route>
+          <Route
+            exact
+            path={routeConstants.ROUTE_URL.DETAILS}
+            component={DetailsPage}
+          ></Route>
           <ProtectedRoute
             exact
-            path="/checkout"
+            path={routeConstants.ROUTE_URL.CHECKOUT}
             component={CheckoutPage}
           ></ProtectedRoute>
           <ProtectedRoute
             exact
-            path="/summary"
+            path={routeConstants.ROUTE_URL.SUMMARY}
             component={SummaryPage}
           ></ProtectedRoute>
-          <Route path="*" component={NotFoundPage}></Route>
+          <Route
+            path={routeConstants.ROUTE_URL.ANY}
+            component={NotFoundPage}
+          ></Route>
         </Switch>
       </AuthProvider>
     </Router>
