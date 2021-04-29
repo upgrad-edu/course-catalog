@@ -51,10 +51,9 @@ const CheckoutPage = () => {
 
   const { values, errors, handleChange, handleSubmit } = useForm(
     initialFormValues,
-    false, // determining if values of form control should be cleared
     validateCheckoutForm,
-    null,
-    navigateToSummaryPage
+    navigateToSummaryPage,
+    false // determining if values of form control should be cleared
   );
 
   const { flatOrBuilding, street, city, state, country, pin, phone } = values;

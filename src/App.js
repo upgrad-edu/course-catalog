@@ -8,19 +8,8 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 
-// imports for 3rd party libraries
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 // imports for custom components
-import { OnboardPage } from "./pages/onboard";
-import { HomePage } from "./pages/user/home";
-import { DetailsPage } from "./pages/user/details";
-import { CheckoutPage } from "./pages/user/checkout";
-import { SummaryPage } from "./pages/user/summary";
-import { NotFoundPage } from "./pages/notfound";
-
-// imports for contexts
-import { AuthProvider } from "./contexts/AuthContext";
+import { Routes } from "./routes";
 
 // overriding default Material UI theme
 const theme = createMuiTheme({
@@ -38,18 +27,7 @@ const theme = createMuiTheme({
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <AuthProvider>
-          <Switch>
-            <Route exact path="/login" component={OnboardPage}></Route>
-            <Route exact path={["/home", "/"]} component={HomePage}></Route>
-            <Route exact path="/courses/:id" component={DetailsPage}></Route>
-            <Route exact path="/checkout" component={CheckoutPage}></Route>
-            <Route exact path="/summary" component={SummaryPage}></Route>
-            <Route path="*" component={NotFoundPage}></Route>
-          </Switch>
-        </AuthProvider>
-      </Router>
+      <Routes />
     </ThemeProvider>
   );
 };
