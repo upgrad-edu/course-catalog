@@ -1,8 +1,11 @@
 import React, { useState, Fragment } from "react";
 
 // imports for 3rd party libraries
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+
+// imports for routes
+import { routeConstants } from "../../../routes";
 
 // imports from Material UI library
 import AppBar from "@material-ui/core/AppBar";
@@ -13,6 +16,7 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SendIcon from "@material-ui/icons/Send";
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
+import Button from "@material-ui/core/Button";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
@@ -32,7 +36,8 @@ const MuiPrimarySearchAppBar = ({
   handleCategorySearch,
 }) => {
   const classes = useStyles();
-  const { logout } = useAuth();
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
 
   const [categoriesAnchorEl, setCategoriesAnchorEl] = useState(null);
   const [profileAnchorEl, setProfileAnchorEl] = useState(null);
@@ -86,6 +91,10 @@ const MuiPrimarySearchAppBar = ({
     const category = event.target.innerText;
     handleCategorySearch(category);
     handleCategoriesMenuClose();
+  };
+
+  const redirectToLoginPage = () => {
+    history.push(routeConstants.ROUTE_URL.ONBOARD);
   };
 
   // visible as categories menu
@@ -144,16 +153,17 @@ const MuiPrimarySearchAppBar = ({
       onClose={handleProfileMobileMenuClose}
       className={classes.root}
     >
-      <MenuItem onClick={logout}>
+      <MenuItem onClick={currentUser ? logout : redirectToLoginPage}>
         <IconButton
           aria-label="profile of current user"
           aria-controls={profileMenuId}
           aria-haspopup="true"
           color="inherit"
+          className={classes.mobileMenuItemIcon}
         >
           <AccountCircle />
         </IconButton>
-        <p>Logout</p>
+        {currentUser ? <p>Logout</p> : <p>Login</p>}
       </MenuItem>
     </Menu>
   );
@@ -228,18 +238,28 @@ const MuiPrimarySearchAppBar = ({
           {isCategoriesVisible && renderCategoriesMenu}
 
           {/* Profile Menu - large screens (desktop) */}
-          <div className={classes.sectionDesktop}>
-            <IconButton
-              edge="end"
-              aria-label="profile of current user"
-              aria-controls={profileMenuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
+          {currentUser ? (
+            <div className={classes.sectionDesktop}>
+              <IconButton
+                edge="end"
+                aria-label="profile of current user"
+                aria-controls={profileMenuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
+          ) : (
+            <Button
+              variant="contained"
+              color="textSecondary"
+              onClick={redirectToLoginPage}
             >
-              <AccountCircle />
-            </IconButton>
-          </div>
+              Login
+            </Button>
+          )}
 
           {/* More Button - small screens (mobile) */}
           <div className={classes.sectionMobile}>

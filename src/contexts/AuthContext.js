@@ -43,7 +43,12 @@ export const AuthProvider = ({ children }) => {
           utils.constants.USER_KEY_LOCAL_STORAGE,
           response.data
         );
+
         hideLoader();
+
+        // show the success message inside Snackbar component
+        showNotification("Logged in successfully!");
+
         history.push(routeConstants.ROUTE_URL.HOME); // redirect to home page on successful login
       },
       // failure callback

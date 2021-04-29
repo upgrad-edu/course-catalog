@@ -90,6 +90,9 @@ const useStyles = makeStyles((theme) => ({
       borderTop: "1px solid var(--clr-grey-light)",
     },
   },
+  mobileMenuItemIcon: {
+    paddingLeft: 0,
+  },
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
