@@ -1,2 +1,2 @@
 export * from "./utilsApi";
-export * as constants from "./constantsApi";
+export * as constants from "./apiConstants";
