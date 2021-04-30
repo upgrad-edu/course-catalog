@@ -5,5 +5,6 @@ export const ROUTE_URL = {
   DETAILS: "/courses/:id",
   CHECKOUT: "/checkout",
   SUMMARY: "/summary",
+  COURSES_LIST: "/admin/list",
   ANY: "*",
 };

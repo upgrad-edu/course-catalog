@@ -92,6 +92,7 @@ const HomePage = () => {
     history.push(routeUtils.getDetailsPageRouteUrl(id)); // redirect to course details page on click of course card
   };
 
+  // TODO: API pending; get all new courses instead of published courses
   // get all NEW courses
   useEffect(() => {
     showLoader();
@@ -118,7 +119,7 @@ const HomePage = () => {
     );
   }, []);
 
-  // get all courses
+  // get all published courses
   useEffect(() => {
     showLoader();
     getAllPublishedCourses(
@@ -155,7 +156,6 @@ const HomePage = () => {
         {isLoading ? (
           loader
         ) : (
-          // TODO: API pending; pass new courses instead of published courses
           <Fragment>
             {/* New Courses */}
             <section>

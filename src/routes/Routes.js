@@ -7,6 +7,7 @@ import { HomePage } from "../pages/user/home";
 import { DetailsPage } from "../pages/user/details";
 import { CheckoutPage } from "../pages/user/checkout";
 import { SummaryPage } from "../pages/user/summary";
+import { ListPage } from "../pages/admin/list";
 import { NotFoundPage } from "../pages/notfound";
 
 // imports for contexts
@@ -21,6 +22,7 @@ const Routes = () => {
     <Router>
       <AuthProvider>
         <Switch>
+          {/* User Routes */}
           <Route
             exact
             path={routeConstants.ROUTE_URL.ONBOARD}
@@ -49,6 +51,15 @@ const Routes = () => {
             path={routeConstants.ROUTE_URL.SUMMARY}
             component={SummaryPage}
           ></ProtectedRoute>
+
+          {/* Admin Routes */}
+          <Route
+            exact
+            path={routeConstants.ROUTE_URL.COURSES_LIST}
+            component={ListPage}
+          ></Route>
+
+          {/* Not Found Page Route */}
           <Route
             path={routeConstants.ROUTE_URL.ANY}
             component={NotFoundPage}

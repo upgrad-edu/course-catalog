@@ -1,0 +1,12 @@
+.listPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.listPageContent {
+  margin-top: 4rem;
+  flex: 1;
+}
+.tableHead {
+  background: var(--clr-grey-light);
+}
