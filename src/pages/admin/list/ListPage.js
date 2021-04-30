@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 // imports for components from MUI library
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -20,7 +24,7 @@ import { Footer } from "../../../components/UI/Footer";
 // imports for custom hooks
 import useLoader from "../../../hooks/useLoader";
 import useNotification from "../../../hooks/useNotification";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 // imports for routes
 import { routeConstants } from "../../../routes";
@@ -42,32 +46,38 @@ const ListPage = () => {
   const { getAllPublishedCourses } = coursesApi;
 
   const [coursesList, setCoursesList] = useState([]);
+  const [isPublishedFilterOn, setIsPublishedFilterOn] = useState(false);
 
   const navigateToEditCoursePage = () => {
     history.push(routeConstants.ROUTE_URL.EDIT_COURSE);
   };
 
-  // TODO: API pending; get all (published as well as unpublished) courses
+  const handlePublishedFilterChange = (event) => {
+    setIsPublishedFilterOn(event.target.checked);
+  };
+
+  const successCallback = (response) => {
+    setCoursesList(response.data);
+    hideLoader();
+  };
+
+  const failureCallback = (error, errorMessage) => {
+    // show errors from specific to generic
+    if (errorMessage) {
+      showNotification(errorMessage);
+    } else {
+      showNotification(error.toString());
+    }
+    hideLoader();
+  };
+
+  // TODO: API pending for get all (published as well as unpublished) courses
   useEffect(() => {
     showLoader();
-    getAllPublishedCourses(
-      // success callback
-      (response) => {
-        setCoursesList(response.data);
-        hideLoader();
-      },
-      // failure callback
-      (error, errorMessage) => {
-        // show errors from specific to generic
-        if (errorMessage) {
-          showNotification(errorMessage);
-        } else {
-          showNotification(error.toString());
-        }
-        hideLoader();
-      }
-    );
-  }, []);
+    isPublishedFilterOn
+      ? getAllPublishedCourses(successCallback, failureCallback)
+      : getAllPublishedCourses(successCallback, failureCallback);
+  }, [isPublishedFilterOn]);
 
   return (
     <div className={classes.listPage}>
@@ -76,6 +86,29 @@ const ListPage = () => {
 
       {/* Main Content */}
       <main className={classes.listPageContent}>
+        {/* Table Main Action Header */}
+        <article className={classes.tableMainActionHeader}>
+          <Link to={routeConstants.ROUTE_URL.ADD_COURSE}>
+            <Button variant="contained" color="secondary">
+              <AddIcon />
+              Add Course
+            </Button>
+          </Link>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isPublishedFilterOn}
+                onChange={handlePublishedFilterChange}
+                name="publishedCoursesFilter"
+                color="secondary"
+              />
+            }
+            className={classes.publishedFilter}
+            label="Published"
+          />
+        </article>
+
+        {/* Courses in Tabular Format */}
         {isLoading ? (
           loader
         ) : (
