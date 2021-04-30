@@ -6,5 +6,6 @@ export const ROUTE_URL = {
   CHECKOUT: "/checkout",
   SUMMARY: "/summary",
   COURSES_LIST: "/admin/list",
+  EDIT_COURSE: "/admin/edit",
   ANY: "*",
 };

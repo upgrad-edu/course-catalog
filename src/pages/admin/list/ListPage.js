@@ -20,6 +20,10 @@ import { Footer } from "../../../components/UI/Footer";
 // imports for custom hooks
 import useLoader from "../../../hooks/useLoader";
 import useNotification from "../../../hooks/useNotification";
+import { useHistory } from "react-router-dom";
+
+// imports for routes
+import { routeConstants } from "../../../routes";
 
 // imports for utils
 import * as utils from "../../../utils";
@@ -33,10 +37,15 @@ import classes from "./ListPage.module.css";
 const ListPage = () => {
   const { loader, isLoading, showLoader, hideLoader } = useLoader();
   const { notification, showNotification } = useNotification();
+  const history = useHistory();
 
   const { getAllPublishedCourses } = coursesApi;
 
   const [coursesList, setCoursesList] = useState([]);
+
+  const navigateToEditCoursePage = () => {
+    history.push(routeConstants.ROUTE_URL.EDIT_COURSE);
+  };
 
   // TODO: API pending; get all (published as well as unpublished) courses
   useEffect(() => {
@@ -112,6 +121,7 @@ const ListPage = () => {
                         aria-controls="admin actions"
                         aria-haspopup="false"
                         color="inherit"
+                        onClick={navigateToEditCoursePage}
                       >
                         <EditIcon />
                       </IconButton>

@@ -8,6 +8,7 @@ import { DetailsPage } from "../pages/user/details";
 import { CheckoutPage } from "../pages/user/checkout";
 import { SummaryPage } from "../pages/user/summary";
 import { ListPage } from "../pages/admin/list";
+import { EditPage } from "../pages/admin/edit";
 import { NotFoundPage } from "../pages/notfound";
 
 // imports for contexts
@@ -57,6 +58,11 @@ const Routes = () => {
             exact
             path={routeConstants.ROUTE_URL.COURSES_LIST}
             component={ListPage}
+          ></Route>
+          <Route
+            exact
+            path={routeConstants.ROUTE_URL.EDIT_COURSE}
+            component={EditPage}
           ></Route>
 
           {/* Not Found Page Route */}
