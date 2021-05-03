@@ -77,10 +77,10 @@ const CheckoutPage = () => {
           id="addressForm"
           noValidate
           autoComplete="off"
-          className={`${cssClasses.form} ${cssClasses.addressForm}`}
+          className={`${cssClasses.addressForm} ${cssClasses.form}`}
         >
           <div
-            className={`${cssClasses.formControlsContainer} ${cssClasses.addressFormControlsContainer}`}
+            className={`${cssClasses.addressFormControlsContainer} ${cssClasses.formControlsContainer}`}
           >
             <FormControl variant="filled">
               <InputLabel htmlFor="flatOrBuilding" color="secondary">

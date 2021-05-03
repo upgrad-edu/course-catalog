@@ -43,14 +43,40 @@ export const checkValidEmail = (email) => {
 };
 
 /**
- * Function to check if given value contains only numbers
+ * Function to check if given value contains only integer numbers
  * @param {String} value - value to be checked
- * @returns {Boolean} - true if value is numerical; false otherwise
+ * @returns {Boolean} - true if value is integer number; false otherwise
  */
-export const checkIsNumerical = (value) => {
+export const checkIfValueIsInteger = (value) => {
   if (value) {
     const regex = /^[0-9]*$/;
     return regex.test(value.toString());
+  }
+  return false;
+};
+
+/**
+ * Function to check if given value contains only numbers (integers or decimals)
+ * @param {String} value - value to be checked
+ * @returns {Boolean} - true if value is numerical (integer or decimal); false otherwise
+ */
+export const checkIfValueIsNumerical = (value) => {
+  if (value) {
+    return !isNaN(value.toString());
+  }
+  return false;
+};
+
+/**
+ * Function to check if given string is a valid URL
+ * @param {String} str - string to be checked
+ * @returns {Boolean} - true if given string is a valid URL; false otherwise
+ * CREDITS - https://stackoverflow.com/a/3809435/7452548
+ */
+export const checkIfValidUrl = (str) => {
+  if (str) {
+    const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+    return regex.test(str.toString());
   }
   return false;
 };

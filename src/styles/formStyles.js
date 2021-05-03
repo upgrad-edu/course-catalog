@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    maxHeight: "70vh",
     overflowY: "auto",
   },
   formControlsContainer: {

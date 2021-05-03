@@ -45,7 +45,7 @@ const validateCheckoutForm = (values) => {
    */
   if (!values.pin.trim()) {
     errors.pin = "Required";
-  } else if (!utils.checkIsNumerical(values.pin)) {
+  } else if (!utils.checkIfValueIsInteger(values.pin)) {
     errors.pin = "Pin should contain only digits";
   } else if (values.pin.length !== utils.constants.PIN_CODE_LEN) {
     errors.pin = `Pin should be exactly ${utils.constants.PIN_CODE_LEN} digits long`;
@@ -58,7 +58,7 @@ const validateCheckoutForm = (values) => {
    */
   if (!values.phone) {
     errors.phone = "Required";
-  } else if (!utils.checkIsNumerical(values.phone)) {
+  } else if (!utils.checkIfValueIsInteger(values.phone)) {
     errors.phone = "Phone number should contain only digits";
   } else if (values.phone.length !== utils.constants.PHONE_NUMBER_LEN) {
     errors.phone = `Phone number should be exactly ${utils.constants.PHONE_NUMBER_LEN} digits long`;

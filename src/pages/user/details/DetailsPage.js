@@ -170,7 +170,7 @@ const DetailsPage = (props) => {
 
                 {/* Button for preview on YouTube */}
                 <div
-                  className={`${classes.btnContainer} ${classes.previewBtnContainer}`}
+                  className={`${classes.previewBtnContainer} ${classes.btnContainer}`}
                 >
                   <Button
                     variant="contained"
@@ -202,7 +202,7 @@ const DetailsPage = (props) => {
             <section className={classes.rightColumn}>
               {/* Button for Enrolment */}
               <div
-                className={`${classes.btnContainer} ${classes.enrolMeBtnContainer}`}
+                className={`${classes.enrolMeBtnContainer} ${classes.btnContainer}`}
               >
                 <Button
                   variant="contained"

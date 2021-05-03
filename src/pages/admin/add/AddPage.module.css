@@ -1,0 +1,42 @@
+.addPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.addPageContent {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.addPageHeading {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+.courseForm {
+  max-height: 63vh;
+  width: 95%;
+  display: grid;
+  row-gap: 1.5rem;
+  padding: 1rem 2rem;
+}
+.controlsGroup {
+  display: grid;
+  row-gap: 1.5rem;
+}
+.addCourseButton {
+  width: 7rem;
+  border-radius: var(--radius) !important;
+  margin: 0 auto !important;
+}
+@media screen and (min-width: 500px) {
+  .controlsGroup {
+    display: flex;
+    justify-content: space-between;
+  }
+  .controlsGroup > * {
+    width: 48%;
+  }
+}
