@@ -11,6 +11,10 @@ const useForm = (
   // form errors based on values entered on UI
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    setValues(valuesInitialState);
+  }, [valuesInitialState]);
+
   // avoids invoking callback function when the errors object is empty on first page load
   const [isSubmitting, setIsSubmitting] = useState(false);
 

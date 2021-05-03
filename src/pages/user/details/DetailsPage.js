@@ -101,7 +101,7 @@ const DetailsPage = (props) => {
     <div className={classes.detailsPage}>
       <MuiPrimarySearchAppBar isLogoClickable={true} isProfileVisible={true} />
 
-      <div className={classes.detailsPageContent}>
+      <main className={classes.detailsPageContent}>
         {isLoading ? (
           loader
         ) : (
@@ -228,7 +228,7 @@ const DetailsPage = (props) => {
           </Fragment>
         )}
         {notification}
-      </div>
+      </main>
       <Footer />
     </div>
   );

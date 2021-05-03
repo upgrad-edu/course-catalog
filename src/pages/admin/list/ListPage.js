@@ -27,7 +27,7 @@ import useNotification from "../../../hooks/useNotification";
 import { useHistory, Link } from "react-router-dom";
 
 // imports for routes
-import { routeConstants } from "../../../routes";
+import { routeUtils, routeConstants } from "../../../routes";
 
 // imports for utils
 import * as utils from "../../../utils";
@@ -48,8 +48,8 @@ const ListPage = () => {
   const [coursesList, setCoursesList] = useState([]);
   const [isPublishedFilterOn, setIsPublishedFilterOn] = useState(false);
 
-  const navigateToEditCoursePage = () => {
-    history.push(routeConstants.ROUTE_URL.EDIT_COURSE);
+  const navigateToEditCoursePage = (courseId) => {
+    history.push(routeUtils.getEditPageRouteUrl(courseId)); // redirect to course edit page on click of edit icon
   };
 
   const handlePublishedFilterChange = (event) => {
@@ -154,7 +154,7 @@ const ListPage = () => {
                         aria-controls="admin actions"
                         aria-haspopup="false"
                         color="inherit"
-                        onClick={navigateToEditCoursePage}
+                        onClick={() => navigateToEditCoursePage(course._id)}
                       >
                         <EditIcon />
                       </IconButton>

@@ -88,8 +88,8 @@ const HomePage = () => {
     );
   };
 
-  const showCourseDetailsPage = (id) => {
-    history.push(routeUtils.getDetailsPageRouteUrl(id)); // redirect to course details page on click of course card
+  const showCourseDetailsPage = (courseId) => {
+    history.push(routeUtils.getDetailsPageRouteUrl(courseId)); // redirect to course details page on click of course card
   };
 
   // TODO: API pending; get all new courses instead of published courses
