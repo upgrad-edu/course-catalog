@@ -110,3 +110,28 @@ export async function getCourseById(
     }
   }
 }
+
+/**
+ * Function to delete a course with given id
+ * @param {*} courseId - id of the course to be deleted
+ * @param {*} successCallback - callback method to be called when API succeeds
+ * @param {*} failureCallback - callback method to be called when API fails
+ */
+export async function deleteCourse(courseId, successCallback, failureCallback) {
+  try {
+    await utilsApi.sendApiRequest(
+      utilsApi.constants.HTTP_METHOD.DELETE,
+      "/tutorials",
+      [courseId],
+      null,
+      null,
+      null,
+      successCallback,
+      failureCallback
+    );
+  } catch (error) {
+    if (failureCallback) {
+      failureCallback(error);
+    }
+  }
+}

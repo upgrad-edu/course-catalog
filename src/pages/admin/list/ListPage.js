@@ -43,7 +43,7 @@ const ListPage = () => {
   const { notification, showNotification } = useNotification();
   const history = useHistory();
 
-  const { getAllPublishedCourses } = coursesApi;
+  const { getAllPublishedCourses, deleteCourse } = coursesApi;
 
   const [coursesList, setCoursesList] = useState([]);
   const [isPublishedFilterOn, setIsPublishedFilterOn] = useState(false);
@@ -78,6 +78,29 @@ const ListPage = () => {
       ? getAllPublishedCourses(successCallback, failureCallback)
       : getAllPublishedCourses(successCallback, failureCallback);
   }, [isPublishedFilterOn]);
+
+  const deleteCourseHandler = (courseId) => {
+    showLoader();
+    deleteCourse(
+      courseId,
+      // success callback
+      (response) => {
+        setCoursesList(coursesList.filter((course) => course._id !== courseId));
+        showNotification("Course deleted successfully!");
+        hideLoader();
+      },
+      // failure callback
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
+        hideLoader();
+      }
+    );
+  };
 
   return (
     <div className={classes.listPage}>
@@ -163,6 +186,7 @@ const ListPage = () => {
                         aria-controls="admin actions"
                         aria-haspopup="false"
                         color="inherit"
+                        onClick={() => deleteCourseHandler(course._id)}
                       >
                         <DeleteIcon />
                       </IconButton>
