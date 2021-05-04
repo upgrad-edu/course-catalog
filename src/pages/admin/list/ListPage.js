@@ -43,7 +43,7 @@ const ListPage = () => {
   const { notification, showNotification } = useNotification();
   const history = useHistory();
 
-  const { getAllPublishedCourses, deleteCourse } = coursesApi;
+  const { getAllCourses, getAllPublishedCourses, deleteCourse } = coursesApi;
 
   const [coursesList, setCoursesList] = useState([]);
   const [isPublishedFilterOn, setIsPublishedFilterOn] = useState(false);
@@ -71,12 +71,11 @@ const ListPage = () => {
     hideLoader();
   };
 
-  // TODO: API pending for get all (published as well as unpublished) courses
   useEffect(() => {
     showLoader();
     isPublishedFilterOn
       ? getAllPublishedCourses(successCallback, failureCallback)
-      : getAllPublishedCourses(successCallback, failureCallback);
+      : getAllCourses(successCallback, failureCallback);
   }, [isPublishedFilterOn]);
 
   const deleteCourseHandler = (courseId) => {

@@ -5,6 +5,7 @@ import * as utilsApi from "./utils-api";
  * @param {String} title - substring which needs to be searched in course title
  * @param {Function} successCallback - callback method to be called when API succeeds
  * @param {Function} failureCallback - callback method to be called when API fails
+ * @returns {Array} array of courses whose title contains the given substring (each course is an object consisting of course details)
  */
 export async function searchCourseByTitle(
   title,
@@ -34,6 +35,7 @@ export async function searchCourseByTitle(
  * @param {String} category - category string corresponding to which courses are to be fetched
  * @param {Function} successCallback - callback method to be called when API succeeds
  * @param {Function} failureCallback - callback method to be called when API fails
+ * @returns {Array} array of courses which belong to the given category (each course is an object consisting of course details)
  */
 export async function getCoursesByCategory(
   category,
@@ -59,9 +61,35 @@ export async function getCoursesByCategory(
 }
 
 /**
+ * Function to get all courses (published as well as non-published)
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
+ * @returns {Array} array of all courses in the database (each course is an object consisting of course details)
+ */
+export async function getAllCourses(successCallback, failureCallback) {
+  try {
+    await utilsApi.sendApiRequest(
+      utilsApi.constants.HTTP_METHOD.GET,
+      "/tutorials",
+      null,
+      null,
+      null,
+      null,
+      successCallback,
+      failureCallback
+    );
+  } catch (error) {
+    if (failureCallback) {
+      failureCallback(error);
+    }
+  }
+}
+
+/**
  * Function to get all published courses
  * @param {Function} successCallback - callback method to be called when API succeeds
  * @param {Function} failureCallback - callback method to be called when API fails
+ * @returns {Array} array of all published courses in the database (each course is an object consisting of course details)
  */
 export async function getAllPublishedCourses(successCallback, failureCallback) {
   try {
@@ -87,6 +115,7 @@ export async function getAllPublishedCourses(successCallback, failureCallback) {
  * @param {*} courseId - id of the course to be fetched
  * @param {*} successCallback - callback method to be called when API succeeds
  * @param {*} failureCallback - callback method to be called when API fails
+ * @returns {Object} course with given ID
  */
 export async function getCourseById(
   courseId,
