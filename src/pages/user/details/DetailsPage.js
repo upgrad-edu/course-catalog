@@ -66,6 +66,10 @@ const DetailsPage = (props) => {
     );
   }, []);
 
+  const openYouTubeVideo = () => {
+    window.open(courseDetails.videoURL);
+  };
+
   const navigateToCheckoutPage = () => {
     history.push({
       pathname: routeConstants.ROUTE_URL.CHECKOUT,
@@ -176,6 +180,7 @@ const DetailsPage = (props) => {
                     variant="contained"
                     startIcon={<YouTubeIcon color="primary" />}
                     className={classes.previewButton}
+                    onClick={openYouTubeVideo}
                   >
                     Preview
                   </Button>
