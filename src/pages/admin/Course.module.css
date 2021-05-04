@@ -11,6 +11,12 @@
   align-items: center;
   flex: 1;
 }
+.backButton {
+  align-self: start;
+  margin-left: 1.5rem;
+  background: var(--clr-black);
+  color: var(--clr-white);
+}
 .coursePageHeading {
   text-align: center;
   padding-bottom: 1rem;

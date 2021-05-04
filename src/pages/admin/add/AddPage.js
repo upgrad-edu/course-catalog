@@ -102,6 +102,13 @@ const AddPage = () => {
           loader
         ) : (
           <Fragment>
+            <Button
+              variant="contained"
+              className={classes.backButton}
+              onClick={navigateToListPage}
+            >
+              Go Back
+            </Button>
             <Typography
               variant="inherit"
               component="h3"
