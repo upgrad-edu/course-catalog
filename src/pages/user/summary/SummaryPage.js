@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 // imports for utils
 import * as utils from "../../../utils";
@@ -55,89 +55,101 @@ const SummaryPage = () => {
     <div className={classes.summaryPage}>
       <MuiPrimarySearchAppBar isLogoClickable={true} isProfileVisible={true} />
       <main className={classes.summaryPageContent}>
-        {/* Summary Heading */}
-        <Typography
-          variant="inherit"
-          component="h3"
-          color="textSecondary"
-          className={classes.summaryPageHeading}
-        >
-          Summary
-        </Typography>
-        {/* Summary Content */}
-        <article className={classes.summary}>
-          {/* Course Summary */}
-          <div>
+        {courseDetails && addressDetails ? (
+          <Fragment>
+            {/* Summary Heading */}
             <Typography
               variant="inherit"
-              component="h4"
-              color="secondary"
-              gutterBottom
+              component="h3"
+              color="textSecondary"
+              className={classes.summaryPageHeading}
             >
-              Course:
+              Summary
             </Typography>
-            <Typography variant="inherit" component="p" gutterBottom>
-              <span className={classes.bold}>Title: </span>
-              {courseDetails.title}
-            </Typography>
-            <Typography variant="inherit" component="p" gutterBottom>
-              <span className={classes.bold}>Author: </span>
-              {courseDetails.author}
-            </Typography>
-            <Typography variant="inherit" component="p" gutterBottom>
-              <span className={classes.bold}>Price: </span>
-              {courseDetails.priceAfterDiscount}
-            </Typography>
-          </div>
+            {/* Summary Content */}
+            <article className={classes.summary}>
+              {/* Course Summary */}
+              <div>
+                <Typography
+                  variant="inherit"
+                  component="h4"
+                  color="secondary"
+                  gutterBottom
+                >
+                  Course:
+                </Typography>
+                <Typography variant="inherit" component="p" gutterBottom>
+                  <span className={classes.bold}>Title: </span>
+                  {courseDetails.title}
+                </Typography>
+                <Typography variant="inherit" component="p" gutterBottom>
+                  <span className={classes.bold}>Author: </span>
+                  {courseDetails.author}
+                </Typography>
+                <Typography variant="inherit" component="p" gutterBottom>
+                  <span className={classes.bold}>Price: </span>
+                  {courseDetails.priceAfterDiscount}
+                </Typography>
+              </div>
 
-          {/* Address Summary */}
-          <div>
-            <Typography
-              variant="inherit"
-              component="h4"
-              color="secondary"
-              gutterBottom
-            >
-              Address:
-            </Typography>
-            <Typography variant="inherit" component="p" gutterBottom>
-              {`${addressDetails.flatOrBuilding}, ${addressDetails.street}`}
-            </Typography>
-            <Typography variant="inherit" component="p" gutterBottom>
-              {`${addressDetails.city}, ${addressDetails.state}, ${addressDetails.country}`}
-            </Typography>
-            <Typography
-              variant="inherit"
-              component="p"
-              gutterBottom
-            ></Typography>
-            <Typography
-              variant="inherit"
-              component="p"
-              className={classes.pin}
-              gutterBottom
-            >
-              <RoomIcon fontSize="small" />
-              &nbsp;
-              {addressDetails.pin}
-            </Typography>
-            <Typography
-              variant="inherit"
-              component="p"
-              className={classes.phone}
-              gutterBottom
-            >
-              <PhoneIcon fontSize="small" />
-              &nbsp;
-              {addressDetails.phone}
-            </Typography>
-          </div>
-        </article>
-        <div className={classes.placeOrderBtn}>
-          <Button variant="contained" color="secondary" onClick={placeOrder}>
-            place order
-          </Button>
-        </div>
+              {/* Address Summary */}
+              <div>
+                <Typography
+                  variant="inherit"
+                  component="h4"
+                  color="secondary"
+                  gutterBottom
+                >
+                  Address:
+                </Typography>
+                <Typography variant="inherit" component="p" gutterBottom>
+                  {`${addressDetails.flatOrBuilding}, ${addressDetails.street}`}
+                </Typography>
+                <Typography variant="inherit" component="p" gutterBottom>
+                  {`${addressDetails.city}, ${addressDetails.state}, ${addressDetails.country}`}
+                </Typography>
+                <Typography
+                  variant="inherit"
+                  component="p"
+                  gutterBottom
+                ></Typography>
+                <Typography
+                  variant="inherit"
+                  component="p"
+                  className={classes.pin}
+                  gutterBottom
+                >
+                  <RoomIcon fontSize="small" />
+                  &nbsp;
+                  {addressDetails.pin}
+                </Typography>
+                <Typography
+                  variant="inherit"
+                  component="p"
+                  className={classes.phone}
+                  gutterBottom
+                >
+                  <PhoneIcon fontSize="small" />
+                  &nbsp;
+                  {addressDetails.phone}
+                </Typography>
+              </div>
+            </article>
+            <div className={classes.placeOrderBtn}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={placeOrder}
+              >
+                place order
+              </Button>
+            </div>
+          </Fragment>
+        ) : courseDetails ? (
+          history.push(routeConstants.ROUTE_URL.CHECKOUT)
+        ) : (
+          history.push(routeConstants.ROUTE_URL.ROOT)
+        )}
         {notification}
       </main>
       <Footer />
