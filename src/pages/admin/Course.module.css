@@ -5,6 +5,7 @@
 }
 .coursePageContent {
   margin-top: 4rem;
+  padding: 1.5rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,16 +14,15 @@
 }
 .backButton {
   align-self: start;
-  margin-left: 1.5rem;
-  background: var(--clr-black);
-  color: var(--clr-white);
+  margin-left: 1.5rem !important;
+  background: var(--clr-black) !important;
+  color: var(--clr-white) !important;
 }
 .coursePageHeading {
   text-align: center;
   padding-bottom: 1rem;
 }
 .courseForm {
-  max-height: 63vh;
   width: 95%;
   display: grid;
   row-gap: 1.5rem;

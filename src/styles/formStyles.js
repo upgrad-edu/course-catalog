@@ -1,8 +1,13 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  form: {
-    overflowY: "auto",
+  signupForm: {
+    maxHeight: "70vh",
+    overflowY: "scroll",
+    [theme.breakpoints.up("sm")]: {
+      maxHeight: "none",
+      overflowY: "visible",
+    },
   },
   formControlsContainer: {
     display: "grid",

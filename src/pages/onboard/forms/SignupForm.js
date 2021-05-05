@@ -54,7 +54,7 @@ const SignupForm = ({ successHandler }) => {
       id="signupForm"
       noValidate
       autoComplete="off"
-      className={classes.form}
+      className={classes.signupForm}
     >
       <div className={classes.formControlsContainer}>
         <FormControl variant="filled">

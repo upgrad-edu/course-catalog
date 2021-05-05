@@ -121,7 +121,7 @@ const AddPage = () => {
               id="addCourseForm"
               noValidate
               autoComplete="off"
-              className={`${cssClasses.courseForm} ${cssClasses.form}`}
+              className={cssClasses.courseForm}
             >
               <FormControl variant="filled">
                 <InputLabel htmlFor="title" color="secondary">

@@ -123,7 +123,7 @@ const EditPage = (props) => {
               id="editCourseForm"
               noValidate
               autoComplete="off"
-              className={`${cssClasses.courseForm} ${cssClasses.form}`}
+              className={cssClasses.courseForm}
             >
               <FormControl variant="filled">
                 <InputLabel htmlFor="title" color="secondary">

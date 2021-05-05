@@ -48,7 +48,7 @@ const LoginForm = ({ successHandler, isLoginSuccessful }) => {
   };
 
   return (
-    <form id="loginForm" noValidate autoComplete="off" className={classes.form}>
+    <form id="loginForm" noValidate autoComplete="off">
       <div className={classes.formControlsContainer}>
         <FormControl variant="filled">
           <InputLabel htmlFor="loginEmail" color="secondary">
