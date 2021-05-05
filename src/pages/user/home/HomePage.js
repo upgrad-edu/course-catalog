@@ -163,7 +163,10 @@ const HomePage = () => {
                 <h4>New Courses</h4>
               </div>
               {newCoursesList.length > 0 ? (
-                <EnhancedSingleLineGridList data={newCoursesList} />
+                <EnhancedSingleLineGridList
+                  data={newCoursesList}
+                  handleClick={(course) => showCourseDetailsPage(course._id)}
+                />
               ) : (
                 <Typography
                   variant="inherit"

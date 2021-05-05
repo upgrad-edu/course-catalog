@@ -12,7 +12,7 @@ import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 // imports for styles
 import { useStyles } from "./styles.js";
 
-const SingleLineGridList = ({ width, data }) => {
+const SingleLineGridList = ({ width, data, handleClick }) => {
   const classes = useStyles();
 
   const getGridListCols = () => {
@@ -31,7 +31,11 @@ const SingleLineGridList = ({ width, data }) => {
     <section className={classes.gridListContainer}>
       <GridList className={classes.gridList} cols={getGridListCols()}>
         {data.map((tile) => (
-          <GridListTile key={tile._id} className={classes.gridListItem}>
+          <GridListTile
+            key={tile._id}
+            className={classes.gridListItem}
+            onClick={() => handleClick(tile)}
+          >
             <img src={tile.imageURL} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
@@ -50,6 +54,7 @@ const SingleLineGridList = ({ width, data }) => {
 SingleLineGridList.propTypes = {
   width: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export const EnhancedSingleLineGridList = withWidth()(SingleLineGridList);
