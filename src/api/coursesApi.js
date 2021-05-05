@@ -1,4 +1,5 @@
-import * as utilsApi from "./utils-api";
+// imports for utils
+import { utilsApi, apiConstants } from "./utils-api";
 
 /**
  * Function to search for a course
@@ -14,8 +15,8 @@ export async function searchCourseByTitle(
 ) {
   try {
     await utilsApi.sendApiRequest(
-      utilsApi.constants.HTTP_METHOD.GET,
-      "/tutorials",
+      apiConstants.HTTP_METHOD.GET,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
       null,
       { title: title },
       null,
@@ -44,9 +45,9 @@ export async function getCoursesByCategory(
 ) {
   try {
     await utilsApi.sendApiRequest(
-      utilsApi.constants.HTTP_METHOD.GET,
-      "/tutorials",
-      ["category"],
+      apiConstants.HTTP_METHOD.GET,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
+      [apiConstants.COURSES_API_PATH_PARAMETER.CATEGORY],
       { category: category },
       null,
       null,
@@ -69,8 +70,8 @@ export async function getCoursesByCategory(
 export async function getAllCourses(successCallback, failureCallback) {
   try {
     await utilsApi.sendApiRequest(
-      utilsApi.constants.HTTP_METHOD.GET,
-      "/tutorials",
+      apiConstants.HTTP_METHOD.GET,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
       null,
       null,
       null,
@@ -94,9 +95,9 @@ export async function getAllCourses(successCallback, failureCallback) {
 export async function getAllPublishedCourses(successCallback, failureCallback) {
   try {
     await utilsApi.sendApiRequest(
-      utilsApi.constants.HTTP_METHOD.GET,
-      "/tutorials",
-      ["published"],
+      apiConstants.HTTP_METHOD.GET,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
+      [apiConstants.COURSES_API_PATH_PARAMETER.PUBLISHED],
       null,
       null,
       null,
@@ -124,8 +125,8 @@ export async function getCourseById(
 ) {
   try {
     await utilsApi.sendApiRequest(
-      utilsApi.constants.HTTP_METHOD.GET,
-      "/tutorials",
+      apiConstants.HTTP_METHOD.GET,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
       [courseId],
       null,
       null,
@@ -149,8 +150,8 @@ export async function getCourseById(
 export async function deleteCourse(courseId, successCallback, failureCallback) {
   try {
     await utilsApi.sendApiRequest(
-      utilsApi.constants.HTTP_METHOD.DELETE,
-      "/tutorials",
+      apiConstants.HTTP_METHOD.DELETE,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
       [courseId],
       null,
       null,

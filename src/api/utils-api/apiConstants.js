@@ -17,3 +17,18 @@ export const REQUEST_HEADER_VALUE = {
   CHARSET_UTF8: "charset=UTF-8",
   NO_CACHE: "no-cache",
 };
+
+export const USER_API_ROUTE = {
+  LOGIN: "/login",
+  SIGNUP: "/sign-up",
+  LOGOUT: "/logout",
+};
+
+export const COURSES_API_ROUTE = {
+  TUTORIALS: "/tutorials",
+};
+
+export const COURSES_API_PATH_PARAMETER = {
+  PUBLISHED: "published",
+  CATEGORY: "category",
+};

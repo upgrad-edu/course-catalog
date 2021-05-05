@@ -1,4 +1,5 @@
-import * as utilsApi from "./utils-api";
+// imports for utils
+import { utilsApi, apiConstants } from "./utils-api";
 
 /**
  * Function to log into the application
@@ -21,8 +22,8 @@ export async function doLogin(
 
     try {
       await utilsApi.sendApiRequest(
-        utilsApi.constants.HTTP_METHOD.POST,
-        "/login",
+        apiConstants.HTTP_METHOD.POST,
+        apiConstants.USER_API_ROUTE.LOGIN,
         null,
         null,
         userData,
@@ -63,8 +64,8 @@ export async function doSignup(
 
     try {
       await utilsApi.sendApiRequest(
-        utilsApi.constants.HTTP_METHOD.POST,
-        "/sign-up",
+        apiConstants.HTTP_METHOD.POST,
+        apiConstants.USER_API_ROUTE.SIGNUP,
         null,
         null,
         userData,
@@ -94,8 +95,8 @@ export async function doLogout(userId, successCallback, failureCallback) {
 
     try {
       await utilsApi.sendApiRequest(
-        utilsApi.constants.HTTP_METHOD.POST,
-        "/logout",
+        apiConstants.HTTP_METHOD.POST,
+        apiConstants.USER_API_ROUTE.LOGOUT,
         null,
         null,
         userData,
