@@ -71,9 +71,13 @@ const DetailsPage = (props) => {
   };
 
   const navigateToCheckoutPage = () => {
+    // set details of selected course in local storage
+    utils.setInLocalStorage(
+      utils.constants.LOCAL_STORAGE_KEY.COURSE,
+      courseDetails
+    );
     history.push({
       pathname: routeConstants.ROUTE_URL.CHECKOUT,
-      courseDetails: courseDetails, // pass course details to checkout page
     });
   };
 

@@ -1,5 +1,8 @@
 import React from "react";
 
+// imports for utils
+import * as utils from "../../../utils";
+
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
 
@@ -35,7 +38,13 @@ const SummaryPage = () => {
     hideNotificationSuccessCallback,
   });
 
-  const { courseDetails, addressDetails } = history.location;
+  // get details of course selected by and address of currently logged-in user
+  const courseDetails = utils.getFromLocalStorage(
+    utils.constants.LOCAL_STORAGE_KEY.COURSE
+  );
+  const addressDetails = utils.getFromLocalStorage(
+    utils.constants.LOCAL_STORAGE_KEY.ADDRESS
+  );
 
   const placeOrder = () => {
     // show the success message inside Snackbar component

@@ -1,5 +1,8 @@
 import React from "react";
 
+// imports for utils
+import * as utils from "../../../utils";
+
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
 
@@ -45,10 +48,10 @@ const CheckoutPage = () => {
   };
 
   const navigateToSummaryPage = () => {
+    // set details of address entered in local storage
+    utils.setInLocalStorage(utils.constants.LOCAL_STORAGE_KEY.ADDRESS, values);
     history.push({
       pathname: routeConstants.ROUTE_URL.SUMMARY,
-      courseDetails: history.location.courseDetails, // pass course details received from details page to summary page
-      addressDetails: values, // pass address details to summary page
     });
   };
 

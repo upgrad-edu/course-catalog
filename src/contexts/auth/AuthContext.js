@@ -4,18 +4,21 @@ import React, { createContext, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 // imports for routes
-import * as routeConstants from "../routes/routeConstants";
+import * as routeConstants from "../../routes/routeConstants";
 
 // imports for utils
-import * as utils from "../utils";
+import * as utils from "../../utils";
+
+// imports for constants
+import * as authConstants from "./authConstants";
 
 // imports for API methods
-import * as userApi from "../api/userApi";
+import * as userApi from "../../api/userApi";
 
 // imports for custom hooks
-import useLoader from "../hooks/useLoader";
-import useNotification from "../hooks/useNotification";
-import useTabs from "../hooks/useTabs";
+import useLoader from "../../hooks/useLoader";
+import useNotification from "../../hooks/useNotification";
+import useTabs from "../../hooks/useTabs";
 
 const AuthContext = createContext();
 
@@ -29,6 +32,26 @@ export const AuthProvider = ({ children }) => {
 
   const { doLogin, doSignup, doLogout } = userApi;
 
+  // Variable to check whether a user is logged in either from state or from local storage
+  const isLoggedIn =
+    currentUser ||
+    utils.getFromLocalStorage(utils.constants.LOCAL_STORAGE_KEY.USER)
+      ? true
+      : false;
+
+  // Function to get details of logged-in user either from state or from local storage
+  const getLoggedInUserDetails = () => {
+    return (
+      currentUser ||
+      utils.getFromLocalStorage(utils.constants.LOCAL_STORAGE_KEY.USER)
+    );
+  };
+
+  // Function to get the role of logged-in user
+  const getLoggedInUserRole = () => {
+    return getLoggedInUserDetails().role;
+  };
+
   // Function to call login API and pass success and failure callbacks to it
   const login = ({ email, password }) => {
     showLoader();
@@ -40,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
         // set logged-in user's details in local storage
         utils.setInLocalStorage(
-          utils.constants.USER_KEY_LOCAL_STORAGE,
+          utils.constants.LOCAL_STORAGE_KEY.USER,
           response.data
         );
 
@@ -49,7 +72,15 @@ export const AuthProvider = ({ children }) => {
         // show the success message inside Snackbar component
         showNotification("Logged in successfully!");
 
-        history.push(routeConstants.ROUTE_URL.HOME); // redirect to home page on successful login
+        // redirect to home page on successful login of user
+        if (getLoggedInUserRole() === authConstants.ROLE.USER) {
+          history.push(routeConstants.ROUTE_URL.HOME);
+        }
+
+        // redirect to list page on successful login of admin
+        if (getLoggedInUserRole() === authConstants.ROLE.ADMIN) {
+          history.push(routeConstants.ROUTE_URL.COURSES_LIST);
+        }
       },
       // failure callback
       (error, errorMessage) => {
@@ -94,13 +125,13 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     showLoader();
     doLogout(
-      currentUser._id,
+      getLoggedInUserDetails()._id,
       // success callback
       (response) => {
         setCurrentUser(null);
 
-        // clear logged-in user's details in local storage
-        utils.removeFromLocalStorage(utils.constants.USER_KEY_LOCAL_STORAGE);
+        // clear all details of logged-in user inside local storage
+        utils.clearLocalStorage();
 
         hideLoader();
         // show the success message inside Snackbar component
@@ -121,10 +152,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const authValues = {
-    currentUser,
     login,
     signup,
     logout,
+    isLoggedIn,
+    getLoggedInUserDetails,
     tabValue,
     handleTabChange,
   };

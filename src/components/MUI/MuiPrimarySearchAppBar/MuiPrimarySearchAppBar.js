@@ -23,7 +23,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 // imports for custom hooks
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/auth";
 
 // imports for styles
 import { useStyles } from "./styles";
@@ -37,7 +37,7 @@ const MuiPrimarySearchAppBar = ({
   handleCategorySearch,
 }) => {
   const classes = useStyles();
-  const { currentUser, logout } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
   const history = useHistory();
 
   const [categoriesAnchorEl, setCategoriesAnchorEl] = useState(null);
@@ -155,7 +155,7 @@ const MuiPrimarySearchAppBar = ({
       onClose={handleProfileMobileMenuClose}
       className={classes.root}
     >
-      <MenuItem onClick={currentUser ? logout : redirectToLoginPage}>
+      <MenuItem onClick={isLoggedIn ? logout : redirectToLoginPage}>
         <IconButton
           aria-label="profile of current user"
           aria-controls={profileMenuId}
@@ -165,7 +165,7 @@ const MuiPrimarySearchAppBar = ({
         >
           <AccountCircle />
         </IconButton>
-        {currentUser ? <p>Logout</p> : <p>Login</p>}
+        {isLoggedIn ? <p>Logout</p> : <p>Login</p>}
       </MenuItem>
     </Menu>
   );
@@ -242,8 +242,8 @@ const MuiPrimarySearchAppBar = ({
           {/* Profile Menu - large screens (desktop) */}
           {isProfileVisible && (
             <Fragment>
-              {currentUser ? (
-                <div className={classes.sectionDesktop}>
+              <div className={classes.sectionDesktop}>
+                {isLoggedIn ? (
                   <IconButton
                     edge="end"
                     aria-label="profile of current user"
@@ -254,12 +254,12 @@ const MuiPrimarySearchAppBar = ({
                   >
                     <AccountCircle />
                   </IconButton>
-                </div>
-              ) : (
-                <Button variant="contained" onClick={redirectToLoginPage}>
-                  Login
-                </Button>
-              )}
+                ) : (
+                  <Button variant="contained" onClick={redirectToLoginPage}>
+                    Login
+                  </Button>
+                )}
+              </div>
 
               {/* More Button - small screens (mobile) */}
               <div className={classes.sectionMobile}>

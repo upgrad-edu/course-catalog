@@ -82,6 +82,15 @@ export const checkIfValidUrl = (str) => {
 };
 
 /**
+ * Function to get value of given key from local storage
+ * @param {*} key - unique identifier (datatype is not reference type)
+ * @returns {*} JSON-parsed value corresponding to given key
+ */
+export const getFromLocalStorage = (key) => {
+  return JSON.parse(localStorage.getItem(key.toString()));
+};
+
+/**
  * Function to set local storage with given key-value pair
  * @param {*} key - unique identifier (datatype is not reference type)
  * @param {*} value - value corresponding to the key
@@ -97,13 +106,10 @@ export const setInLocalStorage = (key, value) => {
 };
 
 /**
- * Function to remove given key from local storage
- * @param {*} key - unique identifier
+ * Function to clear all keys from local storage
  */
-export const removeFromLocalStorage = (key) => {
-  if (key) {
-    localStorage.removeItem(key);
-  }
+export const clearLocalStorage = () => {
+  localStorage.clear();
 };
 
 /**

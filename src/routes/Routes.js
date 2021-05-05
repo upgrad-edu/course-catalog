@@ -13,7 +13,7 @@ import { EditPage } from "../pages/admin/edit";
 import { NotFoundPage } from "../pages/notfound";
 
 // imports for contexts
-import { AuthProvider } from "../contexts/AuthContext";
+import { AuthProvider, authConstants } from "../contexts/auth";
 
 // imports for routes
 import ProtectedRoute from "./ProtectedRoute";
@@ -47,29 +47,34 @@ const Routes = () => {
             exact
             path={routeConstants.ROUTE_URL.CHECKOUT}
             component={CheckoutPage}
+            role={authConstants.ROLE.USER}
           ></ProtectedRoute>
           <ProtectedRoute
             exact
             path={routeConstants.ROUTE_URL.SUMMARY}
             component={SummaryPage}
+            role={authConstants.ROLE.USER}
           ></ProtectedRoute>
 
           {/* Admin Routes */}
-          <Route
+          <ProtectedRoute
             exact
             path={routeConstants.ROUTE_URL.COURSES_LIST}
             component={ListPage}
-          ></Route>
-          <Route
+            role={authConstants.ROLE.ADMIN}
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path={routeConstants.ROUTE_URL.ADD_COURSE}
             component={AddPage}
-          ></Route>
-          <Route
+            role={authConstants.ROLE.ADMIN}
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path={routeConstants.ROUTE_URL.EDIT_COURSE}
             component={EditPage}
-          ></Route>
+            role={authConstants.ROLE.ADMIN}
+          ></ProtectedRoute>
 
           {/* Not Found Page Route */}
           <Route

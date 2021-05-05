@@ -9,7 +9,7 @@ import { LoginForm, SignupForm } from "./forms";
 // imports for custom hooks
 import useLoader from "../../hooks/useLoader";
 import useNotification from "../../hooks/useNotification";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/auth";
 
 // imports for assets
 import logo from "../../assets/logo.png";
@@ -21,7 +21,7 @@ const OnboardPage = () => {
   const classes = useStyles();
   const { loader, isLoading } = useLoader();
   const { notification } = useNotification();
-  const { currentUser, login, signup, tabValue, handleTabChange } = useAuth();
+  const { isLoggedIn, login, signup, tabValue, handleTabChange } = useAuth();
 
   // array consisting of details of tabs to be displayed
   const tabsDetails = [
@@ -31,7 +31,7 @@ const OnboardPage = () => {
       children: (
         <LoginForm
           successHandler={(values) => login(values)}
-          isLoginSuccessful={currentUser ? true : false}
+          isLoginSuccessful={isLoggedIn ? true : false}
         />
       ),
     },
