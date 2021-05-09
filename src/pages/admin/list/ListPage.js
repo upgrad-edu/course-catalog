@@ -43,8 +43,6 @@ const ListPage = () => {
   const { notification, showNotification } = useNotification();
   const history = useHistory();
 
-  const { getAllCourses, getAllPublishedCourses, deleteCourse } = coursesApi;
-
   const [coursesList, setCoursesList] = useState([]);
   const [isPublishedFilterOn, setIsPublishedFilterOn] = useState(false);
 
@@ -56,12 +54,12 @@ const ListPage = () => {
     setIsPublishedFilterOn(event.target.checked);
   };
 
-  const successCallback = (response) => {
+  const getCoursesSuccessCallback = (response) => {
     setCoursesList(response.data);
     hideLoader();
   };
 
-  const failureCallback = (error, errorMessage) => {
+  const getCoursesFailureCallback = (error, errorMessage) => {
     // show errors from specific to generic
     if (errorMessage) {
       showNotification(errorMessage);
@@ -74,13 +72,19 @@ const ListPage = () => {
   useEffect(() => {
     showLoader();
     isPublishedFilterOn
-      ? getAllPublishedCourses(successCallback, failureCallback)
-      : getAllCourses(successCallback, failureCallback);
+      ? coursesApi.getAllPublishedCourses(
+          getCoursesSuccessCallback,
+          getCoursesFailureCallback
+        )
+      : coursesApi.getAllCourses(
+          getCoursesSuccessCallback,
+          getCoursesFailureCallback
+        );
   }, [isPublishedFilterOn]);
 
   const deleteCourseHandler = (courseId) => {
     showLoader();
-    deleteCourse(
+    coursesApi.deleteCourse(
       courseId,
       // success callback
       (response) => {

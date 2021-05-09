@@ -30,8 +30,6 @@ export const AuthProvider = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState(null);
 
-  const { doLogin, doSignup, doLogout } = userApi;
-
   // Variable to check whether a user is logged in either from state or from local storage
   const isLoggedIn =
     currentUser ||
@@ -55,7 +53,7 @@ export const AuthProvider = ({ children }) => {
   // Function to call login API and pass success and failure callbacks to it
   const login = ({ email, password }) => {
     showLoader();
-    doLogin(
+    userApi.doLogin(
       { email: email, password: password },
       // success callback
       (response) => {
@@ -98,7 +96,7 @@ export const AuthProvider = ({ children }) => {
   // Function to call signup API and pass success and failure callbacks to it
   const signup = (values) => {
     showLoader();
-    doSignup(
+    userApi.doSignup(
       values,
       // success callback
       (response) => {
@@ -124,7 +122,7 @@ export const AuthProvider = ({ children }) => {
   // Function to call logout API and pass success and failure callbacks to it
   const logout = () => {
     showLoader();
-    doLogout(
+    userApi.doLogout(
       getLoggedInUserDetails()._id,
       // success callback
       (response) => {

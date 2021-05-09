@@ -40,13 +40,11 @@ const DetailsPage = (props) => {
 
   const [courseDetails, setCourseDetails] = useState({});
 
-  const { getCourseById } = coursesApi;
-
   // get all data of course with given id
   useEffect(() => {
     showLoader();
     const courseId = props.match.params.id;
-    getCourseById(
+    coursesApi.getCourseById(
       courseId,
       // success callback
       (response) => {

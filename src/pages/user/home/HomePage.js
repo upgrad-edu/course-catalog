@@ -38,15 +38,9 @@ const HomePage = () => {
   const [newCoursesList, setNewCoursesList] = useState([]);
   const [coursesList, setCoursesList] = useState([]);
 
-  const {
-    searchCourseByTitle,
-    getCoursesByCategory,
-    getAllPublishedCourses,
-  } = coursesApi;
-
   const handleTitleSearch = (title) => {
     showLoader();
-    searchCourseByTitle(
+    coursesApi.searchCourseByTitle(
       title,
       // success callback
       (response) => {
@@ -68,7 +62,7 @@ const HomePage = () => {
 
   const handleCategorySearch = (category) => {
     showLoader();
-    getCoursesByCategory(
+    coursesApi.getCoursesByCategory(
       category,
       // success callback
       (response) => {
@@ -96,7 +90,7 @@ const HomePage = () => {
   // get all NEW courses
   useEffect(() => {
     showLoader();
-    getAllPublishedCourses(
+    coursesApi.getAllPublishedCourses(
       // success callback
       (response) => {
         const nNewCourses = response.data.slice(
@@ -122,7 +116,7 @@ const HomePage = () => {
   // get all published courses
   useEffect(() => {
     showLoader();
-    getAllPublishedCourses(
+    coursesApi.getAllPublishedCourses(
       // success callback
       (response) => {
         setCoursesList(response.data);

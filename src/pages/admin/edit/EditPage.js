@@ -44,8 +44,6 @@ const EditPage = (props) => {
   const { loader, isLoading, showLoader, hideLoader } = useLoader();
   const { notification, showNotification } = useNotification();
 
-  const { getCourseById } = coursesApi;
-
   const navigateToListPage = () => {
     history.push({
       pathname: routeConstants.ROUTE_URL.COURSES_LIST,
@@ -58,7 +56,7 @@ const EditPage = (props) => {
   useEffect(() => {
     showLoader();
     const courseId = props.match.params.id;
-    getCourseById(
+    coursesApi.getCourseById(
       courseId,
       // success callback
       (response) => {
