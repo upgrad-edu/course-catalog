@@ -49,7 +49,7 @@ const OnboardPage = () => {
       </header>
       <main className={classes.onboardPageContent}>
         {isLoading ? (
-          loader
+          <div className={classes.loaderContainer}>{loader}</div>
         ) : (
           <div className={classes.onboardPageTabsContainer}>
             <MuiTabs

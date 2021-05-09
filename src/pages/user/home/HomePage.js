@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 
 // imports for 3rd party libraries
 import { useHistory } from "react-router";
@@ -151,57 +151,54 @@ const HomePage = () => {
         handleTitleSearch={handleTitleSearch}
         handleCategorySearch={handleCategorySearch}
       />
-      {/* Main Content */}
-      <main className={classes.homePageContent}>
-        {isLoading ? (
-          loader
-        ) : (
-          <Fragment>
-            {/* New Courses */}
-            <section>
-              <div className={classes.titleBar}>
-                <h4>New Courses</h4>
-              </div>
-              {newCoursesList.length > 0 ? (
-                <EnhancedSingleLineGridList
-                  data={newCoursesList}
-                  handleClick={(course) => showCourseDetailsPage(course._id)}
-                />
-              ) : (
-                <Typography
-                  variant="inherit"
-                  component="h4"
-                  className={classes.noCourseFoundText}
-                >
-                  No new course
-                </Typography>
-              )}
-            </section>
-
-            {/* Course Cards */}
-            {coursesList.length > 0 ? (
-              <section className={classes.courseCardsContainer}>
-                {coursesList.map((course) => (
-                  <MuiCard
-                    key={course._id}
-                    data={course}
-                    handleClick={() => showCourseDetailsPage(course._id)}
-                  />
-                ))}
-              </section>
+      {isLoading ? (
+        <section className={classes.loaderContainer}>{loader}</section>
+      ) : (
+        <main className={classes.homePageContent}>
+          {/* New Courses */}
+          <section>
+            <div className={classes.titleBar}>
+              <h4>New Courses</h4>
+            </div>
+            {newCoursesList.length > 0 ? (
+              <EnhancedSingleLineGridList
+                data={newCoursesList}
+                handleClick={(course) => showCourseDetailsPage(course._id)}
+              />
             ) : (
               <Typography
                 variant="inherit"
                 component="h4"
                 className={classes.noCourseFoundText}
               >
-                No course found
+                No new course
               </Typography>
             )}
-          </Fragment>
-        )}
-        {notification}
-      </main>
+          </section>
+
+          {/* Course Cards */}
+          {coursesList.length > 0 ? (
+            <section className={classes.courseCardsContainer}>
+              {coursesList.map((course) => (
+                <MuiCard
+                  key={course._id}
+                  data={course}
+                  handleClick={() => showCourseDetailsPage(course._id)}
+                />
+              ))}
+            </section>
+          ) : (
+            <Typography
+              variant="inherit"
+              component="h4"
+              className={classes.noCourseFoundText}
+            >
+              No course found
+            </Typography>
+          )}
+          {notification}
+        </main>
+      )}
       <Footer />
     </div>
   );

@@ -132,7 +132,7 @@ const ListPage = () => {
 
         {/* Courses in Tabular Format */}
         {isLoading ? (
-          loader
+          <section className={classes.loaderContainer}>{loader}</section>
         ) : (
           <TableContainer>
             <Table aria-label="customized table">

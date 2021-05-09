@@ -3,6 +3,13 @@
   display: flex;
   flex-direction: column;
 }
+.loaderContainer {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
 .homePageContent {
   margin-top: 4rem;
   flex: 1;

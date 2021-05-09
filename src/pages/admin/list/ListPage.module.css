@@ -15,6 +15,10 @@
 .publishedFilter {
   margin-top: 0.5rem;
 }
+.loaderContainer {
+  align-self: center;
+  margin: auto 0;
+}
 .tableHead {
   background: var(--clr-grey-light);
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 
 // imports for utils
 import * as utils from "../../../utils";
@@ -109,135 +109,130 @@ const DetailsPage = (props) => {
     <div className={classes.detailsPage}>
       <MuiPrimarySearchAppBar isLogoClickable={true} isProfileVisible={true} />
 
-      <main className={classes.detailsPageContent}>
-        {isLoading ? (
-          loader
-        ) : (
-          /* Left Column (on large screens only) */
-          <Fragment>
-            <section>
-              {/* Course Text Details */}
-              <article>
-                <Typography variant="inherit" component="h3" gutterBottom>
-                  {courseDetails.title}
-                </Typography>
-                <Typography
-                  variant="inherit"
-                  component="p"
-                  color="secondary"
-                  gutterBottom
-                >
-                  Course Instructor:{" "}
-                  <span className={classes.subtitleContent}>
-                    {courseDetails.author}
-                  </span>
-                </Typography>
-                <div className={classes.durationAndDateContainer}>
-                  <div className={classes.durationContainer}>
-                    <ScheduleIcon color="primary" className={classes.icon} />
-                    <Typography variant="inherit" component="p">
-                      {utils.getFormattedTimeInHoursAndMinutes(
-                        courseDetails.duration
-                      )}
-                    </Typography>
-                  </div>
-                  <div className={classes.dateContainer}>
-                    <TodayIcon color="primary" className={classes.icon} />
-                    <Typography variant="inherit" component="p">
-                      {utils.getFormattedDate(courseDetails.createdAt)}
-                    </Typography>
-                  </div>
-                </div>
-                <Typography
-                  variant="inherit"
-                  component="p"
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Category:{" "}
-                  <span className={classes.subtitleContent}>
-                    {courseDetails.category}
-                  </span>
-                </Typography>
-                <Typography
-                  variant="inherit"
-                  component="p"
-                  color="textSecondary"
-                >
-                  Price:{" "}
-                  <span className={classes.originalPrice}>
-                    {courseDetails.priceInRupees}
-                  </span>
-                  &nbsp;
-                  <span
-                    className={`${classes.discountedPrice} ${classes.subtitleContent}`}
-                  >
-                    {courseDetails.priceAfterDiscount}
-                  </span>
-                </Typography>
-
-                {/* Button for preview on YouTube */}
-                <div
-                  className={`${classes.previewBtnContainer} ${classes.btnContainer}`}
-                >
-                  <Button
-                    variant="contained"
-                    startIcon={<YouTubeIcon color="primary" />}
-                    className={classes.previewButton}
-                    onClick={openYouTubeVideo}
-                  >
-                    Preview
-                  </Button>
-                </div>
-              </article>
-
-              {/* Skills */}
-              <article>
-                <div className={classes.skillsContainer}>
-                  <Typography
-                    variant="inherit"
-                    component="h4"
-                    color="secondary"
-                    gutterBottom
-                  >
-                    Skills Covered:
+      {isLoading ? (
+        <section className={classes.loaderContainer}>{loader}</section>
+      ) : (
+        <main className={classes.detailsPageContent}>
+          {/* /* Left Column (on large screens only) */}
+          <section>
+            {/* Course Text Details */}
+            <article>
+              <Typography variant="inherit" component="h3" gutterBottom>
+                {courseDetails.title}
+              </Typography>
+              <Typography
+                variant="inherit"
+                component="p"
+                color="secondary"
+                gutterBottom
+              >
+                Course Instructor:{" "}
+                <span className={classes.subtitleContent}>
+                  {courseDetails.author}
+                </span>
+              </Typography>
+              <div className={classes.durationAndDateContainer}>
+                <div className={classes.durationContainer}>
+                  <ScheduleIcon color="primary" className={classes.icon} />
+                  <Typography variant="inherit" component="p">
+                    {utils.getFormattedTimeInHoursAndMinutes(
+                      courseDetails.duration
+                    )}
                   </Typography>
-                  <div className={classes.skills}>{renderSkills}</div>
                 </div>
-              </article>
-            </section>
+                <div className={classes.dateContainer}>
+                  <TodayIcon color="primary" className={classes.icon} />
+                  <Typography variant="inherit" component="p">
+                    {utils.getFormattedDate(courseDetails.createdAt)}
+                  </Typography>
+                </div>
+              </div>
+              <Typography
+                variant="inherit"
+                component="p"
+                color="textSecondary"
+                gutterBottom
+              >
+                Category:{" "}
+                <span className={classes.subtitleContent}>
+                  {courseDetails.category}
+                </span>
+              </Typography>
+              <Typography variant="inherit" component="p" color="textSecondary">
+                Price:{" "}
+                <span className={classes.originalPrice}>
+                  {courseDetails.priceInRupees}
+                </span>
+                &nbsp;
+                <span
+                  className={`${classes.discountedPrice} ${classes.subtitleContent}`}
+                >
+                  {courseDetails.priceAfterDiscount}
+                </span>
+              </Typography>
 
-            {/* Right Column (on large screens only) */}
-            <section className={classes.rightColumn}>
-              {/* Button for Enrolment */}
+              {/* Button for preview on YouTube */}
               <div
-                className={`${classes.enrolMeBtnContainer} ${classes.btnContainer}`}
+                className={`${classes.previewBtnContainer} ${classes.btnContainer}`}
               >
                 <Button
                   variant="contained"
-                  color="primary"
-                  onClick={navigateToCheckoutPage}
+                  startIcon={<YouTubeIcon color="primary" />}
+                  className={classes.previewButton}
+                  onClick={openYouTubeVideo}
                 >
-                  Enrol Me
+                  Preview
                 </Button>
               </div>
+            </article>
 
-              {/* Chapters */}
-              <article className={classes.chaptersContainer}>
+            {/* Skills */}
+            <article>
+              <div className={classes.skillsContainer}>
                 <Typography
                   variant="inherit"
-                  component="p"
-                  className={classes.chaptersHeading}
+                  component="h4"
+                  color="secondary"
+                  gutterBottom
                 >
-                  Chapters
+                  Skills Covered:
                 </Typography>
-                <div className={classes.chapters}>{renderChapters}</div>
-              </article>
-            </section>
-          </Fragment>
-        )}
-        {notification}
-      </main>
+                <div className={classes.skills}>{renderSkills}</div>
+              </div>
+            </article>
+          </section>
+
+          {/* Right Column (on large screens only) */}
+          <section className={classes.rightColumn}>
+            {/* Button for Enrolment */}
+            <div
+              className={`${classes.enrolMeBtnContainer} ${classes.btnContainer}`}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={navigateToCheckoutPage}
+              >
+                Enrol Me
+              </Button>
+            </div>
+
+            {/* Chapters */}
+            <article className={classes.chaptersContainer}>
+              <Typography
+                variant="inherit"
+                component="p"
+                className={classes.chaptersHeading}
+              >
+                Chapters
+              </Typography>
+              <div className={classes.chapters}>{renderChapters}</div>
+            </article>
+          </section>
+          {notification}
+        </main>
+      )}
+
       <Footer />
     </div>
   );
