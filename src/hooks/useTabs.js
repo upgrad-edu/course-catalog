@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useTabs = (props) => {
+const useTabs = () => {
   const [tabValue, setTabValue] = useState(0);
 
   // Event handler triggered when a tab is changed

@@ -112,9 +112,7 @@ const LoginForm = ({ successHandler, isLoginSuccessful }) => {
 
 LoginForm.propTypes = {
   successHandler: PropTypes.func.isRequired,
-  apiErrorMessage: PropTypes.string,
   isLoginSuccessful: PropTypes.bool.isRequired,
-  submitCallback: PropTypes.func,
 };
 
 export default LoginForm;

@@ -165,8 +165,6 @@ const SignupForm = ({ successHandler }) => {
 
 SignupForm.propTypes = {
   successHandler: PropTypes.func.isRequired,
-  apiErrorMessage: PropTypes.string,
-  submitCallback: PropTypes.func,
 };
 
 export default SignupForm;
